@@ -1,0 +1,4 @@
+[submodule "DSLinkSDK"]
+	path = SDK
+	url = https://github.com/IOT-DSA/sdk-dslink-dotnet.git
+	branch = portable-sdk
