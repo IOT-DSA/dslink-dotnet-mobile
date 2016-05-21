@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using DSLink;
+using Plugin.Battery;
+using Plugin.Battery.Abstractions;
 using Xamarin.Forms;
-
-#if __ANDROID__
-using Android.OS;
-#endif
 
 namespace DSA_Mobile
 {
@@ -25,7 +24,7 @@ namespace DSA_Mobile
 
             _toggleButton = new Button()
             {
-                Text = "Connect to Broker",
+                Text = "Connect",
                 Command = new Command(() =>
                 {
                     if (_dslink == null)
@@ -67,7 +66,7 @@ namespace DSA_Mobile
 
         protected void StartLink()
         {
-            _dslink = new DSLink(new Configuration(new List<string>(), "DSAMobile", true, true, StoragePath() + "/dsa_mobile.keys", brokerUrl: "http://octocat.local:8080/conn"));
+            _dslink = new DSLink(new Configuration(new List<string>(), "DSAMobile", true, true, StoragePath() + "/dsa_mobile.keys", brokerUrl: _brokerUrlEntry.Text));
         }
 
         protected void StopLink()
