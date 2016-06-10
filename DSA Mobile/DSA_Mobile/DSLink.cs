@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using DSLink;
 
 namespace DSA_Mobile

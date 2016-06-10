@@ -19,7 +19,7 @@ namespace DSA_Mobile
         {
             _brokerUrlEntry = new Entry()
             {
-                Text = "http://octocat.local:8080/conn"
+                Text = "http://dglux.dev.dglogik.com/conn"
             };
 
             _toggleButton = new Button()
@@ -66,7 +66,9 @@ namespace DSA_Mobile
 
         protected void StartLink()
         {
-            _dslink = new DSLink(new Configuration(new List<string>(), "DSAMobile", true, true, StoragePath() + "/dsa_mobile.keys", brokerUrl: _brokerUrlEntry.Text));
+			Configuration configuration = new Configuration(new List<string>(), "DSAMobile", true, true, StoragePath() + "/dsa_mobile.keys", brokerUrl: _brokerUrlEntry.Text);
+			Debug.WriteLine("test");
+			_dslink = new DSLink(configuration);
         }
 
         protected void StopLink()
