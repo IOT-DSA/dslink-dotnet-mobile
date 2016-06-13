@@ -1,17 +1,18 @@
+using System.Diagnostics;
 using DSLink.Nodes;
 using Plugin.Battery;
 using Plugin.Battery.Abstractions;
 
 namespace DSA_Mobile
 {
-    public class Battery
+    public class BatteryModule
     {
         private readonly Node _battery;
         private readonly Node _percentRemaining;
         private readonly Node _status;
         private readonly Node _source;
 
-        public Battery(Node superRoot)
+        public BatteryModule(Node superRoot)
         {
             _battery = superRoot.CreateChild("Battery")
                 .BuildNode();
@@ -38,6 +39,7 @@ namespace DSA_Mobile
 
         private void BatteryChanged(object sender, BatteryChangedEventArgs e)
         {
+			Debug.WriteLine("Battery event");
             _percentRemaining.Value.Set(e.RemainingChargePercent);
             _status.Value.Set(e.Status.ToString());
             _source.Value.Set(e.PowerSource.ToString());

@@ -1,4 +1,5 @@
-﻿using Foundation;
+﻿using DSLink.iOS;
+using Foundation;
 using UIKit;
 
 namespace DSA_Mobile.iOS
@@ -18,6 +19,7 @@ namespace DSA_Mobile.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+			iOSPlatform.Initialize();
             global::Xamarin.Forms.Forms.Init();
 			LoadApplication(new iOSApp());
 

@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using DSA_Mobile.Motion;
 using DSLink;
-using Plugin.Battery;
-using Plugin.Battery.Abstractions;
 using Xamarin.Forms;
 
 namespace DSA_Mobile
@@ -49,7 +48,7 @@ namespace DSA_Mobile
                         _toggleButton
                     }
                 }
-            };
+			};
         }
 
         protected override void OnStart()
@@ -66,9 +65,15 @@ namespace DSA_Mobile
 
         protected void StartLink()
         {
-			Configuration configuration = new Configuration(new List<string>(), "DSAMobile", true, true, StoragePath() + "/dsa_mobile.keys", brokerUrl: _brokerUrlEntry.Text);
-			Debug.WriteLine("test");
-			_dslink = new DSLink(configuration);
+			try
+			{
+				var configuration = new Configuration(new List<string>(), "DSAMobile", true, true, StoragePath() + "/dsa_mobile.keys", brokerUrl: _brokerUrlEntry.Text);
+				_dslink = new DSLink(configuration, this);
+			}
+			catch(Exception e)
+			{
+				Debug.WriteLine(e.ToString());
+			}
         }
 
         protected void StopLink()
@@ -78,5 +83,6 @@ namespace DSA_Mobile
         }
 
         protected abstract string StoragePath();
+		public abstract BaseMotionImplementation GetMotion();
     }
 }
