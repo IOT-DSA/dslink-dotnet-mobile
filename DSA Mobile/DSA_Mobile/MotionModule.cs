@@ -50,12 +50,21 @@ namespace DSA_Mobile
 			                  .BuildNode();
 
 			_motionImpl.Start(SensorType.Accelerometer);
+			_motionImpl.Start(SensorType.Gyroscope);
+			_motionImpl.Start(SensorType.Compass);
 			_motionImpl.AccelerometerValueChanged += (MotionVector vector) =>
 			{
 				_accelerometer_x.Value.Set(vector.X);
 				_accelerometer_y.Value.Set(vector.Y);
 				_accelerometer_z.Value.Set(vector.Z);
 			};
+			_motionImpl.GyroscopeValueChanged += (MotionVector vector) =>
+			{
+				_gyroscope_x.Value.Set(vector.X);
+				_gyroscope_y.Value.Set(vector.Y);
+				_gyroscope_z.Value.Set(vector.Z);
+			};
+			_motionImpl.CompassValueChanged += _compass.Value.Set;
 		}
 
 		/*private void MotionChanged(object sender, SensorValueChangedEventArgs sensorArgs)
