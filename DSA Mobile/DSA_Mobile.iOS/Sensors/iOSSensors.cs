@@ -3,14 +3,14 @@ using CoreLocation;
 using CoreMotion;
 using Foundation;
 
-namespace DSA_Mobile.Motion
+namespace DSA_Mobile.Sensors
 {
-	public class iOSMotionImplementation : BaseMotionImplementation
+	public class iOSSensors : BaseSensors
 	{
 		private readonly CMMotionManager motionManager;
 		private readonly CLLocationManager locationManager;
 
-		public iOSMotionImplementation()
+		public iOSSensors()
 		{
 			motionManager = new CMMotionManager();
 			locationManager = new CLLocationManager();

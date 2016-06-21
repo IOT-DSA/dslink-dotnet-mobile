@@ -8,6 +8,12 @@ namespace DSA_Mobile.iOS.DeviceSettings
         public iOSDeviceSettings(App app) : base(app)
         {
         }
+
+        public override bool ScreenOn()
+        {
+            // TODO
+            return true;
+        }
     }
 }
 

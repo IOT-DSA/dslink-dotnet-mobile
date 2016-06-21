@@ -3,7 +3,8 @@ using Android.Hardware;
 using Android.OS;
 using DSA_Mobile.DeviceSettings;
 using DSA_Mobile.Droid.DeviceSettings;
-using DSA_Mobile.Motion;
+using DSA_Mobile.Droid.Sensors;
+using DSA_Mobile.Sensors;
 using DSLink;
 
 namespace DSA_Mobile.Droid
@@ -24,13 +25,13 @@ namespace DSA_Mobile.Droid
 
         public override DSLink PlatformDSLink(Configuration config) => new AndroidDSLink(config, this, _mainActivity);
 
-        public override BaseMotionImplementation GetMotion()
+        public override BaseSensors GetSensors()
         {
-            if (_motion == null)
+            if (_sensors == null)
             {
-                _motion = new AndroidMotionImplementation((SensorManager)_mainActivity.GetSystemService(Context.SensorService));
+                _sensors = new AndroidSensors((SensorManager)_mainActivity.GetSystemService(Context.SensorService));
             }
-            return _motion;
+            return _sensors;
         }
 
         public override BaseDeviceSettings GetDeviceSettings()

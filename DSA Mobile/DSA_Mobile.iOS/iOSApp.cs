@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using DSA_Mobile.DeviceSettings;
 using DSA_Mobile.iOS.DeviceSettings;
-using DSA_Mobile.Motion;
+using DSA_Mobile.Sensors;
 using Foundation;
 using UIKit;
 
@@ -17,13 +16,13 @@ namespace DSA_Mobile.iOS
 			return Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 		}
 
-		public override BaseMotionImplementation GetMotion()
+		public override BaseSensors GetSensors()
 		{
-			if (_motion == null)
+			if (_sensors == null)
 			{
-				_motion = new iOSMotionImplementation();
+				_sensors = new iOSSensors();
 			}
-			return _motion;
+			return _sensors;
 		}
 
         public override BaseDeviceSettings GetDeviceSettings()

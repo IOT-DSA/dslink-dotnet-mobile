@@ -1,11 +1,10 @@
-using System.Diagnostics;
 using DSLink.Nodes;
 using Plugin.Battery;
 using Plugin.Battery.Abstractions;
 
 namespace DSA_Mobile
 {
-    public class BatteryModule
+    public class BatteryModule : BaseModule
     {
         private readonly Node _percentRemaining;
         private readonly Node _status;

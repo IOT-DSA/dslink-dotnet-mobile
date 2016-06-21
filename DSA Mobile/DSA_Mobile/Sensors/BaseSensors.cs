@@ -1,13 +1,15 @@
 ﻿using System;
 
-namespace DSA_Mobile.Motion
+namespace DSA_Mobile.Sensors
 {
-	public abstract class BaseMotionImplementation
+	public abstract class BaseSensors
 	{
 		public event Action<MotionVector> AccelerometerValueChanged;
 		public event Action<MotionVector> GyroscopeValueChanged;
         public event Action<MotionVector> DeviceMotionValueChanged;
 		public event Action<double> CompassValueChanged;
+        public event Action<double> AirPressureValueChanged;
+        public event Action<double> LightLevelValueChanged;
 
 		public abstract void Start(SensorType sensorType);
 
@@ -30,6 +32,16 @@ namespace DSA_Mobile.Motion
 		{
 			CompassValueChanged?.Invoke(value);
 		}
+
+        public void EmitAirPressure(double value)
+        {
+            AirPressureValueChanged?.Invoke(value);
+        }
+
+        public void EmitLightLevel(double value)
+        {
+            LightLevelValueChanged?.Invoke(value);
+        }
 	}
 }
 

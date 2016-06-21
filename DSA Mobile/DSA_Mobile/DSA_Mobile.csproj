@@ -39,10 +39,10 @@
     <Compile Include="BatteryModule.cs" />
     <Compile Include="DSLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MotionModule.cs" />
-    <Compile Include="Motion\BaseMotionImplementation.cs" />
-    <Compile Include="Motion\MotionVector.cs" />
-    <Compile Include="Motion\SensorType.cs" />
+    <Compile Include="SensorsModule.cs" />
+    <Compile Include="Sensors\BaseSensors.cs" />
+    <Compile Include="Sensors\MotionVector.cs" />
+    <Compile Include="Sensors\SensorType.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="DeviceInfoModule.cs" />
     <Compile Include="NotificationModule.cs" />
@@ -103,7 +103,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Motion\" />
+    <Folder Include="Sensors\" />
     <Folder Include="DeviceSettings\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

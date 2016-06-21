@@ -7,8 +7,6 @@ namespace DSA_Mobile.DeviceSettings
     {
         protected App _app;
 
-        private readonly Node _screenOn;
-
         public BaseDeviceSettings(App app)
         {
             _app = app;

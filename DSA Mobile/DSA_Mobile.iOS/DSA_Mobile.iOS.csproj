@@ -98,7 +98,7 @@
     <ITunesArtwork Include="iTunesArtwork@2x" />
     <None Include="packages.config" />
     <Compile Include="iOSApp.cs" />
-    <Compile Include="Motion\iOSMotionImplementation.cs" />
+    <Compile Include="Sensors\iOSSensors.cs" />
     <Compile Include="DeviceSettings\iOSDeviceSettings.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -185,7 +185,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Motion\" />
+    <Folder Include="Sensors\" />
     <Folder Include="DeviceSettings\" />
   </ItemGroup>
   <ItemGroup>

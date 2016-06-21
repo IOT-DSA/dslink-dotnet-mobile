@@ -1,4 +1,4 @@
-﻿namespace DSA_Mobile
+﻿namespace DSA_Mobile.Sensors
 {
 	public class MotionVector
 	{

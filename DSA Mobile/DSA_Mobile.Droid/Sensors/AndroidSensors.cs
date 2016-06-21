@@ -1,15 +1,17 @@
-﻿using System;
+﻿using AndroidSensorType = Android.Hardware.SensorType;
+using SensorType = DSA_Mobile.Sensors.SensorType;
 using Android.Hardware;
 using Android.Runtime;
+using DSA_Mobile.Sensors;
 
-namespace DSA_Mobile.Motion
+namespace DSA_Mobile.Droid.Sensors
 {
-    public class AndroidMotionImplementation : BaseMotionImplementation
+    public class AndroidSensors : BaseSensors
     {
         private SensorManager _sensorManager;
         private SensorEventListener _sensorListener;
 
-        public AndroidMotionImplementation(SensorManager sensorManager)
+        public AndroidSensors(SensorManager sensorManager)
         {
             _sensorManager = sensorManager;
             _sensorListener = new SensorEventListener(this);
@@ -21,17 +23,17 @@ namespace DSA_Mobile.Motion
             {
                 case SensorType.Accelerometer:
                     _sensorManager.RegisterListener(_sensorListener,
-                                                    _sensorManager.GetDefaultSensor(Android.Hardware.SensorType.Accelerometer),
+                                                    _sensorManager.GetDefaultSensor(AndroidSensorType.Accelerometer),
                                                     SensorDelay.Normal);
                     break;
                 case SensorType.Gyroscope:
                     _sensorManager.RegisterListener(_sensorListener,
-                                                    _sensorManager.GetDefaultSensor(Android.Hardware.SensorType.Gyroscope),
+                                                    _sensorManager.GetDefaultSensor(AndroidSensorType.Gyroscope),
                                                     SensorDelay.Normal);
                     break;
                 case SensorType.DeviceMotion:
                     _sensorManager.RegisterListener(_sensorListener,
-                                                    _sensorManager.GetDefaultSensor(Android.Hardware.SensorType.RotationVector),
+                                                    _sensorManager.GetDefaultSensor(AndroidSensorType.RotationVector),
                                                     SensorDelay.Normal);
                     break;
                 case SensorType.Compass:
@@ -41,11 +43,11 @@ namespace DSA_Mobile.Motion
 
         private class SensorEventListener : Java.Lang.Object, ISensorEventListener
         {
-            private BaseMotionImplementation _motionImpl;
+            private AndroidSensors _sensors;
 
-            public SensorEventListener(AndroidMotionImplementation motionImpl)
+            public SensorEventListener(AndroidSensors motionImpl)
             {
-                _motionImpl = motionImpl;
+                _sensors = motionImpl;
             }
 
             public void OnAccuracyChanged(Sensor sensor, [GeneratedEnum] SensorStatus accuracy)
@@ -60,14 +62,14 @@ namespace DSA_Mobile.Motion
                 MotionVector vector = new MotionVector(x, y, z);
                 switch (e.Sensor.Type)
                 {
-                    case Android.Hardware.SensorType.Accelerometer:
-                        _motionImpl.EmitAccelerometer(vector);
+                    case AndroidSensorType.Accelerometer:
+                        _sensors.EmitAccelerometer(vector);
                         break;
-                    case Android.Hardware.SensorType.Gyroscope:
-                        _motionImpl.EmitGyroscope(vector);
+                    case AndroidSensorType.Gyroscope:
+                        _sensors.EmitGyroscope(vector);
                         break;
-                    case Android.Hardware.SensorType.RotationVector:
-                        _motionImpl.EmitDeviceMotion(vector);
+                    case AndroidSensorType.RotationVector:
+                        _sensors.EmitDeviceMotion(vector);
                         break;
                 }
             }

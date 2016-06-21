@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using DSA_Mobile.DeviceSettings;
-using DSA_Mobile.Motion;
+using DSA_Mobile.Sensors;
 using DSLink;
 using Xamarin.Forms;
 
@@ -15,7 +15,7 @@ namespace DSA_Mobile
         private Entry _brokerUrlEntry;
         private Button _toggleButton;
         private bool _toggleState;
-        protected BaseMotionImplementation _motion;
+        protected BaseSensors _sensors;
         protected BaseDeviceSettings _deviceSettings;
 
         protected App()
@@ -97,7 +97,7 @@ namespace DSA_Mobile
 
         public virtual DSLink PlatformDSLink(Configuration config) => new DSLink(config, this);
         protected abstract string StoragePath();
-		public abstract BaseMotionImplementation GetMotion();
+        public abstract BaseSensors GetSensors();
         public abstract BaseDeviceSettings GetDeviceSettings();
     }
 }

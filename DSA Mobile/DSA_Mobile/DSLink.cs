@@ -7,7 +7,7 @@ namespace DSA_Mobile
         private readonly App _app;
         private readonly BatteryModule _battery;
         private readonly DeviceInfoModule _deviceInfo;
-		private readonly MotionModule _motion;
+        private readonly SensorsModule _sensors;
         private readonly NotificationModule _notifications;
         private readonly DeviceSettingsModule _deviceSettings;
 
@@ -16,7 +16,7 @@ namespace DSA_Mobile
 			_app = app;
             _battery = new BatteryModule(Responder.SuperRoot);
             _deviceInfo = new DeviceInfoModule(Responder.SuperRoot);
-			_motion = new MotionModule(Responder.SuperRoot, _app);
+			_sensors = new SensorsModule(Responder.SuperRoot, _app);
             _notifications = new NotificationModule(Responder.SuperRoot);
             _deviceSettings = new DeviceSettingsModule(Responder.SuperRoot, _app.GetDeviceSettings());
         }

@@ -1,14 +1,14 @@
 ﻿using DSLink.Nodes;
 
 using System.Diagnostics;
-using DSA_Mobile.Motion;
+using DSA_Mobile.Sensors;
 
 namespace DSA_Mobile
 {
-	public class MotionModule
+	public class SensorsModule
 	{
-		private readonly BaseMotionImplementation _motionImpl;
-		private readonly Node _motion;
+        private readonly BaseSensors _sensorsImpl;
+        private readonly Node _sensors;
 		private readonly Node _accelerometer;
 		private readonly Node _accelerometer_x;
 		private readonly Node _accelerometer_y;
@@ -23,11 +23,11 @@ namespace DSA_Mobile
         private readonly Node _dmotion_z;
 		private readonly Node _compass;
 
-		public MotionModule(Node superRoot, DSA_Mobile.App app)
+		public SensorsModule(Node superRoot, App app)
 		{
-			_motion = superRoot.CreateChild("Motion").BuildNode();
-			_motionImpl = app.GetMotion();
-			_accelerometer = _motion.CreateChild("Accelerometer").BuildNode();
+			_sensors = superRoot.CreateChild("Sensors").BuildNode();
+            _sensorsImpl = app.GetSensors();
+			_accelerometer = _sensors.CreateChild("Accelerometer").BuildNode();
 			_accelerometer_x = _accelerometer.CreateChild("X")
 			                                 .SetType("number")
 			                                 .BuildNode();
@@ -38,7 +38,7 @@ namespace DSA_Mobile
 											 .SetType("number")
 			                                 .BuildNode();
 
-			_gyroscope = _motion.CreateChild("Gyroscope").BuildNode();
+			_gyroscope = _sensors.CreateChild("Gyroscope").BuildNode();
 			_gyroscope_x = _gyroscope.CreateChild("X")
 			                       .SetType("number")
 			                       .BuildNode();
@@ -48,7 +48,7 @@ namespace DSA_Mobile
 			_gyroscope_z = _gyroscope.CreateChild("Z")
 								   .SetType("number")
 								   .BuildNode();
-            _dmotion = _motion.CreateChild("DeviceMotion").BuildNode();
+            _dmotion = _sensors.CreateChild("DeviceMotion").BuildNode();
             _dmotion_x = _dmotion.CreateChild("X")
                                  .SetType("number")
                                  .BuildNode();
@@ -59,33 +59,33 @@ namespace DSA_Mobile
                                  .SetType("number")
                                  .BuildNode();
 
-			_compass = _motion.CreateChild("Compass")
+			_compass = _sensors.CreateChild("Compass")
 			                  .SetType("number")
 			                  .BuildNode();
 
-			_motionImpl.Start(SensorType.Accelerometer);
-			_motionImpl.Start(SensorType.Gyroscope);
-            _motionImpl.Start(SensorType.DeviceMotion);
-			_motionImpl.Start(SensorType.Compass);
-			_motionImpl.AccelerometerValueChanged += (MotionVector vector) =>
+			_sensorsImpl.Start(SensorType.Accelerometer);
+			_sensorsImpl.Start(SensorType.Gyroscope);
+            _sensorsImpl.Start(SensorType.DeviceMotion);
+			//_sensorsImpl.Start(SensorType.Compass);
+			_sensorsImpl.AccelerometerValueChanged += (MotionVector vector) =>
 			{
 				_accelerometer_x.Value.Set(vector.X);
 				_accelerometer_y.Value.Set(vector.Y);
 				_accelerometer_z.Value.Set(vector.Z);
 			};
-			_motionImpl.GyroscopeValueChanged += (MotionVector vector) =>
+			_sensorsImpl.GyroscopeValueChanged += (MotionVector vector) =>
 			{
 				_gyroscope_x.Value.Set(vector.X);
 				_gyroscope_y.Value.Set(vector.Y);
 				_gyroscope_z.Value.Set(vector.Z);
 			};
-            _motionImpl.DeviceMotionValueChanged += (MotionVector vector) =>
+            _sensorsImpl.DeviceMotionValueChanged += (MotionVector vector) =>
             {
                 _dmotion_x.Value.Set(vector.X);
                 _dmotion_y.Value.Set(vector.Y);
                 _dmotion_z.Value.Set(vector.Z);
             };
-			_motionImpl.CompassValueChanged += (double value) => {
+			_sensorsImpl.CompassValueChanged += (double value) => {
 				Debug.WriteLine(value);
 			};
 		}
