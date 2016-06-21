@@ -13,6 +13,7 @@ namespace DSA_Mobile
         private DSLink _dslink;
         private Entry _brokerUrlEntry;
         private Button _toggleButton;
+        private bool _toggleState;
 
         protected App()
         {
@@ -26,13 +27,15 @@ namespace DSA_Mobile
                 Text = "Connect",
                 Command = new Command(() =>
                 {
-                    if (_dslink == null)
+                    if (!_toggleState)
                     {
+                        _toggleState = true;
                         Task.Run(() => StartLink());
                         _toggleButton.Text = "Disconnect";
                     }
                     else
                     {
+                        _toggleState = false;
                         Task.Run(() => StopLink());
                         _toggleButton.Text = "Connect";
                     }
@@ -66,21 +69,27 @@ namespace DSA_Mobile
 
         protected void StartLink()
         {
-			try
-			{
-				var configuration = new Configuration(new List<string>(), "DSAMobile", true, true, StoragePath() + "/dsa_mobile.keys", brokerUrl: _brokerUrlEntry.Text);
-                _dslink = PlatformDSLink(configuration);
-			}
-			catch(Exception e)
-			{
-				Debug.WriteLine(e.ToString());
-			}
+            if (_dslink == null)
+            {
+                try
+                {
+                    var configuration = new Configuration(new List<string>(), "DSAMobile", true, true, StoragePath() + "/dsa_mobile.keys", brokerUrl: _brokerUrlEntry.Text);
+                    _dslink = PlatformDSLink(configuration);
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.ToString());
+                }
+            }
+            else
+            {
+                _dslink.Connect();
+            }
         }
 
         protected void StopLink()
         {
-            _dslink.Connector.Disconnect();
-            _dslink = null;
+            _dslink.Disconnect();
         }
 
         /*protected abstract void StartLinkPlatform();

@@ -29,6 +29,11 @@ namespace DSA_Mobile.Motion
                                                     _sensorManager.GetDefaultSensor(Android.Hardware.SensorType.Gyroscope),
                                                     SensorDelay.Normal);
                     break;
+                case SensorType.DeviceMotion:
+                    _sensorManager.RegisterListener(_sensorListener,
+                                                    _sensorManager.GetDefaultSensor(Android.Hardware.SensorType.RotationVector),
+                                                    SensorDelay.Normal);
+                    break;
                 case SensorType.Compass:
                     break;
             }
@@ -60,6 +65,9 @@ namespace DSA_Mobile.Motion
                         break;
                     case Android.Hardware.SensorType.Gyroscope:
                         _motionImpl.EmitGyroscope(vector);
+                        break;
+                    case Android.Hardware.SensorType.RotationVector:
+                        _motionImpl.EmitDeviceMotion(vector);
                         break;
                 }
             }

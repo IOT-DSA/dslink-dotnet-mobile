@@ -29,6 +29,9 @@ namespace DSA_Mobile.Droid
 			global::PCLStorage.Resource.String.ApplicationName = global::DSA_Mobile.Droid.Resource.String.ApplicationName;
 			global::PCLStorage.Resource.String.Hello = global::DSA_Mobile.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::DSA_Mobile.Droid.Resource.Attribute.actionBarSize;
+			global::Plugin.LocalNotifications.Resource.Drawable.plugin_lc_smallicon = global::DSA_Mobile.Droid.Resource.Drawable.plugin_lc_smallicon;
+			global::Plugin.Vibrate.Resource.String.ApplicationName = global::DSA_Mobile.Droid.Resource.String.ApplicationName;
+			global::Plugin.Vibrate.Resource.String.Hello = global::DSA_Mobile.Droid.Resource.String.Hello;
 			global::DSLink.Android.Resource.String.ApplicationName = global::DSA_Mobile.Droid.Resource.String.ApplicationName;
 			global::DSLink.Android.Resource.String.Hello = global::DSA_Mobile.Droid.Resource.String.Hello;
 			global::DSLink.Android.Resource.String.library_name = global::DSA_Mobile.Droid.Resource.String.library_name;
@@ -2511,8 +2514,8 @@ namespace DSA_Mobile.Droid
 			// aapt resource value: 0x7f0200ca
 			public const int mr_ic_play_light = 2130837706;
 			
-			// aapt resource value: 0x7f0200cf
-			public const int notification_template_icon_bg = 2130837711;
+			// aapt resource value: 0x7f0200d0
+			public const int notification_template_icon_bg = 2130837712;
 			
 			// aapt resource value: 0x7f0200cb
 			public const int places_ic_clear = 2130837707;
@@ -2521,10 +2524,13 @@ namespace DSA_Mobile.Droid
 			public const int places_ic_search = 2130837708;
 			
 			// aapt resource value: 0x7f0200cd
-			public const int powered_by_google_dark = 2130837709;
+			public const int plugin_lc_smallicon = 2130837709;
 			
 			// aapt resource value: 0x7f0200ce
-			public const int powered_by_google_light = 2130837710;
+			public const int powered_by_google_dark = 2130837710;
+			
+			// aapt resource value: 0x7f0200cf
+			public const int powered_by_google_light = 2130837711;
 			
 			static Drawable()
 			{
