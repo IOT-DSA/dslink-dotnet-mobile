@@ -99,6 +99,7 @@
     <None Include="packages.config" />
     <Compile Include="iOSApp.cs" />
     <Compile Include="Motion\iOSMotionImplementation.cs" />
+    <Compile Include="DeviceSettings\iOSDeviceSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DSA_Mobile\DSA_Mobile.csproj">
@@ -185,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Motion\" />
+    <Folder Include="DeviceSettings\" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />

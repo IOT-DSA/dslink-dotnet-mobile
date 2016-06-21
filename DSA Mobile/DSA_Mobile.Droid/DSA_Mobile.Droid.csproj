@@ -157,6 +157,7 @@
     <Compile Include="Motion\AndroidMotionImplementation.cs" />
     <Compile Include="AndroidDSLink.cs" />
     <Compile Include="FitnessModule.cs" />
+    <Compile Include="DeviceSettings\AndroidDeviceSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -191,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Motion\" />
+    <Folder Include="DeviceSettings\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

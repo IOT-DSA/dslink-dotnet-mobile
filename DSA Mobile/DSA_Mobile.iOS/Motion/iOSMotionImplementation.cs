@@ -23,21 +23,21 @@ namespace DSA_Mobile.Motion
 			switch (sensorType)
 			{
 				case SensorType.Accelerometer:
-                    motionManager.AccelerometerUpdateInterval = 0.1;
+                    motionManager.AccelerometerUpdateInterval = 0.05;
 					motionManager.StartAccelerometerUpdates(NSOperationQueue.MainQueue, (data, error) =>
 					{
 						EmitAccelerometer(new MotionVector(data.Acceleration.X, data.Acceleration.Y, data.Acceleration.Z));
 					});
 					break;
 				case SensorType.Gyroscope:
-                    motionManager.GyroUpdateInterval = 0.1;
+                    motionManager.GyroUpdateInterval = 0.05;
 					motionManager.StartGyroUpdates(NSOperationQueue.MainQueue, (data, error) =>
 					{
 						EmitGyroscope(new MotionVector(data.RotationRate.x, data.RotationRate.y, data.RotationRate.z));
 					});
 					break;
                 case SensorType.DeviceMotion:
-                    motionManager.DeviceMotionUpdateInterval = 0.1;
+                    motionManager.DeviceMotionUpdateInterval = 0.05d;
                     motionManager.StartDeviceMotionUpdates(NSOperationQueue.MainQueue, (motion, error) =>
                     {
                         EmitDeviceMotion(new MotionVector(motion.Attitude.Roll, motion.Attitude.Pitch, motion.Attitude.Yaw));

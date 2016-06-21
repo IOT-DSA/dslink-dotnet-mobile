@@ -1,6 +1,8 @@
 using Android.Content;
 using Android.Hardware;
 using Android.OS;
+using DSA_Mobile.DeviceSettings;
+using DSA_Mobile.Droid.DeviceSettings;
 using DSA_Mobile.Motion;
 using DSLink;
 
@@ -8,7 +10,7 @@ namespace DSA_Mobile.Droid
 {
     public class AndroidApp : App
     {
-        private MainActivity _mainActivity;
+        public MainActivity _mainActivity;
 
         public AndroidApp(MainActivity activity)
         {
@@ -24,7 +26,20 @@ namespace DSA_Mobile.Droid
 
         public override BaseMotionImplementation GetMotion()
         {
-            return new AndroidMotionImplementation((SensorManager)_mainActivity.GetSystemService(Context.SensorService));
+            if (_motion == null)
+            {
+                _motion = new AndroidMotionImplementation((SensorManager)_mainActivity.GetSystemService(Context.SensorService));
+            }
+            return _motion;
+        }
+
+        public override BaseDeviceSettings GetDeviceSettings()
+        {
+            if (_deviceSettings == null)
+            {
+                _deviceSettings = new AndroidDeviceSettings(this);
+            }
+            return _deviceSettings;
         }
     }
 }
