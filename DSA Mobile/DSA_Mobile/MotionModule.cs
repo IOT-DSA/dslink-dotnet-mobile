@@ -17,6 +17,10 @@ namespace DSA_Mobile
 		private readonly Node _gyroscope_x;
 		private readonly Node _gyroscope_y;
 		private readonly Node _gyroscope_z;
+        private readonly Node _dmotion;
+        private readonly Node _dmotion_x;
+        private readonly Node _dmotion_y;
+        private readonly Node _dmotion_z;
 		private readonly Node _compass;
 
 		public MotionModule(Node superRoot, DSA_Mobile.App app)
@@ -44,6 +48,16 @@ namespace DSA_Mobile
 			_gyroscope_z = _gyroscope.CreateChild("Z")
 								   .SetType("number")
 								   .BuildNode();
+            _dmotion = _motion.CreateChild("DeviceMotion").BuildNode();
+            _dmotion_x = _dmotion.CreateChild("X")
+                                 .SetType("number")
+                                 .BuildNode();
+            _dmotion_y = _dmotion.CreateChild("Y")
+                                 .SetType("number")
+                                 .BuildNode();
+            _dmotion_z = _dmotion.CreateChild("Z")
+                                 .SetType("number")
+                                 .BuildNode();
 
 			_compass = _motion.CreateChild("Compass")
 			                  .SetType("number")
@@ -51,6 +65,7 @@ namespace DSA_Mobile
 
 			_motionImpl.Start(SensorType.Accelerometer);
 			_motionImpl.Start(SensorType.Gyroscope);
+            _motionImpl.Start(SensorType.DeviceMotion);
 			_motionImpl.Start(SensorType.Compass);
 			_motionImpl.AccelerometerValueChanged += (MotionVector vector) =>
 			{
@@ -64,7 +79,15 @@ namespace DSA_Mobile
 				_gyroscope_y.Value.Set(vector.Y);
 				_gyroscope_z.Value.Set(vector.Z);
 			};
-			_motionImpl.CompassValueChanged += _compass.Value.Set;
+            _motionImpl.DeviceMotionValueChanged += (MotionVector vector) =>
+            {
+                _dmotion_x.Value.Set(vector.X);
+                _dmotion_y.Value.Set(vector.Y);
+                _dmotion_z.Value.Set(vector.Z);
+            };
+			_motionImpl.CompassValueChanged += (double value) => {
+				Debug.WriteLine(value);
+			};
 		}
 
 		/*private void MotionChanged(object sender, SensorValueChangedEventArgs sensorArgs)

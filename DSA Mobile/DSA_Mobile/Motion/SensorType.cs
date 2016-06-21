@@ -4,7 +4,8 @@
 	{
 		Accelerometer,
 		Gyroscope,
-		Compass
+		Compass,
+        DeviceMotion
 	}
 }
 

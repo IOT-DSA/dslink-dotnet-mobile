@@ -6,21 +6,27 @@ namespace DSA_Mobile.Motion
 	{
 		public event Action<MotionVector> AccelerometerValueChanged;
 		public event Action<MotionVector> GyroscopeValueChanged;
+        public event Action<MotionVector> DeviceMotionValueChanged;
 		public event Action<double> CompassValueChanged;
 
 		public abstract void Start(SensorType sensorType);
 
-		protected void EmitAccelerometer(MotionVector vector)
+		public void EmitAccelerometer(MotionVector vector)
 		{
 			AccelerometerValueChanged?.Invoke(vector);
 		}
 
-		protected void EmitGyroscope(MotionVector vector)
+		public void EmitGyroscope(MotionVector vector)
 		{
 			GyroscopeValueChanged?.Invoke(vector);
 		}
 
-		protected void EmitCompass(double value)
+        public void EmitDeviceMotion(MotionVector vector)
+        {
+            DeviceMotionValueChanged?.Invoke(vector);
+        }
+
+		public void EmitCompass(double value)
 		{
 			CompassValueChanged?.Invoke(value);
 		}

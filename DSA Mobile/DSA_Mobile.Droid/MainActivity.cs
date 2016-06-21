@@ -14,7 +14,7 @@ namespace DSA_Mobile.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new AndroidApp());
+            LoadApplication(new AndroidApp(this));
         }
     }
 }

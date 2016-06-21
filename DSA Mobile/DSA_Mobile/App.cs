@@ -41,6 +41,7 @@ namespace DSA_Mobile
 
             MainPage = new ContentPage
             {
+                Padding = new Thickness(10, Device.OnPlatform(20, 0, 0), 10, 5),
                 Content = new StackLayout
                 {
                     Children = {
@@ -68,7 +69,7 @@ namespace DSA_Mobile
 			try
 			{
 				var configuration = new Configuration(new List<string>(), "DSAMobile", true, true, StoragePath() + "/dsa_mobile.keys", brokerUrl: _brokerUrlEntry.Text);
-				_dslink = new DSLink(configuration, this);
+                _dslink = PlatformDSLink(configuration);
 			}
 			catch(Exception e)
 			{
@@ -82,6 +83,10 @@ namespace DSA_Mobile
             _dslink = null;
         }
 
+        /*protected abstract void StartLinkPlatform();
+		protected abstract void StopLinkPlatform();*/
+
+        public virtual DSLink PlatformDSLink(Configuration config) => new DSLink(config, this);
         protected abstract string StoragePath();
 		public abstract BaseMotionImplementation GetMotion();
     }
