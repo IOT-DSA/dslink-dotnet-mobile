@@ -1,8 +1,18 @@
 ﻿using System;
+using DSLink.Nodes;
+
 namespace DSA_Mobile
 {
-    public abstract class BaseModule
+    public interface BaseModule
     {
+        bool Supported
+        {
+            get;
+        }
+
+        bool RequestPermissions();
+
+        void AddNodes(Node superRoot);
     }
 }
 

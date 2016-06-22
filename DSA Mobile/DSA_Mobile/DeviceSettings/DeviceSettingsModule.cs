@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using DSA_Mobile.DeviceSettings;
 using DSLink.Nodes;
 
-namespace DSA_Mobile
+namespace DSA_Mobile.DeviceSettings
 {
     public class DeviceSettingsModule : BaseModule
     {
@@ -13,18 +13,12 @@ namespace DSA_Mobile
 
         private Node _screenStatus;
 
-        public DeviceSettingsModule(Node superRoot, BaseDeviceSettings deviceSettings)
+        public bool Supported => true;
+
+        public DeviceSettingsModule(BaseDeviceSettings deviceSettings)
         {
             _deviceSettings = deviceSettings;
             _updateTask = new Task(Update);
-
-            _screenStatus = superRoot.CreateChild("screen_status")
-                     .SetDisplayName("Screen Status")
-                     .SetType("bool")
-                     .SetValue(deviceSettings.ScreenOn())
-                     .BuildNode();
-
-            _updateTask.Start();
         }
 
         public void Update()
@@ -34,6 +28,22 @@ namespace DSA_Mobile
                 _screenStatus.Value.Set(_deviceSettings.ScreenOn());
                 _updateTask.Wait(1000);
             }
+        }
+
+        public bool RequestPermissions()
+        {
+            return true;
+        }
+
+        public void AddNodes(Node superRoot)
+        {
+            _screenStatus = superRoot.CreateChild("screen_status")
+                     .SetDisplayName("Screen Status")
+                     .SetType("bool")
+                     .SetValue(_deviceSettings.ScreenOn())
+                     .BuildNode();
+
+            _updateTask.Start();
         }
     }
 }

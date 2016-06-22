@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DSLink;
 
 namespace DSA_Mobile
@@ -5,20 +6,21 @@ namespace DSA_Mobile
     public class DSLink : DSLinkContainer
     {
         private readonly App _app;
-        private readonly BatteryModule _battery;
-        private readonly DeviceInfoModule _deviceInfo;
-        private readonly SensorsModule _sensors;
-        private readonly NotificationModule _notifications;
-        private readonly DeviceSettingsModule _deviceSettings;
+        private readonly List<BaseModule> loadedModules = new List<BaseModule>();
 
         public DSLink(Configuration config, App app) : base(config)
         {
 			_app = app;
-            _battery = new BatteryModule(Responder.SuperRoot);
-            _deviceInfo = new DeviceInfoModule(Responder.SuperRoot);
-			_sensors = new SensorsModule(Responder.SuperRoot, _app);
-            _notifications = new NotificationModule(Responder.SuperRoot);
-            _deviceSettings = new DeviceSettingsModule(Responder.SuperRoot, _app.GetDeviceSettings());
+        }
+
+        public void RegisterModule(BaseModule module)
+        {
+            var permissionsGranted = module.RequestPermissions();
+            if (permissionsGranted)
+            {
+                module.AddNodes(Responder.SuperRoot);
+                loadedModules.Add(module);
+            }
         }
     }
 }

@@ -6,18 +6,19 @@ using Action = DSLink.Nodes.Actions.Action;
 using Plugin.LocalNotifications;
 using System.Diagnostics;
 
-namespace DSA_Mobile
+namespace DSA_Mobile.Notifications
 {
     public class NotificationModule : BaseModule
     {
         private int _notificationID = 0;
 
-        public NotificationModule(Node superRoot)
+        public bool Supported => true;
+
+        public void AddNodes(Node superRoot)
         {
             superRoot.CreateChild("Create Notification")
                      .AddParameter(new Parameter("Title", "string"))
                      .AddParameter(new Parameter("Message", "string"))
-                     //.AddParameter(new Parameter("Time", "string", editor: "date"))
                      .AddColumn(new Column("Notification ID", "number"))
                      .SetConfig("$invokable", new Value("write"))
                      .SetAction(new Action(Permission.Write, parameters =>
@@ -41,6 +42,19 @@ namespace DSA_Mobile
                          CrossLocalNotifications.Current.Cancel((int)nid);
                          return new List<dynamic>();
                      }));
+        }
+
+        public bool RequestPermissions()
+        {
+#if IOS
+            var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert |
+                                                                                      UIUserNotificationType.Badge |
+                                                                                      UIUserNotificationType.Sound,
+                                                                                      new NSSet());
+            UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
+            Debug.WriteLine("REQUESTED PERMISSIONS");
+#endif
+            return true;
         }
     }
 }

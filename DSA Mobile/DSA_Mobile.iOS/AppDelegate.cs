@@ -8,8 +8,11 @@ namespace DSA_Mobile.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
+        private iOSApp _app;
+        private bool _suspended = false;
+
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
         // method you should instantiate the window, load the UI into it and then make the window
@@ -20,10 +23,28 @@ namespace DSA_Mobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
 			iOSPlatform.Initialize();
-            global::Xamarin.Forms.Forms.Init();
-			LoadApplication(new iOSApp());
+            Xamarin.Forms.Forms.Init();
+            _app = new iOSApp();
+			LoadApplication(_app);
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override void DidEnterBackground(UIApplication uiApplication)
+        {
+            base.DidEnterBackground(uiApplication);
+            _app.StopLink();
+            _suspended = true;
+        }
+
+        public override void WillEnterForeground(UIApplication uiApplication)
+        {
+            base.WillEnterForeground(uiApplication);
+            if (_suspended)
+            {
+                _app.StartLink();
+            }
+            _suspended = false;
         }
     }
 }

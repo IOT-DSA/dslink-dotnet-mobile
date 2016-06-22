@@ -36,19 +36,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="BatteryModule.cs" />
     <Compile Include="DSLink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SensorsModule.cs" />
     <Compile Include="Sensors\BaseSensors.cs" />
     <Compile Include="Sensors\MotionVector.cs" />
     <Compile Include="Sensors\SensorType.cs" />
     <Compile Include="Helpers\Settings.cs" />
-    <Compile Include="DeviceInfoModule.cs" />
-    <Compile Include="NotificationModule.cs" />
     <Compile Include="BaseModule.cs" />
     <Compile Include="DeviceSettings\BaseDeviceSettings.cs" />
-    <Compile Include="DeviceSettingsModule.cs" />
+    <Compile Include="Camera\BaseCamera.cs" />
+    <Compile Include="Pages\SettingsPage.cs" />
+    <Compile Include="Pages\MainPage.cs" />
+    <Compile Include="Battery\BatteryModule.cs" />
+    <Compile Include="DeviceInfo\DeviceInfoModule.cs" />
+    <Compile Include="DeviceSettings\DeviceSettingsModule.cs" />
+    <Compile Include="Notifications\NotificationModule.cs" />
+    <Compile Include="Sensors\SensorsModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SDK\DSLink\DSLink.csproj">
@@ -105,6 +108,11 @@
   <ItemGroup>
     <Folder Include="Sensors\" />
     <Folder Include="DeviceSettings\" />
+    <Folder Include="Camera\" />
+    <Folder Include="Pages\" />
+    <Folder Include="Battery\" />
+    <Folder Include="DeviceInfo\" />
+    <Folder Include="Notifications\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.0.49\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.49\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

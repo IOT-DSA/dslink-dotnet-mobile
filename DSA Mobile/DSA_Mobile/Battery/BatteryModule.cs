@@ -1,16 +1,31 @@
+using System;
 using DSLink.Nodes;
 using Plugin.Battery;
 using Plugin.Battery.Abstractions;
 
-namespace DSA_Mobile
+namespace DSA_Mobile.Battery
 {
     public class BatteryModule : BaseModule
     {
-        private readonly Node _percentRemaining;
-        private readonly Node _status;
-        private readonly Node _source;
+        private Node _percentRemaining;
+        private Node _status;
+        private Node _source;
 
-        public BatteryModule(Node superRoot)
+        public bool Supported => true;
+
+        private void BatteryChanged(object sender, BatteryChangedEventArgs e)
+        {
+            _percentRemaining.Value.Set(e.RemainingChargePercent);
+            _status.Value.Set(e.Status.ToString());
+            _source.Value.Set(e.PowerSource.ToString());
+        }
+
+        public bool RequestPermissions()
+        {
+            return true;
+        }
+
+        public void AddNodes(Node superRoot)
         {
             _percentRemaining = superRoot.CreateChild("battery_percent")
                                          .SetDisplayName("Battery Percent")
@@ -31,13 +46,6 @@ namespace DSA_Mobile
                                .BuildNode();
 
             CrossBattery.Current.BatteryChanged += BatteryChanged;
-        }
-
-        private void BatteryChanged(object sender, BatteryChangedEventArgs e)
-        {
-            _percentRemaining.Value.Set(e.RemainingChargePercent);
-            _status.Value.Set(e.Status.ToString());
-            _source.Value.Set(e.PowerSource.ToString());
         }
     }
 }

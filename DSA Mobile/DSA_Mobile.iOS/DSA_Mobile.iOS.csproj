@@ -100,6 +100,7 @@
     <Compile Include="iOSApp.cs" />
     <Compile Include="Sensors\iOSSensors.cs" />
     <Compile Include="DeviceSettings\iOSDeviceSettings.cs" />
+    <Compile Include="HealthKit\HealthKitModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DSA_Mobile\DSA_Mobile.csproj">
@@ -187,6 +188,7 @@
   <ItemGroup>
     <Folder Include="Sensors\" />
     <Folder Include="DeviceSettings\" />
+    <Folder Include="HealthKit\" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />

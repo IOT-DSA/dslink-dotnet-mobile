@@ -1,15 +1,23 @@
-﻿using DSLink.Nodes;
+﻿using System;
+using DSLink.Nodes;
 using Plugin.DeviceInfo;
 
-namespace DSA_Mobile
+namespace DSA_Mobile.DeviceInfo
 {
-    public class DeviceInfoModule
+    public class DeviceInfoModule : BaseModule
     {
-        private readonly Node _operatingSystem;
-        private readonly Node _operatingSystemVersion;
-        private readonly Node _deviceModel;
+        private Node _operatingSystem;
+        private Node _operatingSystemVersion;
+        private Node _deviceModel;
 
-        public DeviceInfoModule(Node superRoot)
+        public bool Supported => true;
+
+        public bool RequestPermissions()
+        {
+            return true;
+        }
+
+        public void AddNodes(Node superRoot)
         {
             superRoot.CreateChild("os")
                      .SetDisplayName("OS")
