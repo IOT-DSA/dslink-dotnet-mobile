@@ -49,7 +49,7 @@ namespace DSA_Mobile.Camera
                 _takePicture = superRoot.CreateChild("take_picture")
                          .SetDisplayName("Take Picture")
                          .SetInvokable(Permission.Write)
-                         .AddColumn(new Column("Data", "string"))
+                         .AddColumn(new Column("Data", "binary"))
                          .SetAction(new Action(Permission.Write, async (parameters, request) =>
                          {
                              try
@@ -64,7 +64,7 @@ namespace DSA_Mobile.Camera
                                  Debug.WriteLine("after picture taken");
                                  request.SendUpdates(new List<dynamic>
                                  {
-                                     "data:image/png;base64," + Convert.ToBase64String(result.GetStream().ReadAllBytes())
+                                     result.GetStream().ReadAllBytes()
                                  });
                                  Debug.WriteLine("after transmit");
                                  request.Close();
