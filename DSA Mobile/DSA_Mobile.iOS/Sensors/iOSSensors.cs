@@ -23,6 +23,7 @@ namespace DSA_Mobile.Sensors
 			switch (sensorType)
 			{
 				case SensorType.Accelerometer:
+                    AccelerometerActive = true;
                     motionManager.AccelerometerUpdateInterval = 0.05;
 					motionManager.StartAccelerometerUpdates(NSOperationQueue.MainQueue, (data, error) =>
 					{
@@ -30,6 +31,7 @@ namespace DSA_Mobile.Sensors
 					});
 					break;
 				case SensorType.Gyroscope:
+                    GyroActive = true;
                     motionManager.GyroUpdateInterval = 0.05;
 					motionManager.StartGyroUpdates(NSOperationQueue.MainQueue, (data, error) =>
 					{
@@ -37,6 +39,7 @@ namespace DSA_Mobile.Sensors
 					});
 					break;
                 case SensorType.DeviceMotion:
+                    DeviceMotionActive = true;
                     motionManager.DeviceMotionUpdateInterval = 0.05d;
                     motionManager.StartDeviceMotionUpdates(NSOperationQueue.MainQueue, (motion, error) =>
                     {
@@ -44,6 +47,7 @@ namespace DSA_Mobile.Sensors
                     });
                     break;
 				case SensorType.Compass:
+                    CompassActive = true;
 					locationManager.UpdatedHeading += (sender, eventArgs) =>
 					{
 						// TODO: Fix.
@@ -53,5 +57,28 @@ namespace DSA_Mobile.Sensors
 					break;
 			}
 		}
+
+        public override void Stop(SensorType sensorType)
+        {
+            switch (sensorType)
+            {
+                case SensorType.Accelerometer:
+                    AccelerometerActive = false;
+                    motionManager.StopAccelerometerUpdates();
+                    break;
+                case SensorType.Gyroscope:
+                    GyroActive = false;
+                    motionManager.StopGyroUpdates();
+                    break;
+                case SensorType.DeviceMotion:
+                    DeviceMotionActive = false;
+                    motionManager.StopDeviceMotionUpdates();
+                    break;
+                case SensorType.Compass:
+                    CompassActive = false;
+                    locationManager.StopUpdatingHeading();
+                    break;
+            }
+        }
 	}
 }

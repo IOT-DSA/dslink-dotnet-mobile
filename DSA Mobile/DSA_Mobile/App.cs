@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using DSA_Mobile.Battery;
+using DSA_Mobile.Camera;
 using DSA_Mobile.DeviceInfo;
 using DSA_Mobile.DeviceSettings;
 using DSA_Mobile.Notifications;
+using DSA_Mobile.Pages;
 using DSA_Mobile.Sensors;
 using DSLink;
 using Xamarin.Forms;
@@ -17,9 +19,6 @@ namespace DSA_Mobile
         public static App Instance;
 
         protected DSLink _dslink;
-        private Entry _brokerUrlEntry;
-        private Button _toggleButton;
-        private Button _settingsButton;
         public bool Disabled = true;
         protected BaseSensors _sensors;
         protected BaseDeviceSettings _deviceSettings;
@@ -27,13 +26,7 @@ namespace DSA_Mobile
         protected App()
         {
             Instance = this;
-
-            _brokerUrlEntry = new Entry()
-            {
-                Text = "http://10.0.1.177:8080/conn"
-            };
-
-            MainPage = new MainPage();
+            MainPage = new TabHost();
         }
 
         protected override void OnStart()
@@ -72,7 +65,11 @@ namespace DSA_Mobile
         {
             try
             {
-                var configuration = new Configuration(new List<string>(), "DSAMobile", true, true, StoragePath() + "/dsa_mobile.keys", brokerUrl: _brokerUrlEntry.Text);
+                var configuration = new Configuration(new List<string>(), "DSAMobile",
+                                                      responder: true,
+                                                      requester: true,
+                                                      keysLocation: StoragePath() + "/dsa_mobile.keys",
+                                                      brokerUrl: Settings.Get("dsamobile.broker", "http://your.bro.ker/conn"));
                 _dslink = PlatformDSLink(configuration);
             }
             catch (Exception e)
@@ -84,6 +81,7 @@ namespace DSA_Mobile
             _dslink.RegisterModule(new DeviceSettingsModule(GetDeviceSettings()));
             _dslink.RegisterModule(new SensorsModule(GetSensors()));
             _dslink.RegisterModule(new NotificationModule());
+            _dslink.RegisterModule(new CameraModule());
         }
 
         public virtual DSLink PlatformDSLink(Configuration config) => new DSLink(config, this);

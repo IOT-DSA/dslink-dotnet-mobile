@@ -1,5 +1,7 @@
 ﻿using DSLink.iOS;
 using Foundation;
+using Plugin.Iconize;
+using Plugin.Iconize.Fonts;
 using UIKit;
 
 namespace DSA_Mobile.iOS
@@ -23,6 +25,12 @@ namespace DSA_Mobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
 			iOSPlatform.Initialize();
+
+            // Iconize
+            Iconize.With(new IoniconsModule());
+            FormsPlugin.Iconize.iOS.IconControls.Init();
+
+            // Xamarin bootstrap
             Xamarin.Forms.Forms.Init();
             _app = new iOSApp();
 			LoadApplication(_app);

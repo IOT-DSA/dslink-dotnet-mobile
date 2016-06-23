@@ -38,5 +38,9 @@
 	<string>Assets.xcassets/LaunchImage.launchimage</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcons.appiconset</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>iconize-ionicons.ttf</string>
+	</array>
 </dict>
 </plist>

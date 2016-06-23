@@ -1,13 +1,21 @@
-﻿using Xamarin.Forms;
+﻿using DSA_Mobile.Views;
+using Xamarin.Forms;
 
-namespace DSA_Mobile
+namespace DSA_Mobile.Pages
 {
-    public class MainPage : ContentPage
+    public class ResponderPage : DGPage
     {
-        public MainPage()
+        public ResponderPage()
         {
+            Title = "Responder";
+            if (PlatformHelper.iOS)
+            {
+                Icon = "ion-ios-cloud-upload";
+            }
+
             Content = new StackLayout
             {
+                VerticalOptions = LayoutOptions.Center,
                 Children =
                 {
                     new Button

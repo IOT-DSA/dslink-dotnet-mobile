@@ -15,9 +15,11 @@ namespace DSA_Mobile
 
         public void RegisterModule(BaseModule module)
         {
+            Logger.Info("Attempting to request permissions for " + module);
             var permissionsGranted = module.RequestPermissions();
             if (permissionsGranted)
             {
+                Logger.Info("Permissions granted, loading " + module);
                 module.AddNodes(Responder.SuperRoot);
                 loadedModules.Add(module);
             }

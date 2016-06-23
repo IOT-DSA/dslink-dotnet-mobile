@@ -21,26 +21,28 @@ namespace DSA_Mobile.Notifications
                      .AddParameter(new Parameter("Message", "string"))
                      .AddColumn(new Column("Notification ID", "number"))
                      .SetConfig("$invokable", new Value("write"))
-                     .SetAction(new Action(Permission.Write, parameters =>
+                     .SetAction(new Action(Permission.Write, (parameters, request) =>
                      {
                          string title = parameters["Title"].Get();
                          string message = parameters["Message"].Get();
                          int notificationID = _notificationID++;
                          CrossLocalNotifications.Current.Show(title, message, notificationID);
-                         return new List<dynamic>
+                         request.SendUpdates(new List<dynamic>
                          {
                              notificationID
-                         };
+                         });
+                         request.Close();
                      }));
 
             superRoot.CreateChild("Cancel Notification")
                      .AddParameter(new Parameter("Notification ID", "number"))
                      .SetConfig("$invokable", new Value(Permission.Write.ToString()))
-                     .SetAction(new Action(Permission.Write, parameters =>
+                     .SetAction(new Action(Permission.Write, (parameters, request) =>
                      {
                          float nid = parameters["Notification ID"].Get();
                          CrossLocalNotifications.Current.Cancel((int)nid);
-                         return new List<dynamic>();
+                         request.SendUpdates(new List<dynamic>());
+                         request.Close();
                      }));
         }
 

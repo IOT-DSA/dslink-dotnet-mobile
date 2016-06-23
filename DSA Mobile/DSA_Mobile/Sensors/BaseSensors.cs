@@ -11,7 +11,33 @@ namespace DSA_Mobile.Sensors
         public event Action<double> AirPressureValueChanged;
         public event Action<double> LightLevelValueChanged;
 
+        public bool AccelerometerActive
+        {
+            protected set;
+            get;
+        }
+
+        public bool GyroActive
+        {
+            protected set;
+            get;
+        }
+
+        public bool DeviceMotionActive
+        {
+            protected set;
+            get;
+        }
+
+        public bool CompassActive
+        {
+            protected set;
+            get;
+        }
+
 		public abstract void Start(SensorType sensorType);
+
+        public abstract void Stop(SensorType sensorType);
 
 		public void EmitAccelerometer(MotionVector vector)
 		{

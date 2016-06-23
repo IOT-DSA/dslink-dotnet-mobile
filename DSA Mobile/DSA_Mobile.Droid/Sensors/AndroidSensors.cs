@@ -3,6 +3,7 @@ using SensorType = DSA_Mobile.Sensors.SensorType;
 using Android.Hardware;
 using Android.Runtime;
 using DSA_Mobile.Sensors;
+using System;
 
 namespace DSA_Mobile.Droid.Sensors
 {
@@ -22,21 +23,50 @@ namespace DSA_Mobile.Droid.Sensors
             switch (sensorType)
             {
                 case SensorType.Accelerometer:
+                    AccelerometerActive = true;
                     _sensorManager.RegisterListener(_sensorListener,
                                                     _sensorManager.GetDefaultSensor(AndroidSensorType.Accelerometer),
-                                                    SensorDelay.Normal);
+                                                    SensorDelay.Game);
                     break;
                 case SensorType.Gyroscope:
+                    GyroActive = true;
                     _sensorManager.RegisterListener(_sensorListener,
                                                     _sensorManager.GetDefaultSensor(AndroidSensorType.Gyroscope),
-                                                    SensorDelay.Normal);
+                                                    SensorDelay.Game);
                     break;
                 case SensorType.DeviceMotion:
+                    DeviceMotionActive = true;
                     _sensorManager.RegisterListener(_sensorListener,
                                                     _sensorManager.GetDefaultSensor(AndroidSensorType.RotationVector),
-                                                    SensorDelay.Normal);
+                                                    SensorDelay.Game);
                     break;
                 case SensorType.Compass:
+                    CompassActive = true;
+                    break;
+            }
+        }
+
+        public override void Stop(SensorType sensorType)
+        {
+            switch (sensorType)
+            {
+                case SensorType.Accelerometer:
+                    AccelerometerActive = false;
+                    _sensorManager.UnregisterListener(_sensorListener,
+                                                      _sensorManager.GetDefaultSensor(AndroidSensorType.Accelerometer));
+                    break;
+                case SensorType.Gyroscope:
+                    GyroActive = false;
+                    _sensorManager.UnregisterListener(_sensorListener,
+                                                      _sensorManager.GetDefaultSensor(AndroidSensorType.Gyroscope));
+                    break;
+                case SensorType.DeviceMotion:
+                    DeviceMotionActive = false;
+                    _sensorManager.UnregisterListener(_sensorListener,
+                                                      _sensorManager.GetDefaultSensor(AndroidSensorType.RotationVector));
+                    break;
+                case SensorType.Compass:
+                    CompassActive = false;
                     break;
             }
         }
