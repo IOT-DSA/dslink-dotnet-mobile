@@ -178,6 +178,12 @@
     <Reference Include="Plugin.Media.Abstractions">
       <HintPath>..\..\packages\Xam.Plugin.Media.2.3.0\lib\MonoAndroid10\Plugin.Media.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.Contacts">
+      <HintPath>..\..\packages\Xam.Plugin.Contacts.2.0.2-beta1\lib\MonoAndroid10\Plugin.Contacts.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Contacts.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Contacts.2.0.2-beta1\lib\MonoAndroid10\Plugin.Contacts.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidApp.cs" />

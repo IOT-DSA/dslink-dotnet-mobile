@@ -20,7 +20,7 @@ namespace DSA_Mobile.Notifications
                      .AddParameter(new Parameter("Title", "string"))
                      .AddParameter(new Parameter("Message", "string"))
                      .AddColumn(new Column("Notification ID", "number"))
-                     .SetConfig("$invokable", new Value("write"))
+                     .SetInvokable(Permission.Write)
                      .SetAction(new Action(Permission.Write, (parameters, request) =>
                      {
                          string title = parameters["Title"].Get();
@@ -36,12 +36,11 @@ namespace DSA_Mobile.Notifications
 
             superRoot.CreateChild("Cancel Notification")
                      .AddParameter(new Parameter("Notification ID", "number"))
-                     .SetConfig("$invokable", new Value(Permission.Write.ToString()))
+                     .SetInvokable(Permission.Write)
                      .SetAction(new Action(Permission.Write, (parameters, request) =>
                      {
                          float nid = parameters["Notification ID"].Get();
                          CrossLocalNotifications.Current.Cancel((int)nid);
-                         request.SendUpdates(new List<dynamic>());
                          request.Close();
                      }));
         }
