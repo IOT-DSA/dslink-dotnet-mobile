@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace DSA_Mobile
+namespace DSAMobile
 {
     public static class Utilities
     {

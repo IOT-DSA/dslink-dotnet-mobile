@@ -3,7 +3,7 @@ using CoreLocation;
 using CoreMotion;
 using Foundation;
 
-namespace DSA_Mobile.Sensors
+namespace DSAMobile.Sensors
 {
 	public class iOSSensors : BaseSensors
 	{

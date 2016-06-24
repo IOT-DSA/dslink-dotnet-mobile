@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
-namespace DSA_Mobile.WinPhone
+namespace DSAMobile.WinPhone
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

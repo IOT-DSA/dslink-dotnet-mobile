@@ -12,7 +12,7 @@ using OSPermission = Plugin.Permissions.Abstractions.Permission;
 using DSLink.Request;
 using Plugin.Media.Abstractions;
 
-namespace DSA_Mobile.Camera
+namespace DSAMobile.Camera
 {
     public class CameraModule : BaseModule
     {

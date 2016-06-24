@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using DSA_Mobile.DeviceSettings;
+using DSAMobile.DeviceSettings;
 using DSLink.Nodes;
 
-namespace DSA_Mobile.DeviceSettings
+namespace DSAMobile.DeviceSettings
 {
     public class DeviceSettingsModule : BaseModule
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using DSLink.Nodes;
 
-namespace DSA_Mobile.DeviceSettings
+namespace DSAMobile.DeviceSettings
 {
     public abstract class BaseDeviceSettings
     {

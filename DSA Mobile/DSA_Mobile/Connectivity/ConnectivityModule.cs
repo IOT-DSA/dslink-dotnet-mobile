@@ -4,7 +4,7 @@ using DSLink.Nodes;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 
-namespace DSA_Mobile.Connectivity
+namespace DSAMobile.Connectivity
 {
     public class ConnectivityModule : BaseModule
     {

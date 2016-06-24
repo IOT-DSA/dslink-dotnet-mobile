@@ -5,7 +5,7 @@ using DSLink.Request;
 using DSLink.Nodes.Actions;
 using System.Diagnostics;
 
-namespace DSA_Mobile.Vibrate
+namespace DSAMobile.Vibrate
 {
     public class VibrateModule : BaseModule
     {

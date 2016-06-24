@@ -3,7 +3,7 @@ using DSLink.Nodes;
 using Plugin.Battery;
 using Plugin.Battery.Abstractions;
 
-namespace DSA_Mobile.Battery
+namespace DSAMobile.Battery
 {
     public class BatteryModule : BaseModule
     {

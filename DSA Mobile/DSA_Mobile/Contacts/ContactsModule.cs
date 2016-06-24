@@ -8,7 +8,7 @@ using Plugin.Contacts;
 using Plugin.Contacts.Abstractions;
 using Action = DSLink.Nodes.Actions.Action;
 
-namespace DSA_Mobile.Contacts
+namespace DSAMobile.Contacts
 {
     public class ContactsModule : BaseModule
     {

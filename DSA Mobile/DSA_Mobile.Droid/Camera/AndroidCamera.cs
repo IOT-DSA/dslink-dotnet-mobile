@@ -1,9 +1,9 @@
 ﻿using System;
 using Android.Content;
 using Android.Provider;
-using DSA_Mobile.Camera;
+using DSAMobile.Camera;
 
-namespace DSA_Mobile.Droid.Camera
+namespace DSAMobile.Droid.Camera
 {
     public class AndroidCamera : BaseCamera
     {

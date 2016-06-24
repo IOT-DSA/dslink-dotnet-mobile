@@ -1,6 +1,6 @@
 ﻿using DSLink;
 
-namespace DSA_Mobile.Droid
+namespace DSAMobile.Droid
 {
     public class AndroidDSLink : DSLink
     {

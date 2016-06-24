@@ -1,7 +1,7 @@
 ﻿using System;
 using DSLink.Nodes;
 
-namespace DSA_Mobile
+namespace DSAMobile
 {
     public interface BaseModule
     {

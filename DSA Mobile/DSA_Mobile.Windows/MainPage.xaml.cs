@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace DSA_Mobile.Windows
+namespace DSAMobile.Windows
 {
     public sealed partial class MainPage
     {

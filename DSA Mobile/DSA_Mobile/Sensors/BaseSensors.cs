@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DSA_Mobile.Sensors
+namespace DSAMobile.Sensors
 {
 	public abstract class BaseSensors
 	{

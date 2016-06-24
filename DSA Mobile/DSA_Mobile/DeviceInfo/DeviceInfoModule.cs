@@ -2,7 +2,7 @@
 using DSLink.Nodes;
 using Plugin.DeviceInfo;
 
-namespace DSA_Mobile.DeviceInfo
+namespace DSAMobile.DeviceInfo
 {
     public class DeviceInfoModule : BaseModule
     {

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System;
 using System.Threading.Tasks;
 
-namespace DSA_Mobile.Sensors
+namespace DSAMobile.Sensors
 {
     public class SensorsModule : BaseModule
 	{

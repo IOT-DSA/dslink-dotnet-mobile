@@ -1,13 +1,13 @@
 using Android.Content;
 using Android.Hardware;
 using Android.OS;
-using DSA_Mobile.DeviceSettings;
-using DSA_Mobile.Droid.DeviceSettings;
-using DSA_Mobile.Droid.Sensors;
-using DSA_Mobile.Sensors;
+using DSAMobile.DeviceSettings;
+using DSAMobile.Droid.DeviceSettings;
+using DSAMobile.Droid.Sensors;
+using DSAMobile.Sensors;
 using DSLink;
 
-namespace DSA_Mobile.Droid
+namespace DSAMobile.Droid
 {
     public class AndroidApp : App
     {

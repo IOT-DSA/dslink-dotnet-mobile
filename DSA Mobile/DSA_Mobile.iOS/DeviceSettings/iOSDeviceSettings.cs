@@ -1,7 +1,7 @@
 ﻿using System;
-using DSA_Mobile.DeviceSettings;
+using DSAMobile.DeviceSettings;
 
-namespace DSA_Mobile.iOS.DeviceSettings
+namespace DSAMobile.iOS.DeviceSettings
 {
     public class iOSDeviceSettings : BaseDeviceSettings
     {

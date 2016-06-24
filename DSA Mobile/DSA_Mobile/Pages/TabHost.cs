@@ -1,6 +1,6 @@
 ﻿using FormsPlugin.Iconize;
 
-namespace DSA_Mobile.Pages
+namespace DSAMobile.Pages
 {
     public class TabHost : IconTabbedPage
     {

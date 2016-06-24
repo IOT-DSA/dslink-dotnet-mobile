@@ -1,4 +1,4 @@
-﻿namespace DSA_Mobile.Sensors
+﻿namespace DSAMobile.Sensors
 {
 	public enum SensorType
 	{

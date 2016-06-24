@@ -1,4 +1,4 @@
-﻿namespace DSA_Mobile.Camera
+﻿namespace DSAMobile.Camera
 {
     public abstract class BaseCamera
     {

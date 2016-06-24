@@ -1,7 +1,7 @@
-﻿using DSA_Mobile.Views;
+﻿using DSAMobile.Views;
 using Xamarin.Forms;
 
-namespace DSA_Mobile.Pages
+namespace DSAMobile.Pages
 {
     public class ResponderPage : DGPage
     {

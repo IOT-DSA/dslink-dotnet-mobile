@@ -6,7 +6,7 @@ using FormsPlugin.Iconize.Droid;
 using Plugin.Iconize;
 using Plugin.Iconize.Fonts;
 
-namespace DSA_Mobile.Droid
+namespace DSAMobile.Droid
 {
     [
         Activity(Label = "DSA Mobile",

@@ -5,7 +5,7 @@ using UIKit;
 using Foundation;
 using System.Diagnostics;
 
-namespace DSA_Mobile.iOS.HealthKit
+namespace DSAMobile.iOS.HealthKit
 {
     public class HealthKitModule : BaseModule
     {

@@ -1,10 +1,10 @@
 ﻿using System;
-using DSA_Mobile.DeviceSettings;
-using DSA_Mobile.iOS.DeviceSettings;
-using DSA_Mobile.iOS.HealthKit;
-using DSA_Mobile.Sensors;
+using DSAMobile.DeviceSettings;
+using DSAMobile.iOS.DeviceSettings;
+using DSAMobile.iOS.HealthKit;
+using DSAMobile.Sensors;
 
-namespace DSA_Mobile.iOS
+namespace DSAMobile.iOS
 {
 	public class iOSApp : App
 	{

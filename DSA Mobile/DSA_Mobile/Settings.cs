@@ -1,7 +1,7 @@
 ﻿using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 
-namespace DSA_Mobile
+namespace DSAMobile
 {
     public static class Settings
     {

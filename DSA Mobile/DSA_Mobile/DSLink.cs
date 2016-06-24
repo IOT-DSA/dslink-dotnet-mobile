@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using DSLink;
 
-namespace DSA_Mobile
+namespace DSAMobile
 {
     public class DSLink : DSLinkContainer
     {

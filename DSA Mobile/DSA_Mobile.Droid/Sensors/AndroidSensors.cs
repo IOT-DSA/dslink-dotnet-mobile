@@ -2,10 +2,10 @@
 using SensorType = DSA_Mobile.Sensors.SensorType;
 using Android.Hardware;
 using Android.Runtime;
-using DSA_Mobile.Sensors;
+using DSAMobile.Sensors;
 using System;
 
-namespace DSA_Mobile.Droid.Sensors
+namespace DSAMobile.Droid.Sensors
 {
     public class AndroidSensors : BaseSensors
     {

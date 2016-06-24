@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace DSA_Mobile.iOS
+namespace DSAMobile.iOS
 {
     public class Application
     {

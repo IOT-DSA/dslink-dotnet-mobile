@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace DSA_Mobile
+namespace DSAMobile
 {
     public static class PlatformHelper
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace DSA_Mobile.Views
+namespace DSAMobile.Views
 {
     public class DGPage : ContentPage
     {

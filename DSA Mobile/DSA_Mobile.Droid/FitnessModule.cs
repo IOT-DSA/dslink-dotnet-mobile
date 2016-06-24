@@ -11,7 +11,7 @@ using Android.OS;
 using Java.Util.Concurrent;
 using Debug = System.Diagnostics.Debug;
 
-namespace DSA_Mobile.Droid
+namespace DSAMobile.Droid
 {
     public class FitnessModule
     {

@@ -6,7 +6,7 @@ using Action = DSLink.Nodes.Actions.Action;
 using Plugin.LocalNotifications;
 using System.Diagnostics;
 
-namespace DSA_Mobile.Notifications
+namespace DSAMobile.Notifications
 {
     public class NotificationModule : BaseModule
     {

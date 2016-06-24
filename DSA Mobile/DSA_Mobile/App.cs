@@ -1,20 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using DSA_Mobile.Battery;
-using DSA_Mobile.Camera;
-using DSA_Mobile.Connectivity;
-using DSA_Mobile.Contacts;
-using DSA_Mobile.DeviceInfo;
-using DSA_Mobile.DeviceSettings;
-using DSA_Mobile.Notifications;
-using DSA_Mobile.Pages;
-using DSA_Mobile.Sensors;
-using DSA_Mobile.Vibrate;
+using DSAMobile.Battery;
+using DSAMobile.Camera;
+using DSAMobile.Connectivity;
+using DSAMobile.Contacts;
+using DSAMobile.DeviceInfo;
+using DSAMobile.DeviceSettings;
+using DSAMobile.Notifications;
+using DSAMobile.Pages;
+using DSAMobile.Sensors;
+using DSAMobile.Vibrate;
 using DSLink;
 using Xamarin.Forms;
 
-namespace DSA_Mobile
+namespace DSAMobile
 {
     public abstract class App : Application
     {

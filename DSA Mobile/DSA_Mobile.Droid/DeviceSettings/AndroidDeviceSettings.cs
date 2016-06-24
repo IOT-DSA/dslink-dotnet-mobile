@@ -1,10 +1,10 @@
 ﻿using System;
-using DSA_Mobile.DeviceSettings;
+using DSAMobile.DeviceSettings;
 using Android.Provider;
 using Android.Content;
 using Android.OS;
 
-namespace DSA_Mobile.Droid.DeviceSettings
+namespace DSAMobile.Droid.DeviceSettings
 {
     public class AndroidDeviceSettings : BaseDeviceSettings
     {
