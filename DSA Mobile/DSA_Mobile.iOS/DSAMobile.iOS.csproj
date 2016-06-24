@@ -103,10 +103,6 @@
     <Compile Include="HealthKit\HealthKitModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DSA_Mobile\DSA_Mobile.csproj">
-      <Name>DSA_Mobile</Name>
-      <Project>{1BA1733B-3FE1-4AD1-B754-3AB0E780E5A8}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\..\SDK\DSLink\DSLink.csproj">
       <Project>{88591365-982E-41AF-9C02-AD8D84FBB54B}</Project>
       <Name>DSLink</Name>
@@ -114,6 +110,10 @@
     <ProjectReference Include="..\..\SDK\DSLink.iOS\DSLink.iOS.csproj">
       <Project>{ADD4D660-A14D-4997-A805-EBD5ED97EF30}</Project>
       <Name>DSLink.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DSA_Mobile\DSAMobile.csproj">
+      <Project>{1BA1733B-3FE1-4AD1-B754-3AB0E780E5A8}</Project>
+      <Name>DSAMobile</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +216,12 @@
     </Reference>
     <Reference Include="Plugin.Contacts.Abstractions">
       <HintPath>..\..\packages\Xam.Plugin.Contacts.2.0.2-beta1\lib\Xamarin.iOS10\Plugin.Contacts.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.2\lib\Xamarin.iOS10\Plugin.Connectivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.2\lib\Xamarin.iOS10\Plugin.Connectivity.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

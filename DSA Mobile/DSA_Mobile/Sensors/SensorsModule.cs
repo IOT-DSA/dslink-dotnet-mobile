@@ -98,35 +98,42 @@ namespace DSA_Mobile.Sensors
         public void AddNodes(Node superRoot)
         {
             _sensors = superRoot.CreateChild("Sensors").BuildNode();
-            _accelerometer = _sensors.CreateChild("Accelerometer").BuildNode();
-            _accel_x = _accelerometer.CreateChild("X")
+            _accelerometer = _sensors.CreateChild("accelerometer")
+                                     .SetDisplayName("Accelerometer")
+                                     .BuildNode();
+            _accel_x = _accelerometer.CreateChild("x")
                                              .SetType("number")
                                              .BuildNode();
-            _accel_y = _accelerometer.CreateChild("Y")
+            _accel_y = _accelerometer.CreateChild("y")
                                              .SetType("number")
                                              .BuildNode();
-            _accel_z = _accelerometer.CreateChild("Z")
+            _accel_z = _accelerometer.CreateChild("z")
                                              .SetType("number")
                                              .BuildNode();
 
-            _gyroscope = _sensors.CreateChild("Gyroscope").BuildNode();
-            _gyro_x = _gyroscope.CreateChild("X")
+            _gyroscope = _sensors.CreateChild("gyroscope")
+                                 .SetDisplayName("Gyroscope")
+                                 .BuildNode();
+            _gyro_x = _gyroscope.CreateChild("x")
                                    .SetType("number")
                                    .BuildNode();
-            _gyro_y = _gyroscope.CreateChild("Y")
+            _gyro_y = _gyroscope.CreateChild("y")
                                    .SetType("number")
                                    .BuildNode();
-            _gyro_z = _gyroscope.CreateChild("Z")
+            _gyro_z = _gyroscope.CreateChild("z")
                                    .SetType("number")
                                    .BuildNode();
-            _dmotion = _sensors.CreateChild("DeviceMotion").BuildNode();
-            _dmotion_x = _dmotion.CreateChild("X")
+            
+            _dmotion = _sensors.CreateChild("device_motion")
+                               .SetDisplayName("Device Motion")
+                               .BuildNode();
+            _dmotion_x = _dmotion.CreateChild("x")
                                  .SetType("number")
                                  .BuildNode();
-            _dmotion_y = _dmotion.CreateChild("Y")
+            _dmotion_y = _dmotion.CreateChild("y")
                                  .SetType("number")
                                  .BuildNode();
-            _dmotion_z = _dmotion.CreateChild("Z")
+            _dmotion_z = _dmotion.CreateChild("z")
                                  .SetType("number")
                                  .BuildNode();
 

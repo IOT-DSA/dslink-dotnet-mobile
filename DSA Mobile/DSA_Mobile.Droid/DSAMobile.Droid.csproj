@@ -184,6 +184,12 @@
     <Reference Include="Plugin.Contacts.Abstractions">
       <HintPath>..\..\packages\Xam.Plugin.Contacts.2.0.2-beta1\lib\MonoAndroid10\Plugin.Contacts.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.Connectivity">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.2\lib\MonoAndroid10\Plugin.Connectivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.2\lib\MonoAndroid10\Plugin.Connectivity.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidApp.cs" />
@@ -221,7 +227,7 @@
       <Name>DSLink</Name>
     </ProjectReference>
     <ProjectReference Include="..\DSA_Mobile\DSA_Mobile.csproj">
-      <Name>DSA_Mobile</Name>
+      <Name>DSAMobile</Name>
       <Project>{1BA1733B-3FE1-4AD1-B754-3AB0E780E5A8}</Project>
     </ProjectReference>
   </ItemGroup>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using DSA_Mobile.Battery;
 using DSA_Mobile.Camera;
+using DSA_Mobile.Connectivity;
 using DSA_Mobile.Contacts;
 using DSA_Mobile.DeviceInfo;
 using DSA_Mobile.DeviceSettings;
@@ -85,6 +86,7 @@ namespace DSA_Mobile
             _dslink.RegisterModule(new CameraModule());
             _dslink.RegisterModule(new VibrateModule());
             _dslink.RegisterModule(new ContactsModule());
+            _dslink.RegisterModule(new ConnectivityModule());
         }
 
         public virtual DSLink PlatformDSLink(Configuration config) => new DSLink(config, this);

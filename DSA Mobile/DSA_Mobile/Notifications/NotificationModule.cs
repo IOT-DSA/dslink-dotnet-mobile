@@ -47,11 +47,12 @@ namespace DSA_Mobile.Notifications
 
         public bool RequestPermissions()
         {
+            // TODO: Does this even work?
 #if IOS
             var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert |
-                                                                                      UIUserNotificationType.Badge |
-                                                                                      UIUserNotificationType.Sound,
-                                                                                      new NSSet());
+                                                                          UIUserNotificationType.Badge |
+                                                                          UIUserNotificationType.Sound,
+                                                                          new NSSet());
             UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
             Debug.WriteLine("REQUESTED PERMISSIONS");
 #endif
