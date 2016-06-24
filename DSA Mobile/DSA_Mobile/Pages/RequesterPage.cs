@@ -9,10 +9,10 @@ namespace DSAMobile.Pages
         public RequesterPage() : base()
         {
             Title = "Requester";
-            if (PlatformHelper.iOS)
+            /*if (PlatformHelper.iOS)
             {
                 Icon = "ion-ios-cloud-download";
-            }
+            }*/
 
             //Content = new RelativeLayout
         }

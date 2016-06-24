@@ -8,10 +8,10 @@ namespace DSAMobile.Pages
         public ResponderPage()
         {
             Title = "Responder";
-            if (PlatformHelper.iOS)
+            /*if (PlatformHelper.iOS)
             {
                 Icon = "ion-ios-cloud-upload";
-            }
+            }*/
 
             Content = new StackLayout
             {

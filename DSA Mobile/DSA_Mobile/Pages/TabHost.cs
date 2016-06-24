@@ -1,8 +1,8 @@
-﻿using FormsPlugin.Iconize;
+﻿using Xamarin.Forms;
 
 namespace DSAMobile.Pages
 {
-    public class TabHost : IconTabbedPage
+    public class TabHost : TabbedPage
     {
         public TabHost()
         {
@@ -12,4 +12,3 @@ namespace DSAMobile.Pages
         }
     }
 }
-

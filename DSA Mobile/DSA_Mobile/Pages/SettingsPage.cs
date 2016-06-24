@@ -12,10 +12,10 @@ namespace DSAMobile.Pages
         public SettingsPage()
         {
             Title = "Settings";
-            if (PlatformHelper.iOS)
+            /*if (PlatformHelper.iOS)
             {
                 Icon = "ion-toggle-filled";
-            }
+            }*/
 
             _brokerUrlEntry = new Entry
             {
