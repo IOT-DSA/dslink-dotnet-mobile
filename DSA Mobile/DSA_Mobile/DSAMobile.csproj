@@ -8,7 +8,7 @@
     <ProjectGuid>{1BA1733B-3FE1-4AD1-B754-3AB0E780E5A8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DSA_Mobile</RootNamespace>
+    <RootNamespace>DSAMobile</RootNamespace>
     <AssemblyName>DSA_Mobile</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
@@ -43,7 +43,6 @@
     <Compile Include="Sensors\SensorType.cs" />
     <Compile Include="BaseModule.cs" />
     <Compile Include="DeviceSettings\BaseDeviceSettings.cs" />
-    <Compile Include="Camera\BaseCamera.cs" />
     <Compile Include="Pages\SettingsPage.cs" />
     <Compile Include="Pages\ResponderPage.cs" />
     <Compile Include="Battery\BatteryModule.cs" />
