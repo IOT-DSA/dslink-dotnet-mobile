@@ -226,9 +226,9 @@
       <Project>{88591365-982e-41af-9c02-ad8d84fbb54b}</Project>
       <Name>DSLink</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DSA_Mobile\DSA_Mobile.csproj">
-      <Name>DSAMobile</Name>
+    <ProjectReference Include="..\DSA_Mobile\DSAMobile.csproj">
       <Project>{1BA1733B-3FE1-4AD1-B754-3AB0E780E5A8}</Project>
+      <Name>DSAMobile</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

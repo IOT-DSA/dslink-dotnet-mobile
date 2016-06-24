@@ -9,7 +9,7 @@ using Plugin.Iconize.Fonts;
 namespace DSAMobile.Droid
 {
     [
-        Activity(Label = "DSA Mobile",
+        Activity(Label = "DSAMobile",
                  Icon = "@drawable/icon",
                  MainLauncher = true,
                  ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,

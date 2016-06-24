@@ -11,7 +11,7 @@
 
 [assembly: Android.Runtime.ResourceDesignerAttribute("DSA_Mobile.Droid.Resource", IsApplication=true)]
 
-namespace DSAMobile.Droid
+namespace DSA_Mobile.Droid
 {
 	
 	

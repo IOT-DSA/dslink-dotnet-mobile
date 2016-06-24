@@ -1,5 +1,5 @@
 ﻿using AndroidSensorType = Android.Hardware.SensorType;
-using SensorType = DSA_Mobile.Sensors.SensorType;
+using SensorType = DSAMobile.Sensors.SensorType;
 using Android.Hardware;
 using Android.Runtime;
 using DSAMobile.Sensors;
