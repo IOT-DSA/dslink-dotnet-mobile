@@ -25,6 +25,18 @@ namespace DSAMobile
             }
         }
 
+        public static string DSLinkName
+        {
+            get
+            {
+                return Get("dsamobile.name", "DSAMobile");
+            }
+            set
+            {
+                Set("dsamobile.name", value);
+            }
+        }
+
         public static void Set(string key, dynamic value)
         {
             _settings.AddOrUpdateValue(key, value);

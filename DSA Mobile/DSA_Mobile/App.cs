@@ -69,7 +69,8 @@ namespace DSAMobile
         {
             try
             {
-                var configuration = new Configuration(new List<string>(), "DSAMobile",
+                var configuration = new Configuration(new List<string>(),
+                                                      Settings.DSLinkName,
                                                       responder: true,
                                                       requester: true,
                                                       keysLocation: StoragePath() + "/dsa_mobile.keys",

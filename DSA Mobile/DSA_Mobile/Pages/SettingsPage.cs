@@ -7,6 +7,7 @@ namespace DSAMobile.Pages
     public class SettingsPage : DGPage
     {
         private Entry _brokerUrlEntry;
+        private Entry _dslinkNameEntry;
         private Button _saveButton;
 
         public SettingsPage()
@@ -19,9 +20,15 @@ namespace DSAMobile.Pages
 
             _brokerUrlEntry = new Entry
             {
-                Placeholder = "http://your.bro.ker/conn",
+                Placeholder = "Broker URL",
                 Text = Settings.BrokerURL,
                 Keyboard = Keyboard.Url
+            };
+
+            _dslinkNameEntry = new Entry
+            {
+                Placeholder = "DSLink Name",
+                Text = Settings.DSLinkName
             };
 
             _saveButton = new Button
@@ -30,6 +37,7 @@ namespace DSAMobile.Pages
                 Command = new Command(() =>
                 {
                     Settings.BrokerURL = _brokerUrlEntry.Text;
+                    Settings.DSLinkName = _dslinkNameEntry.Text;
                 })
             };
 
@@ -38,6 +46,7 @@ namespace DSAMobile.Pages
                 Children =
                 {
                     _brokerUrlEntry,
+                    _dslinkNameEntry,
                     _saveButton
                 }
             };
