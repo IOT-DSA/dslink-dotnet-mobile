@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using DSAMobile.Battery;
 using DSAMobile.Camera;
+using DSAMobile.Communications;
 using DSAMobile.Connectivity;
 using DSAMobile.Contacts;
 using DSAMobile.DeviceInfo;
 using DSAMobile.DeviceSettings;
+using DSAMobile.Location;
 using DSAMobile.Notifications;
 using DSAMobile.Pages;
 using DSAMobile.Sensors;
@@ -71,7 +73,7 @@ namespace DSAMobile
                                                       responder: true,
                                                       requester: true,
                                                       keysLocation: StoragePath() + "/dsa_mobile.keys",
-                                                      brokerUrl: Settings.Get("dsamobile.broker", "http://your.bro.ker/conn"));
+                                                      brokerUrl: Settings.BrokerURL);
                 _dslink = PlatformDSLink(configuration);
             }
             catch (Exception e)
@@ -87,6 +89,8 @@ namespace DSAMobile
             _dslink.RegisterModule(new VibrateModule());
             _dslink.RegisterModule(new ContactsModule());
             _dslink.RegisterModule(new ConnectivityModule());
+            _dslink.RegisterModule(new CommunicationsModule());
+            _dslink.RegisterModule(new LocationModule());
         }
 
         public virtual DSLink PlatformDSLink(Configuration config) => new DSLink(config, this);

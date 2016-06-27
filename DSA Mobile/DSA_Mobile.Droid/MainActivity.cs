@@ -2,9 +2,6 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using DSLink.Android;
-using FormsPlugin.Iconize.Droid;
-using Plugin.Iconize;
-using Plugin.Iconize.Fonts;
 
 namespace DSAMobile.Droid
 {
@@ -25,6 +22,9 @@ namespace DSAMobile.Droid
             // Iconize
             //Iconize.With(new MaterialModule());
             //IconControls.Init(Resource.Id.);
+
+            // ZXing
+
 
             // Xamarin bootstrap
             Xamarin.Forms.Forms.Init(this, bundle);

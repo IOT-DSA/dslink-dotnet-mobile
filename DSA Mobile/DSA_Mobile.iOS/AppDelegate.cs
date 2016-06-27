@@ -1,4 +1,5 @@
-﻿using DSLink.iOS;
+﻿using DSLink.Connection;
+using DSLink.iOS;
 using Foundation;
 using Plugin.Iconize;
 using Plugin.Iconize.Fonts;

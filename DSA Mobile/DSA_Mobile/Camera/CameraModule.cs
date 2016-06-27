@@ -36,11 +36,15 @@ namespace DSAMobile.Camera
         public bool RequestPermissions()
         {
             var result = CrossPermissions.Current.RequestPermissionsAsync(OSPermission.Camera).Result;
+            bool granted = true;
             foreach (KeyValuePair<OSPermission, PermissionStatus> kp in result)
             {
-                Debug.WriteLine(kp.Value.ToString());
+                if (kp.Value != PermissionStatus.Granted)
+                {
+                    granted = false;
+                }
             }
-            return true;
+            return granted;
         }
 
         public void AddNodes(Node superRoot)

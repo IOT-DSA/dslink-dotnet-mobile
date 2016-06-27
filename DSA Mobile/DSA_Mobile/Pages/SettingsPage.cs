@@ -20,7 +20,7 @@ namespace DSAMobile.Pages
             _brokerUrlEntry = new Entry
             {
                 Placeholder = "http://your.bro.ker/conn",
-                Text = Settings.Get("dsamobile.broker", "http://your.bro.ker/conn"),
+                Text = Settings.BrokerURL,
                 Keyboard = Keyboard.Url
             };
 
@@ -29,7 +29,7 @@ namespace DSAMobile.Pages
                 Text = "Save",
                 Command = new Command(() =>
                 {
-                    Settings.Set("dsamobile.broker", _brokerUrlEntry.Text);
+                    Settings.BrokerURL = _brokerUrlEntry.Text;
                 })
             };
 
