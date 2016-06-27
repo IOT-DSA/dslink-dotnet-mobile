@@ -39,12 +39,18 @@ namespace DSAMobile.Connectivity
                                     .BuildNode();
         }
 
-        public void ConnectivityUpdatedEvent(object sender, ConnectivityChangedEventArgs eventArgs)
+        public void RemoveNodes()
+        {
+            _connectionTypes.RemoveFromParent();
+            _root.RemoveFromParent();
+        }
+
+        private void ConnectivityUpdatedEvent(object sender, ConnectivityChangedEventArgs eventArgs)
         {
             _connectionTypes.Value.Set(ConnectionTypesList(CrossConnectivity.Current.ConnectionTypes));
         }
 
-        public static List<string> ConnectionTypesList(IEnumerable<ConnectionType> types)
+        private static List<string> ConnectionTypesList(IEnumerable<ConnectionType> types)
         {
             var ret = new List<string>();
             foreach (ConnectionType ct in types)

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace DSAMobile.Sensors
 {
@@ -22,73 +23,17 @@ namespace DSAMobile.Sensors
         private Node _dmotion_y;
         private Node _dmotion_z;
 		private Node _compass;
-        private Task _subscriptionTask;
+        private CancellationTokenSource _subToken;
+        private Task _subTask;
 
         public bool Supported => true;
 
         public SensorsModule(BaseSensors sensors)
 		{
             _sensorsImpl = sensors;
-            _subscriptionTask = new Task(UpdateSubscriptions);
+            _subToken = new CancellationTokenSource();
+            _subTask = new Task(UpdateSubscriptions, _subToken.Token);
 		}
-
-        public void UpdateSubscriptions()
-        {
-            while (!_subscriptionTask.IsCanceled)
-            {
-                if (!_sensorsImpl.AccelerometerActive &&
-                    (_accel_x.Subscribed ||
-                     _accel_y.Subscribed ||
-                     _accel_z.Subscribed))
-                {
-                    Debug.WriteLine("Accelerometer started");
-                    _sensorsImpl.Start(SensorType.Accelerometer);
-                }
-                if (!_sensorsImpl.GyroActive &&
-                    (_gyro_x.Subscribed ||
-                     _gyro_y.Subscribed ||
-                     _gyro_z.Subscribed))
-                {
-                    Debug.WriteLine("Gyro started");
-                    _sensorsImpl.Start(SensorType.Gyroscope);
-                }
-                if (!_sensorsImpl.DeviceMotionActive &&
-                    (_dmotion_x.Subscribed ||
-                     _dmotion_y.Subscribed ||
-                     _dmotion_z.Subscribed))
-                {
-                    Debug.WriteLine("DeviceMotion started");
-                    _sensorsImpl.Start(SensorType.DeviceMotion);
-                }
-
-                if (_sensorsImpl.AccelerometerActive &&
-                    (!_accel_x.Subscribed &&
-                     !_accel_y.Subscribed &&
-                     !_accel_z.Subscribed))
-                {
-                    Debug.WriteLine("Accelerometer stopped");
-                    _sensorsImpl.Stop(SensorType.Accelerometer);
-                }
-                if (_sensorsImpl.GyroActive &&
-                    (!_gyro_x.Subscribed &&
-                     !_gyro_y.Subscribed &&
-                     !_gyro_z.Subscribed))
-                {
-                    Debug.WriteLine("Gyro stopped");
-                    _sensorsImpl.Stop(SensorType.Gyroscope);
-                }
-                if (_sensorsImpl.DeviceMotionActive &&
-                    (!_dmotion_x.Subscribed &&
-                     !_dmotion_y.Subscribed &&
-                     !_dmotion_z.Subscribed))
-                {
-                    Debug.WriteLine("DeviceMotion stopped");
-                    _sensorsImpl.Stop(SensorType.DeviceMotion);
-                }
-
-                _subscriptionTask.Wait(500);
-            }
-        }
 
         public bool RequestPermissions()
         {
@@ -165,7 +110,84 @@ namespace DSAMobile.Sensors
                 //Debug.WriteLine(value);
             };*/
 
-            _subscriptionTask.Start();
+            _subTask.Start();
+        }
+
+        public void RemoveNodes()
+        {
+            _subToken.Cancel();
+
+            _accelerometer.RemoveFromParent();
+            _accel_x.RemoveFromParent();
+            _accel_y.RemoveFromParent();
+            _accel_z.RemoveFromParent();
+            _gyroscope.RemoveFromParent();
+            _gyro_x.RemoveFromParent();
+            _gyro_y.RemoveFromParent();
+            _gyro_z.RemoveFromParent();
+            _dmotion.RemoveFromParent();
+            _dmotion_x.RemoveFromParent();
+            _dmotion_y.RemoveFromParent();
+            _dmotion_z.RemoveFromParent();
+            _sensors.RemoveFromParent();
+        }
+
+        private void UpdateSubscriptions()
+        {
+            while (!_subTask.IsCanceled)
+            {
+                if (!_sensorsImpl.AccelerometerActive &&
+                    (_accel_x.Subscribed ||
+                     _accel_y.Subscribed ||
+                     _accel_z.Subscribed))
+                {
+                    Debug.WriteLine("Accelerometer started");
+                    _sensorsImpl.Start(SensorType.Accelerometer);
+                }
+                if (!_sensorsImpl.GyroActive &&
+                    (_gyro_x.Subscribed ||
+                     _gyro_y.Subscribed ||
+                     _gyro_z.Subscribed))
+                {
+                    Debug.WriteLine("Gyro started");
+                    _sensorsImpl.Start(SensorType.Gyroscope);
+                }
+                if (!_sensorsImpl.DeviceMotionActive &&
+                    (_dmotion_x.Subscribed ||
+                     _dmotion_y.Subscribed ||
+                     _dmotion_z.Subscribed))
+                {
+                    Debug.WriteLine("DeviceMotion started");
+                    _sensorsImpl.Start(SensorType.DeviceMotion);
+                }
+
+                if (_sensorsImpl.AccelerometerActive &&
+                    (!_accel_x.Subscribed &&
+                     !_accel_y.Subscribed &&
+                     !_accel_z.Subscribed))
+                {
+                    Debug.WriteLine("Accelerometer stopped");
+                    _sensorsImpl.Stop(SensorType.Accelerometer);
+                }
+                if (_sensorsImpl.GyroActive &&
+                    (!_gyro_x.Subscribed &&
+                     !_gyro_y.Subscribed &&
+                     !_gyro_z.Subscribed))
+                {
+                    Debug.WriteLine("Gyro stopped");
+                    _sensorsImpl.Stop(SensorType.Gyroscope);
+                }
+                if (_sensorsImpl.DeviceMotionActive &&
+                    (!_dmotion_x.Subscribed &&
+                     !_dmotion_y.Subscribed &&
+                     !_dmotion_z.Subscribed))
+                {
+                    Debug.WriteLine("DeviceMotion stopped");
+                    _sensorsImpl.Stop(SensorType.DeviceMotion);
+                }
+
+                _subTask.Wait(500);
+            }
         }
     }
 }

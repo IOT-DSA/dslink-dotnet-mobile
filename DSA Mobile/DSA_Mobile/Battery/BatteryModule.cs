@@ -13,13 +13,6 @@ namespace DSAMobile.Battery
 
         public bool Supported => true;
 
-        private void BatteryChanged(object sender, BatteryChangedEventArgs e)
-        {
-            _percentRemaining.Value.Set(e.RemainingChargePercent);
-            _status.Value.Set(e.Status.ToString());
-            _source.Value.Set(e.PowerSource.ToString());
-        }
-
         public bool RequestPermissions()
         {
             return true;
@@ -46,6 +39,22 @@ namespace DSAMobile.Battery
                                .BuildNode();
 
             CrossBattery.Current.BatteryChanged += BatteryChanged;
+        }
+
+        public void RemoveNodes()
+        {
+            CrossBattery.Current.BatteryChanged -= BatteryChanged;
+
+            _percentRemaining.RemoveFromParent();
+            _status.RemoveFromParent();
+            _source.RemoveFromParent();
+        }
+
+        private void BatteryChanged(object sender, BatteryChangedEventArgs e)
+        {
+            _percentRemaining.Value.Set(e.RemainingChargePercent);
+            _status.Value.Set(e.Status.ToString());
+            _source.Value.Set(e.PowerSource.ToString());
         }
     }
 }

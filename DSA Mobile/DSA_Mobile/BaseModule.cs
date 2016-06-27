@@ -13,6 +13,7 @@ namespace DSAMobile
         bool RequestPermissions();
 
         void AddNodes(Node superRoot);
+        void RemoveNodes();
     }
 }
 

@@ -34,7 +34,12 @@ namespace DSAMobile.Contacts
                                     .BuildNode();
         }
 
-        public void GetContacts(Dictionary<string, Value> parameters, InvokeRequest request)
+        public void RemoveNodes()
+        {
+            _getContacts.RemoveFromParent();
+        }
+
+        private void GetContacts(Dictionary<string, Value> parameters, InvokeRequest request)
         {
             CrossContacts.Current.PreferContactAggregation = false;
             var contacts = CrossContacts.Current.Contacts.ToList();

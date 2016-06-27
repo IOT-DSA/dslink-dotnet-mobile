@@ -36,6 +36,10 @@ namespace DSAMobile.iOS.HealthKit
         public void AddNodes(Node superRoot)
         {
         }
+
+        public void RemoveNodes()
+        {
+        }
     }
 }
 

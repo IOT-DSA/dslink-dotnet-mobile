@@ -1,16 +1,14 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using DSAMobile.DeviceSettings;
 using DSLink.Nodes;
 
 namespace DSAMobile.DeviceSettings
 {
     public class DeviceSettingsModule : BaseModule
     {
-        private BaseDeviceSettings _deviceSettings;
-        private Task _updateTask;
-
+        private readonly BaseDeviceSettings _deviceSettings;
+        private CancellationTokenSource _updateToken;
+        private readonly Task _updateTask;
         private Node _screenStatus;
 
         public bool Supported => true;
@@ -18,16 +16,8 @@ namespace DSAMobile.DeviceSettings
         public DeviceSettingsModule(BaseDeviceSettings deviceSettings)
         {
             _deviceSettings = deviceSettings;
-            _updateTask = new Task(Update);
-        }
-
-        public void Update()
-        {
-            while (!_updateTask.IsCanceled)
-            {
-                _screenStatus.Value.Set(_deviceSettings.ScreenOn());
-                _updateTask.Wait(1000);
-            }
+            _updateToken = new CancellationTokenSource();
+            _updateTask = new Task(Update, _updateToken.Token);
         }
 
         public bool RequestPermissions()
@@ -44,6 +34,21 @@ namespace DSAMobile.DeviceSettings
                      .BuildNode();
 
             _updateTask.Start();
+        }
+
+        public void RemoveNodes()
+        {
+            _updateToken.Cancel();
+            _screenStatus.RemoveFromParent();
+        }
+
+        private void Update()
+        {
+            while (!_updateTask.IsCanceled)
+            {
+                _screenStatus.Value.Set(_deviceSettings.ScreenOn());
+                _updateTask.Wait(1000);
+            }
         }
     }
 }

@@ -65,7 +65,20 @@ namespace DSAMobile.Location
                                          .BuildNode();
 
                 CrossGeolocator.Current.PositionChanged += LocationUpdated;
-                CrossGeolocator.Current.StartListeningAsync(1, 5, false);
+                CrossGeolocator.Current.StartListeningAsync(1, 5, false).Wait();
+            }
+        }
+
+        public void RemoveNodes()
+        {
+            _navigateToCoordinate.RemoveFromParent();
+            if (_permNavigationState && CrossGeolocator.Current.IsGeolocationAvailable)
+            {
+                CrossGeolocator.Current.PositionChanged -= LocationUpdated;
+                CrossGeolocator.Current.StopListeningAsync().Wait();
+
+                _locLatitude.RemoveFromParent();
+                _locLongitude.RemoveFromParent();
             }
         }
 

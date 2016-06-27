@@ -57,6 +57,24 @@ namespace DSAMobile.Communications
             }
         }
 
+        public void RemoveNodes()
+        {
+            if (CrossMessaging.Current.SmsMessenger.CanSendSms)
+            {
+                _sendSms.RemoveFromParent();
+            }
+
+            if (CrossMessaging.Current.PhoneDialer.CanMakePhoneCall)
+            {
+                _makePhoneCall.RemoveFromParent();
+            }
+
+            if (CrossMessaging.Current.EmailMessenger.CanSendEmail)
+            {
+                _sendEmail.RemoveFromParent();
+            }
+        }
+
         private void SendSMS(Dictionary<string, Value> parameters, InvokeRequest request)
         {
             var to = parameters["To"].Get();

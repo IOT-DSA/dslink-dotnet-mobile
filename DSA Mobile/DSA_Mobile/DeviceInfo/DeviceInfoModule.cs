@@ -6,9 +6,9 @@ namespace DSAMobile.DeviceInfo
 {
     public class DeviceInfoModule : BaseModule
     {
-        private Node _operatingSystem;
-        private Node _operatingSystemVersion;
-        private Node _deviceModel;
+        private Node _os;
+        private Node _osVersion;
+        private Node _model;
 
         public bool Supported => true;
 
@@ -19,20 +19,30 @@ namespace DSAMobile.DeviceInfo
 
         public void AddNodes(Node superRoot)
         {
-            superRoot.CreateChild("os")
-                     .SetDisplayName("OS")
-                     .SetType("string")
-                     .SetValue(CrossDeviceInfo.Current.Platform.ToString());
+            _os = superRoot.CreateChild("os")
+                           .SetDisplayName("OS")
+                           .SetType("string")
+                           .SetValue(CrossDeviceInfo.Current.Platform.ToString())
+                           .BuildNode();
 
-            superRoot.CreateChild("os_ver")
-                     .SetDisplayName("OS Version")
-                     .SetType("string")
-                     .SetValue(CrossDeviceInfo.Current.Version);
+            _osVersion = superRoot.CreateChild("os_ver")
+                                  .SetDisplayName("OS Version")
+                                  .SetType("string")
+                                  .SetValue(CrossDeviceInfo.Current.Version)
+                                  .BuildNode();
 
-            superRoot.CreateChild("device_model")
-                     .SetDisplayName("Device Model")
-                     .SetType("string")
-                     .SetValue(CrossDeviceInfo.Current.Model);
+            _model = superRoot.CreateChild("device_model")
+                              .SetDisplayName("Device Model")
+                              .SetType("string")
+                              .SetValue(CrossDeviceInfo.Current.Model)
+                              .BuildNode();
+        }
+
+        public void RemoveNodes()
+        {
+            _os.RemoveFromParent();
+            _osVersion.RemoveFromParent();
+            _model.RemoveFromParent();
         }
     }
 }

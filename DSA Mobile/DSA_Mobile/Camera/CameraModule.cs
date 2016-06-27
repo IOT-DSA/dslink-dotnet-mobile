@@ -72,7 +72,20 @@ namespace DSAMobile.Camera
             }
         }
 
-        public async void TakePicture(Dictionary<string, Value> parameters, InvokeRequest request)
+        public void RemoveNodes()
+        {
+            if (CrossMedia.Current.IsTakePhotoSupported)
+            {
+                _takePicture.RemoveFromParent();
+            }
+
+            if (CrossMedia.Current.IsPickPhotoSupported)
+            {
+                _pickPicture.RemoveFromParent();
+            }
+        }
+
+        private async void TakePicture(Dictionary<string, Value> parameters, InvokeRequest request)
         {
             var result = await CrossMedia.Current.TakePhotoAsync(
                 new StoreCameraMediaOptions
@@ -93,7 +106,7 @@ namespace DSAMobile.Camera
             request.Close();
         }
 
-        public async void PickPicture(Dictionary<string, Value> parameters, InvokeRequest request)
+        private async void PickPicture(Dictionary<string, Value> parameters, InvokeRequest request)
         {
             var result = await CrossMedia.Current.PickPhotoAsync();
             request.SendUpdates(
