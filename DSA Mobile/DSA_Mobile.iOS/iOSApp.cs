@@ -1,13 +1,16 @@
 ﻿using System;
 using DSAMobile.DeviceSettings;
 using DSAMobile.iOS.DeviceSettings;
-using DSAMobile.iOS.HealthKit;
 using DSAMobile.Sensors;
 
 namespace DSAMobile.iOS
 {
 	public class iOSApp : App
 	{
+        public iOSApp()
+        {
+        }
+
 		protected override string StoragePath()
 		{
 			return Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -39,7 +42,6 @@ namespace DSAMobile.iOS
         protected override void InitializeDSLink()
         {
             base.InitializeDSLink();
-            //_dslink.RegisterModule(new HealthKitModule());
         }
 	}
 }

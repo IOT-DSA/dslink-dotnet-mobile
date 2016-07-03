@@ -6,30 +6,31 @@ namespace DSAMobile
     public class DSLink : DSLinkContainer
     {
         private readonly App _app;
-        private readonly List<BaseModule> loadedModules = new List<BaseModule>();
+        private readonly List<BaseModule> _requestedModules = new List<BaseModule>();
+        private readonly List<BaseModule> _loadedModules = new List<BaseModule>();
 
-        public DSLink(Configuration config, App app) : base(config)
+        public DSLink(Configuration config, App app, List<BaseModule> requestedModules) : base(config)
         {
 			_app = app;
+            _requestedModules = requestedModules;
         }
 
-        public void RegisterModule(BaseModule module)
+        protected override void OnConnectionOpen()
         {
-            if (module.Supported)
+            foreach (BaseModule module in _requestedModules)
             {
-                Logger.Info("Attempting to request permissions for " + module);
-                var permissionsGranted = module.RequestPermissions();
-                if (permissionsGranted)
+                if (module.Supported)
                 {
-                    Logger.Info("Permissions granted, loading " + module);
-                    module.AddNodes(Responder.SuperRoot);
-                    loadedModules.Add(module);
+                    Logger.Info("Requesting permissions for " + module);
+                    var granted = module.RequestPermissions();
+                    if (granted)
+                    {
+                        module.AddNodes(Responder.SuperRoot);
+                        _loadedModules.Add(module);
+                    }
                 }
             }
-            else
-            {
-                Logger.Info(module + " is not supported");
-            }
+            _requestedModules.Clear();
         }
     }
 }

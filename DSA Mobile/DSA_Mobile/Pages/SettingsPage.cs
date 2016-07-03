@@ -1,5 +1,4 @@
-﻿using System;
-using DSAMobile.Views;
+﻿using DSAMobile.Views;
 using Xamarin.Forms;
 
 namespace DSAMobile.Pages

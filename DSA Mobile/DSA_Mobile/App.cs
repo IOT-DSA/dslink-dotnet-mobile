@@ -14,6 +14,7 @@ using DSAMobile.Pages;
 using DSAMobile.Sensors;
 using DSAMobile.Vibrate;
 using DSLink;
+using DSLink.Util.Logger;
 using Xamarin.Forms;
 
 namespace DSAMobile
@@ -26,11 +27,26 @@ namespace DSAMobile
         public bool Disabled = true;
         protected BaseSensors _sensors;
         protected BaseDeviceSettings _deviceSettings;
+        protected List<BaseModule> enabledModules;
 
         protected App()
         {
             Instance = this;
             MainPage = new TabHost();
+            enabledModules = new List<BaseModule>()
+            {
+                new BatteryModule(),
+                new DeviceInfoModule(),
+                new DeviceSettingsModule(GetDeviceSettings()),
+                new SensorsModule(GetSensors()),
+                new NotificationModule(),
+                new CameraModule(),
+                new VibrateModule(),
+                new ContactsModule(),
+                new ConnectivityModule(),
+                new CommunicationsModule(),
+                new LocationModule(),
+            };
         }
 
         protected override void OnStart()
@@ -74,27 +90,17 @@ namespace DSAMobile
                                                       responder: true,
                                                       requester: true,
                                                       keysLocation: StoragePath() + "/dsa_mobile.keys",
-                                                      brokerUrl: Settings.BrokerURL);
-                _dslink = PlatformDSLink(configuration);
+                                                      brokerUrl: Settings.BrokerURL,
+                                                      logLevel: LogLevel.Debug);
+                _dslink = PlatformDSLink(configuration, enabledModules);
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.ToString());
             }
-            _dslink.RegisterModule(new BatteryModule());
-            _dslink.RegisterModule(new DeviceInfoModule());
-            _dslink.RegisterModule(new DeviceSettingsModule(GetDeviceSettings()));
-            _dslink.RegisterModule(new SensorsModule(GetSensors()));
-            _dslink.RegisterModule(new NotificationModule());
-            _dslink.RegisterModule(new CameraModule());
-            _dslink.RegisterModule(new VibrateModule());
-            _dslink.RegisterModule(new ContactsModule());
-            _dslink.RegisterModule(new ConnectivityModule());
-            _dslink.RegisterModule(new CommunicationsModule());
-            _dslink.RegisterModule(new LocationModule());
         }
 
-        public virtual DSLink PlatformDSLink(Configuration config) => new DSLink(config, this);
+        public virtual DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new DSLink(config, this, modules);
         protected abstract string StoragePath();
         public abstract BaseSensors GetSensors();
         public abstract BaseDeviceSettings GetDeviceSettings();
