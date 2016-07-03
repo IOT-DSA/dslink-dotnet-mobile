@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Android.Content;
 using Android.Hardware;
 using Android.OS;
@@ -23,7 +24,7 @@ namespace DSAMobile.Droid
             return Environment.ExternalStorageDirectory.Path;
         }
 
-        public override DSLink PlatformDSLink(Configuration config) => new AndroidDSLink(config, this, _mainActivity);
+        public override DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new AndroidDSLink(config, this, _mainActivity, modules);
 
         public override BaseSensors GetSensors()
         {

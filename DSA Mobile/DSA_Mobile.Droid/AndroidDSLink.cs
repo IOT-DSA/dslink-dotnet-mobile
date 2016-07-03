@@ -1,4 +1,5 @@
-﻿using DSLink;
+﻿using System.Collections.Generic;
+using DSLink;
 
 namespace DSAMobile.Droid
 {
@@ -7,7 +8,7 @@ namespace DSAMobile.Droid
         private MainActivity _mainActivity;
         private FitnessModule _fitness;
 
-        public AndroidDSLink(Configuration config, App app, MainActivity mainActivity) : base(config, app)
+        public AndroidDSLink(Configuration config, App app, MainActivity mainActivity, List<BaseModule> modules) : base(config, app, modules)
         {
             _mainActivity = mainActivity;
         }
