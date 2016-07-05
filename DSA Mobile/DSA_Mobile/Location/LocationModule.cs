@@ -15,30 +15,14 @@ namespace DSAMobile.Location
 {
     public class LocationModule : BaseModule
     {
-        private bool _permNavigationState;
         private Node _navigateToCoordinate;
         private Node _locLongitude;
         private Node _locLatitude;
-
-        public LocationModule()
-        {
-        }
 
         public bool Supported => true;
 
         public bool RequestPermissions()
         {
-            var result = CrossPermissions.Current.RequestPermissionsAsync(OSPermission.Location).Result;
-
-            foreach (KeyValuePair<OSPermission, PermissionStatus> kp in result)
-            {
-                if (kp.Key == OSPermission.Location)
-                {
-                    // If we don't get location permission, we just won't add location nodes.
-                    _permNavigationState = kp.Value == PermissionStatus.Granted;
-                }
-            }
-
             return true;
         }
 
@@ -52,7 +36,7 @@ namespace DSAMobile.Location
                                              .SetAction(new Action(Permission.Write, NavigateToCoord))
                                              .BuildNode();
 
-            if (_permNavigationState && CrossGeolocator.Current.IsGeolocationAvailable)
+            if (CrossGeolocator.Current.IsGeolocationAvailable)
             {
                 _locLatitude = superRoot.CreateChild("latitude")
                                         .SetDisplayName("Latitude")
@@ -72,7 +56,7 @@ namespace DSAMobile.Location
         public void RemoveNodes()
         {
             _navigateToCoordinate.RemoveFromParent();
-            if (_permNavigationState && CrossGeolocator.Current.IsGeolocationAvailable)
+            if (CrossGeolocator.Current.IsGeolocationAvailable)
             {
                 CrossGeolocator.Current.PositionChanged -= LocationUpdated;
                 CrossGeolocator.Current.StopListeningAsync().Wait();

@@ -69,6 +69,8 @@ namespace DSAMobile
             }
             else
             {
+                _dslink.Config.Name = Settings.DSLinkName;
+                _dslink.Config.BrokerUrl = Settings.BrokerURL;
                 _dslink.Connect();
             }
         }
