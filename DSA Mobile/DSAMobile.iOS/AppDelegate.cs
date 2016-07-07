@@ -3,6 +3,7 @@ using Foundation;
 using Plugin.Iconize;
 using Plugin.Iconize.Fonts;
 using UIKit;
+using ZXing.Net.Mobile.Forms.iOS;
 
 namespace DSAMobile.iOS
 {
@@ -29,6 +30,9 @@ namespace DSAMobile.iOS
             // Iconize
             Iconize.With(new IoniconsModule());
             FormsPlugin.Iconize.iOS.IconControls.Init();
+
+            // ZXing
+            Platform.Init();
 
             // Xamarin bootstrap
             Xamarin.Forms.Forms.Init();

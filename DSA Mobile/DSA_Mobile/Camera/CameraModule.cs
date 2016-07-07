@@ -54,17 +54,19 @@ namespace DSAMobile.Camera
             if (_media.IsTakePhotoSupported)
             {
                 _takePicture = superRoot.CreateChild("take_picture")
-                         .SetDisplayName("Take Picture")
-                         .SetInvokable(Permission.Write)
-                         .AddColumn(new Column("Data", "binary"))
-                         .SetAction(new Action(Permission.Write, TakePicture))
-                         .BuildNode();
+                                        .SetDisplayName("Take Picture")
+                                        .SetActionGroup(ActionGroups.Camera)
+                                        .SetInvokable(Permission.Write)
+                                        .AddColumn(new Column("Data", "binary"))
+                                        .SetAction(new Action(Permission.Write, TakePicture))
+                                        .BuildNode();
             }
 
             if (_media.IsPickPhotoSupported)
             {
                 _pickPicture = superRoot.CreateChild("pick_picture")
                                         .SetDisplayName("Pick Picture")
+                                        .SetActionGroup(ActionGroups.Camera)
                                         .SetInvokable(Permission.Write)
                                         .AddColumn(new Column("Data", "binary"))
                                         .SetAction(new Action(Permission.Write, PickPicture))
@@ -94,6 +96,13 @@ namespace DSAMobile.Camera
                     Directory = "Pictures"
                 }
             );
+
+            if (result == null)
+            {
+                request.Close();
+                return;
+            }
+
             request.SendUpdates(
                 new List<dynamic>
                 {
@@ -109,6 +118,13 @@ namespace DSAMobile.Camera
         private async void PickPicture(Dictionary<string, Value> parameters, InvokeRequest request)
         {
             var result = await CrossMedia.Current.PickPhotoAsync();
+
+            if (result == null)
+            {
+                request.Close();
+                return;
+            }
+
             request.SendUpdates(
                 new List<dynamic>
                 {

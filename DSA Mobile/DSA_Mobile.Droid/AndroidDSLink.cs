@@ -5,8 +5,7 @@ namespace DSAMobile.Droid
 {
     public class AndroidDSLink : DSLink
     {
-        private MainActivity _mainActivity;
-        private FitnessModule _fitness;
+        private readonly MainActivity _mainActivity;
 
         public AndroidDSLink(Configuration config, App app, MainActivity mainActivity, List<BaseModule> modules) : base(config, app, modules)
         {

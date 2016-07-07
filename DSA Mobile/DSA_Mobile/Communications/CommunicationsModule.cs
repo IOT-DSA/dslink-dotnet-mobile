@@ -27,6 +27,7 @@ namespace DSAMobile.Communications
             {
                 _sendSms = superRoot.CreateChild("send_sms")
                                     .SetDisplayName("Send SMS")
+                                    .SetActionGroup(ActionGroups.Communications)
                                     .SetInvokable(Permission.Write)
                                     .AddParameter(new Parameter("To", "string"))
                                     .AddParameter(new Parameter("Message", "string"))
@@ -38,6 +39,7 @@ namespace DSAMobile.Communications
             {
                 _makePhoneCall = superRoot.CreateChild("make_phone_call")
                                           .SetDisplayName("Make Phone Call")
+                                          .SetActionGroup(ActionGroups.Communications)
                                           .SetInvokable(Permission.Write)
                                           .AddParameter(new Parameter("To", "string"))
                                           .SetAction(new Action(Permission.Write, MakePhoneCall))
@@ -48,6 +50,7 @@ namespace DSAMobile.Communications
             {
                 _sendEmail = superRoot.CreateChild("send_email")
                                       .SetDisplayName("Send Email")
+                                      .SetActionGroup(ActionGroups.Communications)
                                       .SetInvokable(Permission.Write)
                                       .AddParameter(new Parameter("To", "string"))
                                       .AddParameter(new Parameter("Subject", "string"))

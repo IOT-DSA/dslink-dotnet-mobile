@@ -2,6 +2,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using DSLink.Android;
+using ZXing.Net.Mobile.Forms.Android;
 
 namespace DSAMobile.Droid
 {
@@ -24,11 +25,19 @@ namespace DSAMobile.Droid
             //IconControls.Init(Resource.Id.);
 
             // ZXing
-
+            Platform.Init();
 
             // Xamarin bootstrap
             Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new AndroidApp(this));
+            LoadApplication(new AndroidApp
+            {
+                MainActivity = this
+            });
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+        {
+            PermissionsHandler.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

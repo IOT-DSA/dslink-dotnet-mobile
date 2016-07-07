@@ -30,6 +30,7 @@ namespace DSAMobile.Location
         {
             _navigateToCoordinate = superRoot.CreateChild("nav_to_coord")
                                              .SetDisplayName("Navigate to Coordinate")
+                                             .SetActionGroup(ActionGroups.Geolocation)
                                              .AddParameter(new Parameter("Name", "string"))
                                              .AddParameter(new Parameter("Latitude", "number"))
                                              .AddParameter(new Parameter("Longitude", "number"))

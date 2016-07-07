@@ -12,25 +12,25 @@ namespace DSAMobile.Droid
 {
     public class AndroidApp : App
     {
-        public MainActivity _mainActivity;
-
-        public AndroidApp(MainActivity activity)
-        {
-            _mainActivity = activity;
-        }
+        public MainActivity MainActivity;
 
         protected override string StoragePath()
         {
             return Environment.ExternalStorageDirectory.Path;
         }
 
-        public override DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new AndroidDSLink(config, this, _mainActivity, modules);
+        public override DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new AndroidDSLink(config, this, MainActivity, modules);
+
+        public override void InitModules()
+        {
+            base.InitModules();
+        }
 
         public override BaseSensors GetSensors()
         {
             if (_sensors == null)
             {
-                _sensors = new AndroidSensors((SensorManager)_mainActivity.GetSystemService(Context.SensorService));
+                _sensors = new AndroidSensors((SensorManager)MainActivity.GetSystemService(Context.SensorService));
             }
             return _sensors;
         }

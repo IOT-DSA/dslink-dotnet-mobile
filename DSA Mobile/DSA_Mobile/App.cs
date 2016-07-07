@@ -13,6 +13,7 @@ using DSAMobile.Notifications;
 using DSAMobile.Pages;
 using DSAMobile.Sensors;
 using DSAMobile.Vibrate;
+using DSAMobile.ZXing;
 using DSLink;
 using DSLink.Util.Logger;
 using Xamarin.Forms;
@@ -33,20 +34,7 @@ namespace DSAMobile
         {
             Instance = this;
             MainPage = new TabHost();
-            enabledModules = new List<BaseModule>()
-            {
-                new BatteryModule(),
-                new DeviceInfoModule(),
-                new DeviceSettingsModule(GetDeviceSettings()),
-                new SensorsModule(GetSensors()),
-                new NotificationModule(),
-                new CameraModule(),
-                new VibrateModule(),
-                new ContactsModule(),
-                new ConnectivityModule(),
-                new CommunicationsModule(),
-                new LocationModule(),
-            };
+            enabledModules = new List<BaseModule>();
         }
 
         protected override void OnStart()
@@ -61,10 +49,27 @@ namespace DSAMobile
         {
         }
 
+        public virtual void InitModules()
+        {
+            enabledModules.Add(new BatteryModule());
+            enabledModules.Add(new DeviceInfoModule());
+            enabledModules.Add(new DeviceSettingsModule(GetDeviceSettings()));
+            enabledModules.Add(new SensorsModule(GetSensors()));
+            enabledModules.Add(new NotificationModule());
+            enabledModules.Add(new CameraModule());
+            enabledModules.Add(new VibrateModule());
+            enabledModules.Add(new ContactsModule());
+            enabledModules.Add(new ConnectivityModule());
+            enabledModules.Add(new CommunicationsModule());
+            enabledModules.Add(new LocationModule());
+            enabledModules.Add(new ZXingModule());
+        }
+
         public void StartLink()
         {
             if (_dslink == null)
             {
+                InitModules();
                 InitializeDSLink();
             }
             else

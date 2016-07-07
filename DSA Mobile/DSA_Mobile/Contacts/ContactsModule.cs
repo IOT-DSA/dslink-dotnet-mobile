@@ -25,6 +25,7 @@ namespace DSAMobile.Contacts
         {
             _getContacts = superRoot.CreateChild("get_contacts")
                                     .SetDisplayName("Get Contacts")
+                                    .SetActionGroup("Communications")
                                     .SetInvokable(Permission.Write)
                                     .AddColumn(new Column("Name", "string"))
                                     .AddColumn(new Column("Phone Numbers", "array"))

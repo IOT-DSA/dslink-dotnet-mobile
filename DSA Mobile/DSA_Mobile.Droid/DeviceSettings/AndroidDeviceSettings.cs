@@ -8,11 +8,11 @@ namespace DSAMobile.Droid.DeviceSettings
 {
     public class AndroidDeviceSettings : BaseDeviceSettings
     {
-        private PowerManager _powerManager;
+        private readonly PowerManager _powerManager;
 
         public AndroidDeviceSettings(AndroidApp app) : base(app)
         {
-            _powerManager = app._mainActivity.GetSystemService(Context.PowerService) as PowerManager;
+            _powerManager = app.MainActivity.GetSystemService(Context.PowerService) as PowerManager;
         }
 
         public override bool ScreenOn()

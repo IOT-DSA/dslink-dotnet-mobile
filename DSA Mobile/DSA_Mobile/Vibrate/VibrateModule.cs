@@ -22,10 +22,11 @@ namespace DSAMobile.Vibrate
         {
             var vibrate = superRoot.CreateChild("vibrate")
                                    .SetDisplayName("Vibrate")
+                                   .SetActionGroup(ActionGroups.Notifications)
                                    .SetInvokable(Permission.Write)
                                    .SetAction(new Action(Permission.Write, Vibrate));
 
-            if (!PlatformHelper.iOS)
+            if (PlatformHelper.Android)
             {
                 vibrate.AddParameter(new Parameter("Duration", "number"));
             }

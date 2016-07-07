@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using Action = DSLink.Nodes.Actions.Action;
 using Plugin.LocalNotifications;
-using System.Diagnostics;
 using DSLink.Request;
 
 namespace DSAMobile.Notifications
@@ -19,21 +17,14 @@ namespace DSAMobile.Notifications
 
         public bool RequestPermissions()
         {
-            // TODO: Does this even work?
-#if IOS
-            var settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert |
-                                                                          UIUserNotificationType.Badge |
-                                                                          UIUserNotificationType.Sound,
-                                                                          new NSSet());
-            UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
-            Debug.WriteLine("REQUESTED PERMISSIONS");
-#endif
             return true;
         }
 
         public void AddNodes(Node superRoot)
         {
-            _create = superRoot.CreateChild("Create Notification")
+            _create = superRoot.CreateChild("create_notification")
+                               .SetDisplayName("Create Notification")
+                               .SetActionGroup(ActionGroups.Notifications)
                                .AddParameter(new Parameter("Title", "string"))
                                .AddParameter(new Parameter("Message", "string"))
                                .AddColumn(new Column("Notification ID", "number"))
@@ -41,7 +32,9 @@ namespace DSAMobile.Notifications
                                .SetAction(new Action(Permission.Write, CreateNotification))
                                .BuildNode();
 
-            _cancel = superRoot.CreateChild("Cancel Notification")
+            _cancel = superRoot.CreateChild("cancel_notification")
+                               .SetDisplayName("Cancel Notification")
+                               .SetActionGroup(ActionGroups.Notifications)
                                .AddParameter(new Parameter("Notification ID", "number"))
                                .SetInvokable(Permission.Write)
                                .SetAction(new Action(Permission.Write, CancelNotification))
