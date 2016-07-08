@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources>
+	<style name="DSAMobile" parent="DSAMobile.Base"></style>
+	<style name="DSAMobile.Base" parent="Theme.AppCompat.Light">
+    	<item name="windowActionBar">false</item>
+    	<item name="windowNoTitle">true</item>
+		<item name="android:windowBackground">@color/background</item>
+
+    	<item name="colorPrimary">@color/primary</item>
+    	<item name="colorPrimaryDark">@color/primaryDark</item>
+    	<item name="colorAccent">@color/accent</item>
+	</style>
+</resources>

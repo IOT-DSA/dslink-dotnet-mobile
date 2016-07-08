@@ -1,4 +1,5 @@
-﻿using DSAMobile.Views;
+﻿using DSAMobile.Controls;
+using DSAMobile.Views;
 using Xamarin.Forms;
 
 namespace DSAMobile.Pages
@@ -30,7 +31,7 @@ namespace DSAMobile.Pages
                 Text = Settings.DSLinkName
             };
 
-            _saveButton = new Button
+            _saveButton = new DGButton
             {
                 Text = "Save",
                 Command = new Command(() =>

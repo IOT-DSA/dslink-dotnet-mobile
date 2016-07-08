@@ -2,7 +2,9 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using DSLink.Android;
+using Xamarin.Forms.Platform.Android;
 using ZXing.Net.Mobile.Forms.Android;
+using ZXingPlatform = ZXing.Net.Mobile.Forms.Android.Platform;
 
 namespace DSAMobile.Droid
 {
@@ -13,7 +15,7 @@ namespace DSAMobile.Droid
                  ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
                  ScreenOrientation = ScreenOrientation.Portrait)
     ]
-    public class MainActivity : Xamarin.Forms.Platform.Android.FormsApplicationActivity
+    public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -25,7 +27,7 @@ namespace DSAMobile.Droid
             //IconControls.Init(Resource.Id.);
 
             // ZXing
-            Platform.Init();
+            ZXingPlatform.Init();
 
             // Xamarin bootstrap
             Xamarin.Forms.Forms.Init(this, bundle);

@@ -67,6 +67,7 @@
     <Compile Include="TTS\TTSModule.cs" />
     <Compile Include="Flash\FlashModule.cs" />
     <Compile Include="Share\ShareModule.cs" />
+    <Compile Include="Controls.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SDK\DSLink\DSLink.csproj">
