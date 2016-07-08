@@ -17,7 +17,13 @@ namespace DSAMobile
         {
             get
             {
-                return Get("dsamobile.broker", "http://your.bro.ker/conn");
+                return Get("dsamobile.broker",
+                    #if DEBUG
+                    "http://10.0.1.150:8080/conn"
+                    #else
+                    "http://your.bro.ker/conn"
+                    #endif
+                );
             }
             set
             {

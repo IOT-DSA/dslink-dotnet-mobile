@@ -64,6 +64,9 @@
     <Compile Include="Location\LocationModule.cs" />
     <Compile Include="ZXing\ZXingModule.cs" />
     <Compile Include="ActionGroups.cs" />
+    <Compile Include="TTS\TTSModule.cs" />
+    <Compile Include="Flash\FlashModule.cs" />
+    <Compile Include="Share\ShareModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SDK\DSLink\DSLink.csproj">
@@ -173,6 +176,24 @@
     <Reference Include="ZXing.Net.Mobile.Forms">
       <HintPath>..\..\packages\ZXing.Net.Mobile.Forms.2.0.4.46\lib\portable-net45+netcore45+wp8+UAP10.0+MonoAndroid403+MonoTouch10+Xamarin.iOS10\ZXing.Net.Mobile.Forms.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.TextToSpeech.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugins.TextToSpeech.2.0.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.TextToSpeech.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.TextToSpeech">
+      <HintPath>..\..\packages\Xam.Plugins.TextToSpeech.2.0.0\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.TextToSpeech.dll</HintPath>
+    </Reference>
+    <Reference Include="Lamp.Plugin">
+      <HintPath>..\..\packages\kphillpotts.Lamp.Plugin.1.0.0.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Lamp.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Lamp.Plugin.Abstractions">
+      <HintPath>..\..\packages\kphillpotts.Lamp.Plugin.1.0.0.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Lamp.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share">
+      <HintPath>..\..\packages\Plugin.Share.4.0.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Share.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share.Abstractions">
+      <HintPath>..\..\packages\Plugin.Share.4.0.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Share.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -192,6 +213,9 @@
     <Folder Include="Communications\" />
     <Folder Include="Location\" />
     <Folder Include="ZXing\" />
+    <Folder Include="TTS\" />
+    <Folder Include="Flash\" />
+    <Folder Include="Share\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

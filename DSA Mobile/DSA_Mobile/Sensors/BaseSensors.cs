@@ -11,6 +11,12 @@ namespace DSAMobile.Sensors
         public event Action<double> AirPressureValueChanged;
         public event Action<double> LightLevelValueChanged;
 
+        public virtual bool SupportsAccelerometer => false;
+        public virtual bool SupportsGyroscope => false;
+        public virtual bool SupportsDeviceMotion => false;
+        public virtual bool SupportsCompass => false;
+        public virtual bool SupportsLightLevel => false;
+
         public bool AccelerometerActive
         {
             protected set;
@@ -30,6 +36,12 @@ namespace DSAMobile.Sensors
         }
 
         public bool CompassActive
+        {
+            protected set;
+            get;
+        }
+
+        public bool LightLevelActive
         {
             protected set;
             get;

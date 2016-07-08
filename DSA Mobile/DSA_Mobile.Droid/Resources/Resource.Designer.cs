@@ -1577,6 +1577,8 @@ namespace DSAMobile.Droid
 			global::ZXing.Net.Mobile.Forms.Android.Resource.Styleable.ViewStubCompat_android_id = global::DSAMobile.Droid.Resource.Styleable.ViewStubCompat_android_id;
 			global::ZXing.Net.Mobile.Forms.Android.Resource.Styleable.ViewStubCompat_android_inflatedId = global::DSAMobile.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
 			global::ZXing.Net.Mobile.Forms.Android.Resource.Styleable.ViewStubCompat_android_layout = global::DSAMobile.Droid.Resource.Styleable.ViewStubCompat_android_layout;
+			global::Plugin.TextToSpeech.Resource.String.ApplicationName = global::DSAMobile.Droid.Resource.String.ApplicationName;
+			global::Plugin.TextToSpeech.Resource.String.Hello = global::DSAMobile.Droid.Resource.String.Hello;
 			global::DSLink.Android.Resource.String.ApplicationName = global::DSAMobile.Droid.Resource.String.ApplicationName;
 			global::DSLink.Android.Resource.String.Hello = global::DSAMobile.Droid.Resource.String.Hello;
 			global::DSLink.Android.Resource.String.library_name = global::DSAMobile.Droid.Resource.String.library_name;

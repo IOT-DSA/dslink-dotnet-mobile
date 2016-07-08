@@ -1,5 +1,5 @@
-﻿using System;
-using DSAMobile.DeviceSettings;
+﻿using DSAMobile.DeviceSettings;
+using UIKit;
 
 namespace DSAMobile.iOS.DeviceSettings
 {
@@ -14,6 +14,10 @@ namespace DSAMobile.iOS.DeviceSettings
             // TODO
             return true;
         }
+
+        public override void SetScreenIdle(bool screenIdleState)
+        {
+            UIApplication.SharedApplication.IdleTimerDisabled = screenIdleState;
+        }
     }
 }
-

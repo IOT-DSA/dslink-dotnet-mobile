@@ -1,15 +1,43 @@
-﻿using System.Diagnostics;
-using CoreLocation;
+﻿using CoreLocation;
 using CoreMotion;
 using Foundation;
 
 namespace DSAMobile.Sensors
 {
+    /// <summary>
+    /// iOS sensors implementation
+    /// 
+    /// Supports:
+    /// - Accelerometer
+    /// - Gyroscope
+    /// - Device Rotation
+    /// - Compass
+    /// 
+    /// Does not support:
+    /// - Light level
+    /// </summary>
 	public class iOSSensors : BaseSensors
 	{
+        /// <summary>
+        /// iOS Motion Manager.
+        /// </summary>
 		private readonly CMMotionManager motionManager;
+
+        /// <summary>
+        /// iOS Location Manager.
+        /// </summary>
 		private readonly CLLocationManager locationManager;
 
+        public override bool SupportsAccelerometer => true;
+        public override bool SupportsGyroscope => true;
+        public override bool SupportsDeviceMotion => true;
+        public override bool SupportsCompass => true;
+        public override bool SupportsLightLevel => false;
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="T:DSAMobile.Sensors.iOSSensors"/> class.
+        /// </summary>
 		public iOSSensors()
 		{
 			motionManager = new CMMotionManager();
@@ -18,6 +46,10 @@ namespace DSAMobile.Sensors
 			locationManager.HeadingFilter = 1;
 		}
 
+        /// <summary>
+        /// Start the specified sensor type reading.
+        /// </summary>
+        /// <param name="sensorType">Sensor type</param>
 		public override void Start(SensorType sensorType)
 		{
 			switch (sensorType)
@@ -55,9 +87,16 @@ namespace DSAMobile.Sensors
 					};
 					locationManager.StartUpdatingHeading();
 					break;
+                case SensorType.LightLevel:
+                    LightLevelActive = false;
+                    break;
 			}
 		}
 
+        /// <summary>
+        /// Stop the specified sensor type reading.
+        /// </summary>
+        /// <param name="sensorType">Sensor type</param>
         public override void Stop(SensorType sensorType)
         {
             switch (sensorType)
@@ -77,6 +116,9 @@ namespace DSAMobile.Sensors
                 case SensorType.Compass:
                     CompassActive = false;
                     locationManager.StopUpdatingHeading();
+                    break;
+                case SensorType.LightLevel:
+                    LightLevelActive = false;
                     break;
             }
         }

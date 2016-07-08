@@ -215,6 +215,24 @@
     <Reference Include="ZXing.Net.Mobile.Forms.iOS">
       <HintPath>..\..\packages\ZXing.Net.Mobile.Forms.2.0.4.46\lib\Xamarin.iOS10\ZXing.Net.Mobile.Forms.iOS.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.TextToSpeech.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugins.TextToSpeech.2.0.0\lib\Xamarin.iOS10\Plugin.TextToSpeech.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.TextToSpeech">
+      <HintPath>..\..\packages\Xam.Plugins.TextToSpeech.2.0.0\lib\Xamarin.iOS10\Plugin.TextToSpeech.dll</HintPath>
+    </Reference>
+    <Reference Include="Lamp.Plugin">
+      <HintPath>..\..\packages\kphillpotts.Lamp.Plugin.1.0.0.1\lib\Xamarin.iOS10\Lamp.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="Lamp.Plugin.Abstractions">
+      <HintPath>..\..\packages\kphillpotts.Lamp.Plugin.1.0.0.1\lib\Xamarin.iOS10\Lamp.Plugin.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share">
+      <HintPath>..\..\packages\Plugin.Share.4.0.2\lib\Xamarin.iOS10\Plugin.Share.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share.Abstractions">
+      <HintPath>..\..\packages\Plugin.Share.4.0.2\lib\Xamarin.iOS10\Plugin.Share.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json" />
