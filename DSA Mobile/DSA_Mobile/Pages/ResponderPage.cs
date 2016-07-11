@@ -1,4 +1,6 @@
-﻿using DSAMobile.Controls;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using DSAMobile.Controls;
 using DSAMobile.Views;
 using Xamarin.Forms;
 
@@ -6,8 +8,8 @@ namespace DSAMobile.Pages
 {
     public class ResponderPage : DGPage
     {
-        private Label _linkStatus;
-        private Button _toggleService;
+        public readonly Label LinkStatus;
+        private readonly Button _toggleService;
 
         public ResponderPage()
         {
@@ -34,7 +36,7 @@ namespace DSAMobile.Pages
                 })
             };
 
-            _linkStatus = new Label
+            LinkStatus = new Label
             {
                 Text = "DSLink is disconnected",
                 HorizontalTextAlignment = TextAlignment.Center
@@ -45,7 +47,7 @@ namespace DSAMobile.Pages
                 Children =
                 {
                     _toggleService,
-                    _linkStatus
+                    LinkStatus
                 }
             };
         }

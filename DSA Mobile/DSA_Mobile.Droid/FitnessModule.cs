@@ -13,7 +13,7 @@ using Debug = System.Diagnostics.Debug;
 
 namespace DSAMobile.Droid
 {
-    public class FitnessModule
+    /*public class FitnessModule
     {
         private const string TAG = "DSAFitness";
         private ClientConnectionCallback _clientConnectionCallback;
@@ -106,5 +106,5 @@ namespace DSAMobile.Droid
                 }
             }
         }
-    }
+    }*/
 }

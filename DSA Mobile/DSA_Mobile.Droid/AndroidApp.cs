@@ -1,18 +1,27 @@
+using System;
 using System.Collections.Generic;
 using Android.Content;
 using Android.Hardware;
-using Android.OS;
 using DSAMobile.DeviceSettings;
 using DSAMobile.Droid.DeviceSettings;
 using DSAMobile.Droid.Sensors;
 using DSAMobile.Sensors;
 using DSLink;
+using Environment = Android.OS.Environment;
 
 namespace DSAMobile.Droid
 {
     public class AndroidApp : App
     {
         public MainActivity MainActivity;
+        public Action BaseStartLink;
+        public Action BaseStopLink;
+
+        public AndroidApp()
+        {
+            BaseStartLink = base.StartLink;
+            BaseStopLink = base.StopLink;
+        }
 
         protected override string StoragePath()
         {
@@ -21,9 +30,14 @@ namespace DSAMobile.Droid
 
         public override DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new AndroidDSLink(config, this, MainActivity, modules);
 
-        public override void InitModules()
+        public override void StartLink()
         {
-            base.InitModules();
+            MainActivity.StartService(new Intent(MainActivity, typeof(AndroidService)));
+        }
+
+        public override void StopLink()
+        {
+            MainActivity.StopService(new Intent(MainActivity, typeof(AndroidService)));
         }
 
         public override BaseSensors GetSensors()

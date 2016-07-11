@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace DSAMobile.Controls
 {
@@ -7,7 +6,7 @@ namespace DSAMobile.Controls
     {
         public DGButton()
         {
-            BackgroundColor = Color.Transparent;
+            BackgroundColor = Color.White;
         }
     }
 }

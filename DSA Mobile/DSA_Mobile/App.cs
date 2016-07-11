@@ -32,6 +32,7 @@ namespace DSAMobile
             get;
             private set;
         }
+        public readonly TabHost TabHost;
         public bool Disabled = true;
         protected BaseSensors _sensors;
         protected BaseDeviceSettings _deviceSettings;
@@ -40,7 +41,8 @@ namespace DSAMobile
         protected App()
         {
             Instance = this;
-            MainPage = new TabHost();
+            TabHost = new TabHost();
+            MainPage = TabHost;
             enabledModules = new List<BaseModule>();
         }
 
@@ -75,46 +77,56 @@ namespace DSAMobile
             enabledModules.Add(new ShareModule());
         }
 
-        public void StartLink()
+        public virtual void StartLink()
         {
-            if (DSLink == null)
+            SetDSLinkStatus("DSLink is connecting");
+            try
             {
-                InitModules();
-                InitializeDSLink();
+                if (DSLink == null)
+                {
+                    InitModules();
+                    InitializeDSLink();
+                }
+                else
+                {
+                    DSLink.Config.Name = Settings.DSLinkName;
+                    DSLink.Config.BrokerUrl = Settings.BrokerURL;
+                    DSLink.Connect();
+                }
             }
-            else
+            catch (Exception e)
             {
-                DSLink.Config.Name = Settings.DSLinkName;
-                DSLink.Config.BrokerUrl = Settings.BrokerURL;
-                DSLink.Connect();
+                SetDSLinkStatus(string.Format("DSLink failed to start: {0}", e.ToString()));
+                Debug.WriteLine(e.ToString());
             }
+
+            SetDSLinkStatus("DSLink is connected");
         }
 
-        public void StopLink()
+        public virtual void StopLink()
         {
             if (DSLink != null)
             {
                 DSLink.Disconnect();
             }
+            SetDSLinkStatus("DSLink is disconnected");
         }
 
         protected virtual void InitializeDSLink()
         {
-            try
-            {
-                var configuration = new Configuration(new List<string>(),
-                                                      Settings.DSLinkName,
-                                                      responder: true,
-                                                      requester: true,
-                                                      keysLocation: StoragePath() + "/dsa_mobile.keys",
-                                                      brokerUrl: Settings.BrokerURL,
-                                                      logLevel: LogLevel.Info);
-                DSLink = PlatformDSLink(configuration, enabledModules);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.ToString());
-            }
+            var configuration = new Configuration(new List<string>(),
+                                                  Settings.DSLinkName,
+                                                  responder: true,
+                                                  requester: true,
+                                                  keysLocation: StoragePath() + "/dsa_mobile.keys",
+                                                  brokerUrl: Settings.BrokerURL,
+                                                  logLevel: LogLevel.Info);
+            DSLink = PlatformDSLink(configuration, enabledModules);
+        }
+
+        public void SetDSLinkStatus(string text)
+        {
+            TabHost.ResponderPage.LinkStatus.Text = text;
         }
 
         public virtual DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new DSLink(config, this, modules);

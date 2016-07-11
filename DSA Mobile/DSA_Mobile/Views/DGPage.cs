@@ -7,13 +7,13 @@ namespace DSAMobile.Views
     {
         public DGPage()
         {
-            Padding = new Thickness(left: 10,
+            Padding = new Thickness(left: 0,
                                     top: Device.OnPlatform(
                                         iOS: 30,
-                                        Android: 10,
-                                        WinPhone: 10),
-                                    right: 10,
-                                    bottom: 10);
+                                        Android: 0,
+                                        WinPhone: 0),
+                                    right: 0,
+                                    bottom: 0);
         }
     }
 }

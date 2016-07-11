@@ -6,9 +6,9 @@ namespace DSAMobile.Pages
 {
     public class SettingsPage : DGPage
     {
-        private Entry _brokerUrlEntry;
-        private Entry _dslinkNameEntry;
-        private Button _saveButton;
+        private readonly EntryCell _brokerUrlCell;
+        private readonly EntryCell _dslinkNameCell;
+        private readonly Button _saveButton;
 
         public SettingsPage()
         {
@@ -18,39 +18,47 @@ namespace DSAMobile.Pages
                 Icon = "ion-toggle-filled";
             }*/
 
-            _brokerUrlEntry = new Entry
-            {
-                Placeholder = "Broker URL",
-                Text = Settings.BrokerURL,
-                Keyboard = Keyboard.Url
-            };
-
-            _dslinkNameEntry = new Entry
-            {
-                Placeholder = "DSLink Name",
-                Text = Settings.DSLinkName
-            };
-
             _saveButton = new DGButton
             {
                 Text = "Save",
                 Command = new Command(() =>
                 {
-                    Settings.BrokerURL = _brokerUrlEntry.Text;
-                    Settings.DSLinkName = _dslinkNameEntry.Text;
+                    Settings.BrokerURL = _brokerUrlCell.Text;
+                    Settings.DSLinkName = _dslinkNameCell.Text;
                 })
+            };
+
+            _brokerUrlCell = new EntryCell
+            {
+                Label = "Broker URL",
+                Text = Settings.BrokerURL,
+                Keyboard = Keyboard.Url
+            };
+
+            _dslinkNameCell = new EntryCell
+            {
+                Label = "DSLink Name",
+                Text = Settings.DSLinkName
             };
 
             Content = new StackLayout
             {
                 Children =
                 {
-                    _brokerUrlEntry,
-                    _dslinkNameEntry,
+                    new TableView
+                    {
+                        Root = new TableRoot
+                        {
+                            new TableSection("DSLink")
+                            {
+                                _brokerUrlCell,
+                                _dslinkNameCell
+                            }
+                        }
+                    },
                     _saveButton
                 }
             };
         }
     }
 }
-

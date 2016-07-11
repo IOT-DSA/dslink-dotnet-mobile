@@ -260,9 +260,7 @@
     <Compile Include="FitnessModule.cs" />
     <Compile Include="DeviceSettings\AndroidDeviceSettings.cs" />
     <Compile Include="MainApplication.cs" />
-    <Compile Include="DSLinkService.cs" />
-    <Compile Include="StreamModule.cs" />
-    <Compile Include="CameraStreamer.cs" />
+    <Compile Include="AndroidService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
