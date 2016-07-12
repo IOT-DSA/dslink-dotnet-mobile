@@ -53,7 +53,7 @@ namespace DSAMobile.Share
                               .SetAction(new Action(Permission.Write, Share))
                               .BuildNode();
 
-            _shareLink = superRoot.CreateChild("shareLink")
+            _shareLink = superRoot.CreateChild("share_link")
                                   .SetDisplayName("Share Link")
                                   .SetActionGroup(ActionGroups.Share)
                                   .SetInvokable(Permission.Write)
@@ -65,7 +65,7 @@ namespace DSAMobile.Share
 
             if (CrossShare.Current.SupportsClipboard)
             {
-                _setClipboard = superRoot.CreateChild("setClipboard")
+                _setClipboard = superRoot.CreateChild("set_clipboard")
                                          .SetDisplayName("Set Clipboard")
                                          .SetActionGroup(ActionGroups.Share)
                                          .SetInvokable(Permission.Write)

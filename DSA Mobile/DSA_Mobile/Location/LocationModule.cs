@@ -50,7 +50,7 @@ namespace DSAMobile.Location
                                          .BuildNode();
 
                 CrossGeolocator.Current.PositionChanged += LocationUpdated;
-                CrossGeolocator.Current.StartListeningAsync(1, 5, false).Wait();
+                CrossGeolocator.Current.StartListeningAsync(60, 50, false).Wait();
             }
         }
 

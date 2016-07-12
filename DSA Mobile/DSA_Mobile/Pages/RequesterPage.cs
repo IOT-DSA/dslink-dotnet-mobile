@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using DSAMobile.Controls;
+﻿using DSAMobile.Controls;
 using DSAMobile.Views;
-using DSLink.Nodes;
-using DSLink.Respond;
 using Xamarin.Forms;
 
 namespace DSAMobile.Pages
@@ -24,7 +20,7 @@ namespace DSAMobile.Pages
 
             var button = new DGButton
             {
-                Text = "Test Requester",
+                Text = "Load Requester",
                 Command = new Command((obj) =>
                 {
                     _requesterView.Load();

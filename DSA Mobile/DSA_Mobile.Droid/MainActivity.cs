@@ -2,6 +2,9 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using DSLink.Android;
+using FormsPlugin.Iconize.Droid;
+using Plugin.Iconize;
+using Plugin.Iconize.Fonts;
 using Xamarin.Forms.Platform.Android;
 using ZXing.Net.Mobile.Forms.Android;
 using ZXingPlatform = ZXing.Net.Mobile.Forms.Android.Platform;
@@ -23,8 +26,8 @@ namespace DSAMobile.Droid
             AndroidPlatform.Initialize();
 
             // Iconize
-            //Iconize.With(new MaterialModule());
-            //IconControls.Init(Resource.Id.);
+            Iconize.With(new MaterialModule());
+            IconControls.Init();
 
             // ZXing
             ZXingPlatform.Init();

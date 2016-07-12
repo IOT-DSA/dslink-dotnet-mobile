@@ -70,6 +70,7 @@
     <Compile Include="Controls.cs" />
     <Compile Include="Views\TablePage.cs" />
     <Compile Include="Views\RequesterView.cs" />
+    <Compile Include="Views\ValueView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SDK\DSLink\DSLink.csproj">

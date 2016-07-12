@@ -43,7 +43,9 @@ namespace DSAMobile.Sensors
 
         public void AddNodes(Node superRoot)
         {
-            _sensors = superRoot.CreateChild("Sensors").BuildNode();
+            _sensors = superRoot.CreateChild("sensors")
+                                .SetDisplayName("Sensors")
+                                .BuildNode();
 
             if (_sensorsImpl.SupportsAccelerometer)
             {
@@ -243,7 +245,7 @@ namespace DSAMobile.Sensors
                     if (!_sensorsImpl.LightLevelActive &&
                     _lightLevel.Subscribed)
                     {
-                        Debug.WriteLine("Light Level stopped");
+                        Debug.WriteLine("Light Level started");
                         _sensorsImpl.Start(SensorType.LightLevel);
                     }
                     if (_sensorsImpl.LightLevelActive &&

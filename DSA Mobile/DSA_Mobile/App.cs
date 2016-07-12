@@ -120,7 +120,7 @@ namespace DSAMobile
                                                   requester: true,
                                                   keysLocation: StoragePath() + "/dsa_mobile.keys",
                                                   brokerUrl: Settings.BrokerURL,
-                                                  logLevel: LogLevel.Info);
+                                                  logLevel: LogLevel.Debug);
             DSLink = PlatformDSLink(configuration, enabledModules);
         }
 

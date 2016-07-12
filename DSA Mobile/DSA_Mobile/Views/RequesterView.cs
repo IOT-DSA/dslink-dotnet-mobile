@@ -1,9 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using DSAMobile.Views;
 using DSLink.Nodes;
 using Xamarin.Forms;
 
-namespace DSAMobile
+namespace DSAMobile.Views
 {
     public class RequesterView : ListView
     {
@@ -14,6 +13,9 @@ namespace DSAMobile
         {
             _path = path;
             _items = new ObservableCollection<NodeObject>();
+
+            IsPullToRefreshEnabled = true;
+            RefreshCommand = new Command(Load);
 
             ItemsSource = _items;
 
@@ -29,15 +31,36 @@ namespace DSAMobile
                     return;
                 }
 
-                var node = ((NodeObject)e.Item).Node;
+                var nodeObject = ((NodeObject)e.Item);
 
-                var p = new ContentPage
+                if (nodeObject.Action)
                 {
-                    Title = node.Path,
-                    Content = new RequesterView(node.Path, true)
-                };
-
-                Navigation.PushAsync(p);
+                    Navigation.PushAsync(new ContentPage
+                    {
+                        Content = new StackLayout
+                        {
+                            Children =
+                            {
+                                new Label
+                                {
+                                    Text = "I'm an action!"
+                                }
+                            }
+                        }
+                    });
+                }
+                else if (nodeObject.Value)
+                {
+                    Navigation.PushAsync(new ValuePage(nodeObject.Node.Path));
+                }
+                else
+                {
+                    Navigation.PushAsync(new ContentPage
+                    {
+                        Title = nodeObject.Node.DisplayName,
+                        Content = new RequesterView(nodeObject.Node.Path, true)
+                    });
+                }
             };
 
             if (load)
@@ -50,10 +73,16 @@ namespace DSAMobile
         {
             App.Instance.DSLink.Requester.List(_path, (response) =>
             {
-                foreach (Node node in response.Node.Children.Values)
+                Device.BeginInvokeOnMainThread(() =>
                 {
-                    _items.Add(new NodeObject(node));
-                }
+                    IsRefreshing = true;
+                    _items.Clear();
+                    foreach (Node node in response.Node.Children.Values)
+                    {
+                        _items.Add(new NodeObject(node));
+                    }
+                    IsRefreshing = false;
+                });
             });
         }
     }
@@ -61,10 +90,14 @@ namespace DSAMobile
     public class NodeObject
     {
         public readonly Node Node;
+        public readonly bool Value;
+        public readonly bool Action;
 
         public NodeObject(Node node)
         {
             Node = node;
+            Value = node.Configurations.ContainsKey("$type");
+            Action = node.Configurations.ContainsKey("$invokable");
         }
 
         public override string ToString()
