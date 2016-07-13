@@ -23,23 +23,30 @@ namespace DSAMobile.Flash
                                    .SetType("bool")
                                    .SetValue(false)
                                    .BuildNode();
+        }
 
+        public void Start()
+        {
             _flashlight.Value.OnSet += FlashlightCallback;
         }
 
-        public void RemoveNodes()
+        public void Stop()
         {
             _flashlight.Value.OnSet -= FlashlightCallback;
-
-            _flashlight.RemoveFromParent();
         }
 
         public void FlashlightCallback(Value val)
         {
             var boolState = val.Get();
 
-            if (boolState) CrossLamp.Current.TurnOn();
-            else CrossLamp.Current.TurnOff();
+            if (boolState)
+            {
+                CrossLamp.Current.TurnOn();
+            }
+            else
+            {
+                CrossLamp.Current.TurnOff();
+            }
         }
     }
 }

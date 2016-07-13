@@ -38,11 +38,12 @@ namespace DSAMobile.DeviceInfo
                               .BuildNode();
         }
 
-        public void RemoveNodes()
+        public void Start()
         {
-            _os.RemoveFromParent();
-            _osVersion.RemoveFromParent();
-            _model.RemoveFromParent();
+        }
+
+        public void Stop()
+        {
         }
     }
 }

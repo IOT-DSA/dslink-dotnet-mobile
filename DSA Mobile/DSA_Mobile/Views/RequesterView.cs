@@ -1,4 +1,6 @@
-﻿using DSLink.Nodes;
+﻿using System.Diagnostics;
+using DSLink.Nodes;
+using DSLink.Request;
 using FormsPlugin.Iconize;
 using Xamarin.Forms;
 
@@ -101,9 +103,6 @@ namespace DSAMobile.Views
                         TextColor = Color.Default,
                         VerticalOptions = LayoutOptions.Center
                     },
-                    new IconButton
-                    {
-                    }
                     /*new Label
                     {
                         Text = ">  ",
@@ -129,8 +128,16 @@ namespace DSAMobile.Views
 
     public class ValueCell : CustomNodeCell
     {
+        private Label _valueLabel;
+
         public ValueCell(Node node, INavigation navigation) : base(node, navigation)
         {
+            _valueLabel = new Label
+            {
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.EndAndExpand
+            };
+
             View = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
@@ -142,9 +149,16 @@ namespace DSAMobile.Views
                         Text = FriendlyName,
                         TextColor = Color.Default,
                         VerticalOptions = LayoutOptions.Center
-                    }
+                    },
+                    _valueLabel
                 }
             };
+        }
+
+        ~ValueCell()
+        {
+            //App.Instance.DSLink.Requester.Unsubscribe(_node.Path);
+            Debug.WriteLine("Destructor called");
         }
 
         protected override void OnTapped()
@@ -152,6 +166,29 @@ namespace DSAMobile.Views
             base.OnTapped();
 
             _navigation.PushAsync(new ValuePage(_node.Path));
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            App.Instance.DSLink.Requester.Subscribe(_node.Path, ValueUpdate);
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            App.Instance.DSLink.Requester.Unsubscribe(_node.Path);
+        }
+
+        private void ValueUpdate(SubscriptionUpdate update)
+        {
+            Debug.WriteLine(App.Instance.DSLink.Requester._subscriptionManager.GetSub(update.SubscriptionID).Path);
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                _valueLabel.Text = update.Value;
+            });
         }
     }
 

@@ -1,4 +1,3 @@
-using System;
 using DSLink.Nodes;
 using Plugin.Battery;
 using Plugin.Battery.Abstractions;
@@ -41,13 +40,14 @@ namespace DSAMobile.Battery
             CrossBattery.Current.BatteryChanged += BatteryChanged;
         }
 
-        public void RemoveNodes()
+        public void Start()
+        {
+            CrossBattery.Current.BatteryChanged += BatteryChanged;
+        }
+
+        public void Stop()
         {
             CrossBattery.Current.BatteryChanged -= BatteryChanged;
-
-            _percentRemaining.RemoveFromParent();
-            _status.RemoveFromParent();
-            _source.RemoveFromParent();
         }
 
         private void BatteryChanged(object sender, BatteryChangedEventArgs e)

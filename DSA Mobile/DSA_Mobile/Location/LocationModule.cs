@@ -48,22 +48,24 @@ namespace DSAMobile.Location
                                          .SetDisplayName("Longitude")
                                          .SetType("double")
                                          .BuildNode();
-
-                CrossGeolocator.Current.PositionChanged += LocationUpdated;
-                CrossGeolocator.Current.StartListeningAsync(60, 50, false).Wait();
             }
         }
 
-        public void RemoveNodes()
+        public void Start()
         {
-            _navigateToCoordinate.RemoveFromParent();
+            if (CrossGeolocator.Current.IsGeolocationAvailable)
+            {
+                CrossGeolocator.Current.PositionChanged += LocationUpdated;
+                CrossGeolocator.Current.StartListeningAsync(60, 100, false).Wait();
+            }
+        }
+
+        public void Stop()
+        {
             if (CrossGeolocator.Current.IsGeolocationAvailable)
             {
                 CrossGeolocator.Current.PositionChanged -= LocationUpdated;
                 CrossGeolocator.Current.StopListeningAsync().Wait();
-
-                _locLatitude.RemoveFromParent();
-                _locLongitude.RemoveFromParent();
             }
         }
 

@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using DSAMobile.Utils;
 using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
+using Action = DSLink.Nodes.Actions.Action;
 
 namespace DSAMobile.DeviceSettings
 {
@@ -12,7 +15,7 @@ namespace DSAMobile.DeviceSettings
         private App _app;
         private readonly BaseDeviceSettings _deviceSettings;
         private CancellationTokenSource _updateToken;
-        private readonly Task _updateTask;
+        private Task _updateTask;
 
         private Node _screenStatus;
         private Node _screenIdleTimer;
@@ -34,8 +37,6 @@ namespace DSAMobile.DeviceSettings
         {
             _app = app;
             _deviceSettings = deviceSettings;
-            _updateToken = new CancellationTokenSource();
-            _updateTask = new Task(Update, _updateToken.Token);
         }
 
         public bool RequestPermissions()
@@ -133,76 +134,65 @@ namespace DSAMobile.DeviceSettings
                                        .SetType("string")
                                        .BuildNode();
             }
-
-            _updateTask.Start();
         }
 
-        public void RemoveNodes()
+        public void Start()
+        {
+            _updateToken = new CancellationTokenSource();
+            _updateTask = Repeat.Interval(TimeSpan.FromSeconds(1), Update, _updateToken.Token);
+        }
+
+        public void Stop()
         {
             _updateToken.Cancel();
-            _screenStatus.RemoveFromParent();
-            _screenIdleTimer.RemoveFromParent();
-            if (_deviceSettings.IsWiFiStateSupported)
-            {
-                _wifiEnabled.RemoveFromParent();
-            }
-            if (_deviceSettings.WiFiScanningSupported)
-            {
-                _scanWiFiNetworks.RemoveFromParent();
-            }
         }
 
         private void Update()
         {
-            while (!_updateTask.IsCanceled)
+            _screenStatus.Value.Set(_deviceSettings.ScreenOn());
+
+            if (_deviceSettings.IsWiFiStateSupported)
             {
-                _screenStatus.Value.Set(_deviceSettings.ScreenOn());
+                _wifiEnabled.Value.Set(_deviceSettings.WiFiEnabled);
+            }
 
-                if (_deviceSettings.IsWiFiStateSupported)
+            if (_deviceSettings.GetWiFiInfoSupported)
+            {
+                var info = _deviceSettings.WiFiInfo;
+                if (_wifi_ssid.Subscribed)
                 {
-                    _wifiEnabled.Value.Set(_deviceSettings.WiFiEnabled);
+                    _wifi_ssid.Value.Set(info.Ssid);
                 }
 
-                if (_deviceSettings.GetWiFiInfoSupported)
+                if (_wifi_bssid.Subscribed)
                 {
-                    var info = _deviceSettings.WiFiInfo;
-                    if (_wifi_ssid.Subscribed)
-                    {
-                        _wifi_ssid.Value.Set(info.Ssid);
-                    }
-
-                    if (_wifi_bssid.Subscribed)
-                    {
-                        _wifi_bssid.Value.Set(info.Bssid);
-                    }
-
-                    if (_wifi_signalLevel.Subscribed)
-                    {
-                        _wifi_signalLevel.Value.Set(info.SignalLevel);
-                    }
-
-                    if (_wifi_frequency.Subscribed)
-                    {
-                        _wifi_frequency.Value.Set(info.Frequency);
-                    }
-
-                    if (_wifi_hiddenSsid.Subscribed)
-                    {
-                        _wifi_hiddenSsid.Value.Set(info.HiddenSsid);
-                    }
-
-                    if (_wifi_linkSpeed.Subscribed)
-                    {
-                        _wifi_linkSpeed.Value.Set(info.LinkSpeed);
-                    }
-
-                    if (_wifi_ipAddress.Subscribed)
-                    {
-                        _wifi_ipAddress.Value.Set(info.IpAddress.AddressString);
-                    }
+                    _wifi_bssid.Value.Set(info.Bssid);
                 }
 
-                _updateTask.Wait(5000);
+                if (_wifi_signalLevel.Subscribed)
+                {
+                    _wifi_signalLevel.Value.Set(info.SignalLevel);
+                }
+
+                if (_wifi_frequency.Subscribed)
+                {
+                    _wifi_frequency.Value.Set(info.Frequency);
+                }
+
+                if (_wifi_hiddenSsid.Subscribed)
+                {
+                    _wifi_hiddenSsid.Value.Set(info.HiddenSsid);
+                }
+
+                if (_wifi_linkSpeed.Subscribed)
+                {
+                    _wifi_linkSpeed.Value.Set(info.LinkSpeed);
+                }
+
+                if (_wifi_ipAddress.Subscribed)
+                {
+                    _wifi_ipAddress.Value.Set(info.IpAddress.AddressString);
+                }
             }
         }
 

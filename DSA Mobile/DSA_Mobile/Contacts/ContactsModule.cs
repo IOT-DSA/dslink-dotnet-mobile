@@ -35,9 +35,12 @@ namespace DSAMobile.Contacts
                                     .BuildNode();
         }
 
-        public void RemoveNodes()
+        public void Start()
         {
-            _getContacts.RemoveFromParent();
+        }
+
+        public void Stop()
+        {
         }
 
         private void GetContacts(Dictionary<string, Value> parameters, InvokeRequest request)

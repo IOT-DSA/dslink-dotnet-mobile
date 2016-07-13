@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System;
 using System.Threading.Tasks;
 using System.Threading;
+using DSAMobile.Utils;
 
 namespace DSAMobile.Sensors
 {
@@ -32,8 +33,6 @@ namespace DSAMobile.Sensors
         public SensorsModule(BaseSensors sensors)
 		{
             _sensorsImpl = sensors;
-            _subToken = new CancellationTokenSource();
-            _subTask = new Task(UpdateSubscriptions, _subToken.Token);
 		}
 
         public bool RequestPermissions()
@@ -62,12 +61,7 @@ namespace DSAMobile.Sensors
                                                  .SetType("number")
                                                  .BuildNode();
 
-                _sensorsImpl.AccelerometerValueChanged += (MotionVector vector) =>
-                {
-                    _accel_x.Value.Set(vector.X);
-                    _accel_y.Value.Set(vector.Y);
-                    _accel_z.Value.Set(vector.Z);
-                };
+                _sensorsImpl.AccelerometerValueChanged += UpdateAccelerometer;
             }
 
             if (_sensorsImpl.SupportsGyroscope)
@@ -85,12 +79,7 @@ namespace DSAMobile.Sensors
                                        .SetType("number")
                                        .BuildNode();
 
-                _sensorsImpl.GyroscopeValueChanged += (MotionVector vector) =>
-                {
-                    _gyro_x.Value.Set(vector.X);
-                    _gyro_y.Value.Set(vector.Y);
-                    _gyro_z.Value.Set(vector.Z);
-                };
+                _sensorsImpl.GyroscopeValueChanged += UpdateGyroscope;
             }
 
             if (_sensorsImpl.SupportsDeviceMotion)
@@ -108,12 +97,7 @@ namespace DSAMobile.Sensors
                                      .SetType("number")
                                      .BuildNode();
 
-                _sensorsImpl.DeviceMotionValueChanged += (MotionVector vector) =>
-                {
-                    _dmotion_x.Value.Set(vector.X);
-                    _dmotion_y.Value.Set(vector.Y);
-                    _dmotion_z.Value.Set(vector.Z);
-                };
+                _sensorsImpl.DeviceMotionValueChanged += UpdateDeviceMotion;
             }
 
             if (_sensorsImpl.SupportsCompass)
@@ -134,46 +118,19 @@ namespace DSAMobile.Sensors
                                   .SetType("number")
                                   .BuildNode();
 
-                _sensorsImpl.LightLevelValueChanged += _lightLevel.Value.Set;
+                _sensorsImpl.LightLevelValueChanged += UpdateLightLevel;
             }
-
-            _subTask.Start();
         }
 
-        public void RemoveNodes()
+        public void Start()
+        {
+            _subToken = new CancellationTokenSource();
+            _subTask = Repeat.Interval(TimeSpan.FromMilliseconds(100), UpdateSubscriptions, _subToken.Token);
+        }
+
+        public void Stop()
         {
             _subToken.Cancel();
-
-            if (_sensorsImpl.SupportsAccelerometer)
-            {
-                _accelerometer.RemoveFromParent();
-                _accel_x.RemoveFromParent();
-                _accel_y.RemoveFromParent();
-                _accel_z.RemoveFromParent();
-            }
-
-            if (_sensorsImpl.SupportsGyroscope)
-            {
-                _gyroscope.RemoveFromParent();
-                _gyro_x.RemoveFromParent();
-                _gyro_y.RemoveFromParent();
-                _gyro_z.RemoveFromParent();
-            }
-
-            if (_sensorsImpl.SupportsDeviceMotion)
-            {
-                _dmotion.RemoveFromParent();
-                _dmotion_x.RemoveFromParent();
-                _dmotion_y.RemoveFromParent();
-                _dmotion_z.RemoveFromParent();
-            }
-
-            if (_sensorsImpl.SupportsLightLevel)
-            {
-                _lightLevel.RemoveFromParent();
-            }
-
-            _sensors.RemoveFromParent();
         }
 
         private void UpdateSubscriptions()
@@ -259,6 +216,31 @@ namespace DSAMobile.Sensors
                 _subTask.Wait(100);
             }
         }
+
+        private void UpdateAccelerometer(MotionVector vector)
+        {
+            _accel_x.Value.Set(vector.X);
+            _accel_y.Value.Set(vector.Y);
+            _accel_z.Value.Set(vector.Z);
+        }
+
+        private void UpdateGyroscope(MotionVector vector)
+        {
+            _gyro_x.Value.Set(vector.X);
+            _gyro_y.Value.Set(vector.Y);
+            _gyro_z.Value.Set(vector.Z);
+        }
+
+        private void UpdateDeviceMotion(MotionVector vector)
+        {
+            _dmotion_x.Value.Set(vector.X);
+            _dmotion_y.Value.Set(vector.Y);
+            _dmotion_z.Value.Set(vector.Z);
+        }
+
+        private void UpdateLightLevel(double value)
+        {
+            _lightLevel.Value.Set(value);
+        }
     }
 }
-

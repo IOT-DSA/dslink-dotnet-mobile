@@ -34,9 +34,12 @@ namespace DSAMobile.Vibrate
             _vibrate = vibrate.BuildNode();
         }
 
-        public void RemoveNodes()
+        public void Start()
         {
-            _vibrate.RemoveFromParent();
+        }
+
+        public void Stop()
+        {
         }
 
         private void Vibrate(Dictionary<string, Value> parameters, InvokeRequest request)

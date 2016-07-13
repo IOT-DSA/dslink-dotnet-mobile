@@ -60,22 +60,12 @@ namespace DSAMobile.Communications
             }
         }
 
-        public void RemoveNodes()
+        public void Start()
         {
-            if (CrossMessaging.Current.SmsMessenger.CanSendSms)
-            {
-                _sendSms.RemoveFromParent();
-            }
+        }
 
-            if (CrossMessaging.Current.PhoneDialer.CanMakePhoneCall)
-            {
-                _makePhoneCall.RemoveFromParent();
-            }
-
-            if (CrossMessaging.Current.EmailMessenger.CanSendEmail)
-            {
-                _sendEmail.RemoveFromParent();
-            }
+        public void Stop()
+        {
         }
 
         private void SendSMS(Dictionary<string, Value> parameters, InvokeRequest request)

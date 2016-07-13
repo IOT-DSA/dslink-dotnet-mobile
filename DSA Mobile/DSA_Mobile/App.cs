@@ -91,8 +91,8 @@ namespace DSAMobile
                 {
                     DSLink.Config.Name = Settings.DSLinkName;
                     DSLink.Config.BrokerUrl = Settings.BrokerURL;
-                    DSLink.Connect();
                 }
+                DSLink.Connect();
             }
             catch (Exception e)
             {
@@ -120,13 +120,17 @@ namespace DSAMobile
                                                   requester: true,
                                                   keysLocation: StoragePath() + "/dsa_mobile.keys",
                                                   brokerUrl: Settings.BrokerURL,
-                                                  logLevel: LogLevel.Debug);
+                                                  logLevel: LogLevel.Debug,
+                                                  connectionAttemptLimit: 2);
             DSLink = PlatformDSLink(configuration, enabledModules);
         }
 
         public void SetDSLinkStatus(string text)
         {
-            TabHost.ResponderPage.LinkStatus.Text = text;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                TabHost.ResponderPage.LinkStatus.Text = text;
+            });
         }
 
         public virtual DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new DSLink(config, this, modules);

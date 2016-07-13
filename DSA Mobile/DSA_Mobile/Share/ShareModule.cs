@@ -75,15 +75,12 @@ namespace DSAMobile.Share
             }
         }
 
-        public void RemoveNodes()
+        public void Start()
         {
-            _openInBrowser.RemoveFromParent();
-            _share.RemoveFromParent();
-            _shareLink.RemoveFromParent();
-            if (CrossShare.Current.SupportsClipboard)
-            {
-                _setClipboard.RemoveFromParent();
-            }
+        }
+
+        public void Stop()
+        {
         }
 
         private void OpenInBrowser(Dictionary<string, Value> parameters, InvokeRequest request)

@@ -41,10 +41,12 @@ namespace DSAMobile.Notifications
                                .BuildNode();
         }
 
-        public void RemoveNodes()
+        public void Start()
         {
-            _create.RemoveFromParent();
-            _cancel.RemoveFromParent();
+        }
+
+        public void Stop()
+        {
         }
 
         private void CreateNotification(Dictionary<string, Value> parameters, InvokeRequest request)

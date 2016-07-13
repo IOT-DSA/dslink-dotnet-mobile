@@ -17,20 +17,35 @@ namespace DSAMobile
 
         protected override void OnConnectionOpen()
         {
-            foreach (BaseModule module in _requestedModules)
+            if (_requestedModules.Count > 0)
             {
-                if (module.Supported)
+                foreach (BaseModule module in _requestedModules)
                 {
-                    Logger.Info("Requesting permissions for " + module);
-                    var granted = module.RequestPermissions();
-                    if (granted)
+                    if (module.Supported)
                     {
-                        module.AddNodes(Responder.SuperRoot);
-                        _loadedModules.Add(module);
+                        Logger.Info("Requesting permissions for " + module);
+                        var granted = module.RequestPermissions();
+                        if (granted)
+                        {
+                            module.AddNodes(Responder.SuperRoot);
+                            _loadedModules.Add(module);
+                        }
                     }
                 }
+                _requestedModules.Clear();
             }
-            _requestedModules.Clear();
+            foreach (BaseModule module in _loadedModules)
+            {
+                module.Start();
+            }
+        }
+
+        protected override void OnConnectionClosed()
+        {
+            foreach (BaseModule module in _loadedModules)
+            {
+                module.Stop();
+            }
         }
     }
 }

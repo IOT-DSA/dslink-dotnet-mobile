@@ -74,17 +74,12 @@ namespace DSAMobile.Camera
             }
         }
 
-        public void RemoveNodes()
+        public void Start()
         {
-            if (CrossMedia.Current.IsTakePhotoSupported)
-            {
-                _takePicture.RemoveFromParent();
-            }
+        }
 
-            if (CrossMedia.Current.IsPickPhotoSupported)
-            {
-                _pickPicture.RemoveFromParent();
-            }
+        public void Stop()
+        {
         }
 
         private async void TakePicture(Dictionary<string, Value> parameters, InvokeRequest request)

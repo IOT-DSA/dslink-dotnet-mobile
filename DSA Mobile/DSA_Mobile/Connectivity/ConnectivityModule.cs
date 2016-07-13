@@ -11,13 +11,7 @@ namespace DSAMobile.Connectivity
         private Node _root;
         private Node _connectionTypes;
 
-        public bool Supported
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool Supported => true;
 
         public bool RequestPermissions()
         {
@@ -39,13 +33,17 @@ namespace DSAMobile.Connectivity
                                     .BuildNode();
         }
 
-        public void RemoveNodes()
+        public void Start()
         {
-            _connectionTypes.RemoveFromParent();
-            _root.RemoveFromParent();
+            CrossConnectivity.Current.ConnectivityChanged += ConnectivityUpdated;
         }
 
-        private void ConnectivityUpdatedEvent(object sender, ConnectivityChangedEventArgs eventArgs)
+        public void Stop()
+        {
+            CrossConnectivity.Current.ConnectivityChanged -= ConnectivityUpdated;
+        }
+
+        private void ConnectivityUpdated(object sender, ConnectivityChangedEventArgs eventArgs)
         {
             _connectionTypes.Value.Set(ConnectionTypesList(CrossConnectivity.Current.ConnectionTypes));
         }

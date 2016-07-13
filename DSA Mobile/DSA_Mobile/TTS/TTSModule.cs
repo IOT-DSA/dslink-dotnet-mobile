@@ -31,7 +31,11 @@ namespace DSAMobile.TTS
                               .BuildNode();
         }
 
-        public void RemoveNodes()
+        public void Start()
+        {
+        }
+
+        public void Stop()
         {
             _speak.RemoveFromParent();
         }

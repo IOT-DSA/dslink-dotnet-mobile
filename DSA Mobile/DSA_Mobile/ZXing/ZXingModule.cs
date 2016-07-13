@@ -37,9 +37,12 @@ namespace DSAMobile.ZXing
                                  .BuildNode();
         }
 
-        public void RemoveNodes()
+        public void Start()
         {
-            _scanCode.RemoveFromParent();
+        }
+
+        public void Stop()
+        {
         }
 
         private async void ScanCode(Dictionary<string, Value> parameters, InvokeRequest request)
