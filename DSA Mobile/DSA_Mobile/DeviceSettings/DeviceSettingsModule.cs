@@ -166,16 +166,43 @@ namespace DSAMobile.DeviceSettings
                 if (_deviceSettings.GetWiFiInfoSupported)
                 {
                     var info = _deviceSettings.WiFiInfo;
-                    _wifi_ssid.Value.Set(info.Ssid);
-                    _wifi_bssid.Value.Set(info.Bssid);
-                    _wifi_signalLevel.Value.Set(info.SignalLevel);
-                    _wifi_frequency.Value.Set(info.Frequency);
-                    _wifi_hiddenSsid.Value.Set(info.HiddenSsid);
-                    _wifi_linkSpeed.Value.Set(info.LinkSpeed);
-                    _wifi_ipAddress.Value.Set(info.IpAddress.AddressString);
+                    if (_wifi_ssid.Subscribed)
+                    {
+                        _wifi_ssid.Value.Set(info.Ssid);
+                    }
+
+                    if (_wifi_bssid.Subscribed)
+                    {
+                        _wifi_bssid.Value.Set(info.Bssid);
+                    }
+
+                    if (_wifi_signalLevel.Subscribed)
+                    {
+                        _wifi_signalLevel.Value.Set(info.SignalLevel);
+                    }
+
+                    if (_wifi_frequency.Subscribed)
+                    {
+                        _wifi_frequency.Value.Set(info.Frequency);
+                    }
+
+                    if (_wifi_hiddenSsid.Subscribed)
+                    {
+                        _wifi_hiddenSsid.Value.Set(info.HiddenSsid);
+                    }
+
+                    if (_wifi_linkSpeed.Subscribed)
+                    {
+                        _wifi_linkSpeed.Value.Set(info.LinkSpeed);
+                    }
+
+                    if (_wifi_ipAddress.Subscribed)
+                    {
+                        _wifi_ipAddress.Value.Set(info.IpAddress.AddressString);
+                    }
                 }
 
-                _updateTask.Wait(1000);
+                _updateTask.Wait(5000);
             }
         }
 

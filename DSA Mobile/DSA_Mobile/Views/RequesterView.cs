@@ -1,66 +1,29 @@
-﻿using System.Collections.ObjectModel;
-using DSLink.Nodes;
+﻿using DSLink.Nodes;
+using FormsPlugin.Iconize;
 using Xamarin.Forms;
 
 namespace DSAMobile.Views
 {
-    public class RequesterView : ListView
+    public class RequesterView : TableView
     {
         private readonly string _path;
-        private readonly ObservableCollection<NodeObject> _items;
+        private readonly TableSection _nodesSection;
+        private readonly TableSection _valuesSection;
+        private readonly TableSection _actionsSection;
 
         public RequesterView(string path, bool load = false)
         {
             _path = path;
-            _items = new ObservableCollection<NodeObject>();
 
-            IsPullToRefreshEnabled = true;
-            RefreshCommand = new Command(Load);
+            _nodesSection = new TableSection("Nodes");
+            _valuesSection = new TableSection("Values");
+            _actionsSection = new TableSection("Actions");
 
-            ItemsSource = _items;
-
-            ItemSelected += (sender, e) =>
+            Root = new TableRoot
             {
-                ((ListView)sender).SelectedItem = null;
-            };
-
-            ItemTapped += (object sender, ItemTappedEventArgs e) =>
-            {
-                if (e.Item == null)
-                {
-                    return;
-                }
-
-                var nodeObject = ((NodeObject)e.Item);
-
-                if (nodeObject.Action)
-                {
-                    Navigation.PushAsync(new ContentPage
-                    {
-                        Content = new StackLayout
-                        {
-                            Children =
-                            {
-                                new Label
-                                {
-                                    Text = "I'm an action!"
-                                }
-                            }
-                        }
-                    });
-                }
-                else if (nodeObject.Value)
-                {
-                    Navigation.PushAsync(new ValuePage(nodeObject.Node.Path));
-                }
-                else
-                {
-                    Navigation.PushAsync(new ContentPage
-                    {
-                        Title = nodeObject.Node.DisplayName,
-                        Content = new RequesterView(nodeObject.Node.Path, true)
-                    });
-                }
+                _nodesSection,
+                _valuesSection,
+                _actionsSection
             };
 
             if (load)
@@ -75,14 +38,159 @@ namespace DSAMobile.Views
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    IsRefreshing = true;
-                    _items.Clear();
+                    _nodesSection.Clear();
+                    _valuesSection.Clear();
+                    _actionsSection.Clear();
                     foreach (Node node in response.Node.Children.Values)
                     {
-                        _items.Add(new NodeObject(node));
+                        if (node.Configurations.ContainsKey("$type"))
+                        {
+                            _valuesSection.Add(new ValueCell(node, Navigation));
+                        }
+                        else if (node.Configurations.ContainsKey("$invokable"))
+                        {
+                            _actionsSection.Add(new ActionCell(node, Navigation));
+                        }
+                        else
+                        {
+                            _nodesSection.Add(new NodeCell(node, Navigation));
+                        }
                     }
-                    IsRefreshing = false;
                 });
+            });
+        }
+    }
+
+    public class CustomNodeCell : ViewCell
+    {
+        protected readonly Node _node;
+        protected readonly INavigation _navigation;
+
+        public CustomNodeCell(Node node, INavigation navigation)
+        {
+            _node = node;
+            _navigation = navigation;
+        }
+
+        public string FriendlyName
+        {
+            get
+            {
+                if (_node.DisplayName != null)
+                {
+                    return _node.DisplayName;
+                }
+                return _node.Name;
+            }
+        }
+    }
+
+    public class NodeCell : CustomNodeCell
+    {
+        public NodeCell(Node node, INavigation navigation) : base(node, navigation)
+        {
+            View = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Padding = new Thickness(left: 5, right: 5, bottom: 0, top: 0),
+                Children =
+                {
+                    new Label
+                    {
+                        Text = FriendlyName,
+                        TextColor = Color.Default,
+                        VerticalOptions = LayoutOptions.Center
+                    },
+                    new IconButton
+                    {
+                    }
+                    /*new Label
+                    {
+                        Text = ">  ",
+                        Scale = 3.0,
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.EndAndExpand
+                    }*/
+                }
+            };
+        }
+
+        protected override void OnTapped()
+        {
+            base.OnTapped();
+
+            _navigation.PushAsync(new ContentPage
+            {
+                Title = _node.DisplayName,
+                Content = new RequesterView(_node.Path, true)
+            });
+        }
+    }
+
+    public class ValueCell : CustomNodeCell
+    {
+        public ValueCell(Node node, INavigation navigation) : base(node, navigation)
+        {
+            View = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Padding = new Thickness(left: 5, right: 5, bottom: 0, top: 0),
+                Children =
+                {
+                    new Label
+                    {
+                        Text = FriendlyName,
+                        TextColor = Color.Default,
+                        VerticalOptions = LayoutOptions.Center
+                    }
+                }
+            };
+        }
+
+        protected override void OnTapped()
+        {
+            base.OnTapped();
+
+            _navigation.PushAsync(new ValuePage(_node.Path));
+        }
+    }
+
+    public class ActionCell : CustomNodeCell
+    {
+        public ActionCell(Node node, INavigation navigation) : base(node, navigation)
+        {
+            View = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Padding = new Thickness(left: 5, right: 5, bottom: 0, top: 0),
+                Children =
+                {
+                    new Label
+                    {
+                        Text = FriendlyName,
+                        TextColor = Color.Default,
+                        VerticalOptions = LayoutOptions.Center
+                    }
+                }
+            };
+        }
+
+        protected override void OnTapped()
+        {
+            base.OnTapped();
+
+            _navigation.PushAsync(new ContentPage
+            {
+                Content = new StackLayout
+                {
+                    Children =
+                    {
+                        new Label
+                        {
+                            Text = "I'm an action!"
+                        }
+                    }
+                }
             });
         }
     }
