@@ -8,7 +8,7 @@ namespace DSAMobile.Pages
     {
         private readonly RequesterView _requesterView;
 
-        public RequesterPage() : base()
+        public RequesterPage()
         {
             Title = "Requester";
             /*if (PlatformHelper.iOS)

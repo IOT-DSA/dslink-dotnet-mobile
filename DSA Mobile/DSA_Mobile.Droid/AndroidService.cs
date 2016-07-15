@@ -53,10 +53,9 @@ namespace DSAMobile.Droid
                 ((AndroidApp)App.Instance).BaseStopLink();
                 Log.Info(Tag, "Stopped service");
             })).Start();
+
             var notificationManager = (NotificationManager)GetSystemService(NotificationService);
             notificationManager.Cancel(0);
-
-
         }
     }
 }

@@ -135,85 +135,80 @@ namespace DSAMobile.Sensors
 
         private void UpdateSubscriptions()
         {
-            while (!_subTask.IsCanceled)
+            if (_sensorsImpl.SupportsAccelerometer)
             {
-                if (_sensorsImpl.SupportsAccelerometer)
+                if (!_sensorsImpl.AccelerometerActive &&
+                (_accel_x.Subscribed ||
+                 _accel_y.Subscribed ||
+                 _accel_z.Subscribed))
                 {
-                    if (!_sensorsImpl.AccelerometerActive &&
-                    (_accel_x.Subscribed ||
-                     _accel_y.Subscribed ||
-                     _accel_z.Subscribed))
-                    {
-                        Debug.WriteLine("Accelerometer started");
-                        _sensorsImpl.Start(SensorType.Accelerometer);
-                    }
-                    if (_sensorsImpl.AccelerometerActive &&
-                    (!_accel_x.Subscribed &&
-                     !_accel_y.Subscribed &&
-                     !_accel_z.Subscribed))
-                    {
-                        Debug.WriteLine("Accelerometer stopped");
-                        _sensorsImpl.Stop(SensorType.Accelerometer);
-                    }
+                    Debug.WriteLine("Accelerometer started");
+                    _sensorsImpl.Start(SensorType.Accelerometer);
                 }
-
-                if (_sensorsImpl.SupportsGyroscope)
+                if (_sensorsImpl.AccelerometerActive &&
+                (!_accel_x.Subscribed &&
+                 !_accel_y.Subscribed &&
+                 !_accel_z.Subscribed))
                 {
-                    if (!_sensorsImpl.GyroActive &&
-                    (_gyro_x.Subscribed ||
-                     _gyro_y.Subscribed ||
-                     _gyro_z.Subscribed))
-                    {
-                        Debug.WriteLine("Gyro started");
-                        _sensorsImpl.Start(SensorType.Gyroscope);
-                    }
-                    if (_sensorsImpl.GyroActive &&
-                    (!_gyro_x.Subscribed &&
-                     !_gyro_y.Subscribed &&
-                     !_gyro_z.Subscribed))
-                    {
-                        Debug.WriteLine("Gyro stopped");
-                        _sensorsImpl.Stop(SensorType.Gyroscope);
-                    }
+                    Debug.WriteLine("Accelerometer stopped");
+                    _sensorsImpl.Stop(SensorType.Accelerometer);
                 }
+            }
 
-                if (_sensorsImpl.SupportsDeviceMotion)
+            if (_sensorsImpl.SupportsGyroscope)
+            {
+                if (!_sensorsImpl.GyroActive &&
+                (_gyro_x.Subscribed ||
+                 _gyro_y.Subscribed ||
+                 _gyro_z.Subscribed))
                 {
-                    if (!_sensorsImpl.DeviceMotionActive &&
-                    (_dmotion_x.Subscribed ||
-                     _dmotion_y.Subscribed ||
-                     _dmotion_z.Subscribed))
-                    {
-                        Debug.WriteLine("DeviceMotion started");
-                        _sensorsImpl.Start(SensorType.DeviceMotion);
-                    }
-                    if (_sensorsImpl.DeviceMotionActive &&
-                    (!_dmotion_x.Subscribed &&
-                     !_dmotion_y.Subscribed &&
-                     !_dmotion_z.Subscribed))
-                    {
-                        Debug.WriteLine("DeviceMotion stopped");
-                        _sensorsImpl.Stop(SensorType.DeviceMotion);
-                    }
+                    Debug.WriteLine("Gyro started");
+                    _sensorsImpl.Start(SensorType.Gyroscope);
                 }
-
-                if (_sensorsImpl.SupportsLightLevel)
+                if (_sensorsImpl.GyroActive &&
+                (!_gyro_x.Subscribed &&
+                 !_gyro_y.Subscribed &&
+                 !_gyro_z.Subscribed))
                 {
-                    if (!_sensorsImpl.LightLevelActive &&
-                    _lightLevel.Subscribed)
-                    {
-                        Debug.WriteLine("Light Level started");
-                        _sensorsImpl.Start(SensorType.LightLevel);
-                    }
-                    if (_sensorsImpl.LightLevelActive &&
-                        !_lightLevel.Subscribed)
-                    {
-                        Debug.WriteLine("Light Level stopped");
-                        _sensorsImpl.Stop(SensorType.LightLevel);
-                    }
+                    Debug.WriteLine("Gyro stopped");
+                    _sensorsImpl.Stop(SensorType.Gyroscope);
                 }
+            }
 
-                _subTask.Wait(100);
+            if (_sensorsImpl.SupportsDeviceMotion)
+            {
+                if (!_sensorsImpl.DeviceMotionActive &&
+                (_dmotion_x.Subscribed ||
+                 _dmotion_y.Subscribed ||
+                 _dmotion_z.Subscribed))
+                {
+                    Debug.WriteLine("DeviceMotion started");
+                    _sensorsImpl.Start(SensorType.DeviceMotion);
+                }
+                if (_sensorsImpl.DeviceMotionActive &&
+                (!_dmotion_x.Subscribed &&
+                 !_dmotion_y.Subscribed &&
+                 !_dmotion_z.Subscribed))
+                {
+                    Debug.WriteLine("DeviceMotion stopped");
+                    _sensorsImpl.Stop(SensorType.DeviceMotion);
+                }
+            }
+
+            if (_sensorsImpl.SupportsLightLevel)
+            {
+                if (!_sensorsImpl.LightLevelActive &&
+                _lightLevel.Subscribed)
+                {
+                    Debug.WriteLine("Light Level started");
+                    _sensorsImpl.Start(SensorType.LightLevel);
+                }
+                if (_sensorsImpl.LightLevelActive &&
+                    !_lightLevel.Subscribed)
+                {
+                    Debug.WriteLine("Light Level stopped");
+                    _sensorsImpl.Stop(SensorType.LightLevel);
+                }
             }
         }
 

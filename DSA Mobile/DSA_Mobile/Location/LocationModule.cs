@@ -53,7 +53,7 @@ namespace DSAMobile.Location
 
         public void Start()
         {
-            if (CrossGeolocator.Current.IsGeolocationAvailable)
+            if (CrossGeolocator.Current.IsGeolocationAvailable && !CrossGeolocator.Current.IsListening)
             {
                 CrossGeolocator.Current.PositionChanged += LocationUpdated;
                 CrossGeolocator.Current.StartListeningAsync(60, 100, false).Wait();
@@ -62,7 +62,7 @@ namespace DSAMobile.Location
 
         public void Stop()
         {
-            if (CrossGeolocator.Current.IsGeolocationAvailable)
+            if (CrossGeolocator.Current.IsGeolocationAvailable && CrossGeolocator.Current.IsListening)
             {
                 CrossGeolocator.Current.PositionChanged -= LocationUpdated;
                 CrossGeolocator.Current.StopListeningAsync().Wait();
@@ -86,4 +86,3 @@ namespace DSAMobile.Location
         }
     }
 }
-

@@ -169,12 +169,6 @@
     <Reference Include="Plugin.Contacts.Abstractions">
       <HintPath>..\..\packages\Xam.Plugin.Contacts.2.0.2-beta1\lib\MonoAndroid10\Plugin.Contacts.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Connectivity">
-      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.2\lib\MonoAndroid10\Plugin.Connectivity.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Connectivity.Abstractions">
-      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.2\lib\MonoAndroid10\Plugin.Connectivity.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.Messaging.Abstractions">
       <HintPath>..\..\packages\Xam.Plugins.Messaging.3.2.1\lib\MonoAndroid10\Plugin.Messaging.Abstractions.dll</HintPath>
     </Reference>
@@ -249,6 +243,12 @@
     </Reference>
     <Reference Include="Plugin.Share.Abstractions">
       <HintPath>..\..\packages\Plugin.Share.4.0.2\lib\MonoAndroid10\Plugin.Share.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\MonoAndroid10\Plugin.Connectivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\MonoAndroid10\Plugin.Connectivity.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

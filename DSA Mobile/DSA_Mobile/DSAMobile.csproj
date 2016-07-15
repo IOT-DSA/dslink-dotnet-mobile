@@ -70,8 +70,10 @@
     <Compile Include="Controls.cs" />
     <Compile Include="Views\TablePage.cs" />
     <Compile Include="Views\RequesterView.cs" />
-    <Compile Include="Views\ValueView.cs" />
+    <Compile Include="Views\ValuePage.cs" />
     <Compile Include="Utils\Repeater.cs" />
+    <Compile Include="Views\ActionView.cs" />
+    <Compile Include="Views\Cells\PickerCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SDK\DSLink\DSLink.csproj">
@@ -136,12 +138,6 @@
     <Reference Include="Plugin.Contacts.Abstractions">
       <HintPath>..\..\packages\Xam.Plugin.Contacts.2.0.2-beta1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Contacts.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Connectivity">
-      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.2\lib\portable-net45+wp80+wp81+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+Xamarin.Mac20+UAP10\Plugin.Connectivity.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Connectivity.Abstractions">
-      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.2\lib\portable-net45+wp80+wp81+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+Xamarin.Mac20+UAP10\Plugin.Connectivity.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.Messaging.Abstractions">
       <HintPath>..\..\packages\Xam.Plugins.Messaging.3.2.1\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Messaging.Abstractions.dll</HintPath>
     </Reference>
@@ -199,6 +195,12 @@
     <Reference Include="Plugin.Share.Abstractions">
       <HintPath>..\..\packages\Plugin.Share.4.0.2\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Share.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.Connectivity">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\portable-net45+wp80+wp81+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+Xamarin.Mac20+UAP10\Plugin.Connectivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\portable-net45+wp80+wp81+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+Xamarin.Mac20+UAP10\Plugin.Connectivity.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -222,6 +224,9 @@
     <Folder Include="Flash\" />
     <Folder Include="Share\" />
     <Folder Include="Utils\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Resources\Icons\" />
+    <Folder Include="Views\Cells\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

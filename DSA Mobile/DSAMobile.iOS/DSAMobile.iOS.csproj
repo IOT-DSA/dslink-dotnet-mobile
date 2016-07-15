@@ -128,12 +128,6 @@
     <Reference Include="Plugin.Battery.Abstractions">
       <HintPath>..\..\packages\Xam.Plugin.Battery.2.0.0\lib\Xamarin.iOS10\Plugin.Battery.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Connectivity">
-      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.2\lib\Xamarin.iOS10\Plugin.Connectivity.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Connectivity.Abstractions">
-      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.2\lib\Xamarin.iOS10\Plugin.Connectivity.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.Contacts">
       <HintPath>..\..\packages\Xam.Plugin.Contacts.2.0.2-beta1\lib\Xamarin.iOS10\Plugin.Contacts.dll</HintPath>
     </Reference>
@@ -232,6 +226,12 @@
     </Reference>
     <Reference Include="Plugin.Share.Abstractions">
       <HintPath>..\..\packages\Plugin.Share.4.0.2\lib\Xamarin.iOS10\Plugin.Share.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\Xamarin.iOS10\Plugin.Connectivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Connectivity.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\Xamarin.iOS10\Plugin.Connectivity.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

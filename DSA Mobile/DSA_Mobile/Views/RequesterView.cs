@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using DSLink.Nodes;
 using DSLink.Request;
-using FormsPlugin.Iconize;
 using Xamarin.Forms;
 
 namespace DSAMobile.Views
@@ -9,24 +9,21 @@ namespace DSAMobile.Views
     public class RequesterView : TableView
     {
         private readonly string _path;
-        private readonly TableSection _nodesSection;
-        private readonly TableSection _valuesSection;
-        private readonly TableSection _actionsSection;
+        public List<string> SubscribedPaths;
+        public readonly TableSection Nodes;
+        public readonly TableSection Values;
+        public readonly TableSection Actions;
 
         public RequesterView(string path, bool load = false)
         {
             _path = path;
+            SubscribedPaths = new List<string>();
 
-            _nodesSection = new TableSection("Nodes");
-            _valuesSection = new TableSection("Values");
-            _actionsSection = new TableSection("Actions");
+            Root = new TableRoot();
 
-            Root = new TableRoot
-            {
-                _nodesSection,
-                _valuesSection,
-                _actionsSection
-            };
+            Nodes = new TableSection("Nodes");
+            Values = new TableSection("Values");
+            Actions = new TableSection("Actions");
 
             if (load)
             {
@@ -40,23 +37,54 @@ namespace DSAMobile.Views
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    _nodesSection.Clear();
-                    _valuesSection.Clear();
-                    _actionsSection.Clear();
-                    foreach (Node node in response.Node.Children.Values)
+                    Root.Clear();
+                    Nodes.Clear();
+                    Values.Clear();
+                    Actions.Clear();
+                });
+                bool addNodes = false;
+                bool addValues = false;
+                bool addActions = false;
+                // TODO: Unsubscribe from old paths, subscribe to new.
+                //App.Instance.DSLink.Connector.EnableQueue = true;
+                Debug.WriteLine("Starting subscription process");
+                foreach (Node node in response.Node.Children.Values)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
                     {
                         if (node.Configurations.ContainsKey("$type"))
                         {
-                            _valuesSection.Add(new ValueCell(node, Navigation));
+                            Debug.WriteLine(string.Format("Subscribing to {0}", node.Name));
+                            addValues = true;
+                            Values.Add(new ValueCell(node, Navigation, SubscribedPaths));
                         }
                         else if (node.Configurations.ContainsKey("$invokable"))
                         {
-                            _actionsSection.Add(new ActionCell(node, Navigation));
+                            addActions = true;
+                            Actions.Add(new ActionCell(node, Navigation));
                         }
                         else
                         {
-                            _nodesSection.Add(new NodeCell(node, Navigation));
+                            addNodes = true;
+                            Nodes.Add(new NodeCell(node, Navigation));
                         }
+                    });
+                }
+                //App.Instance.DSLink.Connector.EnableQueue = false;
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (addNodes)
+                    {
+                        Root.Add(Nodes);
+                    }
+                    if (addValues)
+                    {
+                        Root.Add(Values);
+                    }
+                    if (addActions)
+                    {
+                        Root.Add(Actions);
                     }
                 });
             });
@@ -91,6 +119,14 @@ namespace DSAMobile.Views
     {
         public NodeCell(Node node, INavigation navigation) : base(node, navigation)
         {
+            Tapped += async (sender, e) =>
+            {
+                await _navigation.PushAsync(new RequesterPageWrapper(
+                    FriendlyName,
+                    new RequesterView(_node.Path, true)
+                ));
+            };
+
             View = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
@@ -113,25 +149,19 @@ namespace DSAMobile.Views
                 }
             };
         }
-
-        protected override void OnTapped()
-        {
-            base.OnTapped();
-
-            _navigation.PushAsync(new ContentPage
-            {
-                Title = _node.DisplayName,
-                Content = new RequesterView(_node.Path, true)
-            });
-        }
     }
 
     public class ValueCell : CustomNodeCell
     {
         private Label _valueLabel;
 
-        public ValueCell(Node node, INavigation navigation) : base(node, navigation)
+        public ValueCell(Node node, INavigation navigation, List<string> subscribedPaths) : base(node, navigation)
         {
+            Tapped += async (sender, e) =>
+            {
+                await _navigation.PushAsync(new ValuePage(_node.Path));
+            };
+
             _valueLabel = new Label
             {
                 VerticalOptions = LayoutOptions.Center,
@@ -153,38 +183,13 @@ namespace DSAMobile.Views
                     _valueLabel
                 }
             };
-        }
 
-        ~ValueCell()
-        {
-            //App.Instance.DSLink.Requester.Unsubscribe(_node.Path);
-            Debug.WriteLine("Destructor called");
-        }
-
-        protected override void OnTapped()
-        {
-            base.OnTapped();
-
-            _navigation.PushAsync(new ValuePage(_node.Path));
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
+            subscribedPaths.Add(_node.Path);
             App.Instance.DSLink.Requester.Subscribe(_node.Path, ValueUpdate);
-        }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            App.Instance.DSLink.Requester.Unsubscribe(_node.Path);
         }
 
         private void ValueUpdate(SubscriptionUpdate update)
         {
-            Debug.WriteLine(App.Instance.DSLink.Requester._subscriptionManager.GetSub(update.SubscriptionID).Path);
             Device.BeginInvokeOnMainThread(() =>
             {
                 _valueLabel.Text = update.Value;
@@ -196,6 +201,14 @@ namespace DSAMobile.Views
     {
         public ActionCell(Node node, INavigation navigation) : base(node, navigation)
         {
+            Tapped += async (sender, e) =>
+            {
+                await _navigation.PushAsync(new ActionPage(_node.Path)
+                {
+                    Title = FriendlyName
+                });
+            };
+
             View = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
@@ -211,43 +224,42 @@ namespace DSAMobile.Views
                 }
             };
         }
-
-        protected override void OnTapped()
-        {
-            base.OnTapped();
-
-            _navigation.PushAsync(new ContentPage
-            {
-                Content = new StackLayout
-                {
-                    Children =
-                    {
-                        new Label
-                        {
-                            Text = "I'm an action!"
-                        }
-                    }
-                }
-            });
-        }
     }
 
-    public class NodeObject
+    public class RequesterPageWrapper : ContentPage
     {
-        public readonly Node Node;
-        public readonly bool Value;
-        public readonly bool Action;
+        private bool _unloaded = false;
+        private readonly RequesterView _requesterView;
 
-        public NodeObject(Node node)
+        public RequesterPageWrapper(string title, RequesterView requesterView)
         {
-            Node = node;
-            Value = node.Configurations.ContainsKey("$type");
-            Action = node.Configurations.ContainsKey("$invokable");
+            Title = title;
+            _requesterView = requesterView;
+            Content = _requesterView;
         }
 
-        public override string ToString()
+        protected override void OnAppearing()
         {
-            return Node.DisplayName ?? Node.Name;
+            base.OnAppearing();
+
+            if (_unloaded)
+            {
+                _requesterView.Load();
+                _unloaded = false;
+            }
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            App.Instance.DSLink.Requester.Unsubscribe(
+                _requesterView.SubscribedPaths
+            );
+
+            _requesterView.SubscribedPaths.Clear();
+
+            _unloaded = true;
         }
     }
 }
