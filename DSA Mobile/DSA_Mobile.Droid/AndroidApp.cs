@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.Hardware;
 using DSAMobile.DeviceSettings;
@@ -15,8 +16,8 @@ namespace DSAMobile.Droid
     public class AndroidApp : App
     {
         public MainActivity MainActivity;
-        public Action BaseStartLink;
         public Action BaseStopLink;
+        public Func<Task> BaseStartLink;
 
         public AndroidApp()
         {
@@ -31,7 +32,7 @@ namespace DSAMobile.Droid
 
         public override DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new AndroidDSLink(config, this, MainActivity, modules);
 
-        public override void StartLink()
+        public override async Task StartLink()
         {
             MainActivity.StartService(new Intent(MainActivity, typeof(AndroidService)));
         }

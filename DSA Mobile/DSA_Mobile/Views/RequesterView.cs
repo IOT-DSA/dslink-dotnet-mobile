@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using DSLink.Nodes;
 using DSLink.Request;
 using Xamarin.Forms;
@@ -31,58 +32,77 @@ namespace DSAMobile.Views
             }
         }
 
-        public void Load()
+        public async void Load()
         {
-            App.Instance.DSLink.Requester.List(_path, (response) =>
+            await App.Instance.DSLink.Requester.List(_path, (response) =>
             {
+                // TODO: We really need a way to relayout without removing everything...
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     Root.Clear();
-                    Nodes.Clear();
-                    Values.Clear();
-                    Actions.Clear();
                 });
-                bool addNodes = false;
-                bool addValues = false;
-                bool addActions = false;
-                // TODO: Unsubscribe from old paths, subscribe to new.
+
                 //App.Instance.DSLink.Connector.EnableQueue = true;
-                Debug.WriteLine("Starting subscription process");
+
+                var nodes = new Dictionary<string, NodeCell>();
+                var values = new Dictionary<string, ValueCell>();
+                var actions = new Dictionary<string, ActionCell>();
+
                 foreach (Node node in response.Node.Children.Values)
                 {
-                    Device.BeginInvokeOnMainThread(() =>
+                    if (node.Configurations.ContainsKey("$type"))
                     {
-                        if (node.Configurations.ContainsKey("$type"))
-                        {
-                            Debug.WriteLine(string.Format("Subscribing to {0}", node.Name));
-                            addValues = true;
-                            Values.Add(new ValueCell(node, Navigation, SubscribedPaths));
-                        }
-                        else if (node.Configurations.ContainsKey("$invokable"))
-                        {
-                            addActions = true;
-                            Actions.Add(new ActionCell(node, Navigation));
-                        }
-                        else
-                        {
-                            addNodes = true;
-                            Nodes.Add(new NodeCell(node, Navigation));
-                        }
-                    });
+                        var cell = new ValueCell(node, Navigation, SubscribedPaths);
+                        values.Add(cell.FriendlyName, cell);
+                    }
+                    else if (node.Configurations.ContainsKey("$invokable"))
+                    {
+                        var cell = new ActionCell(node, Navigation);
+                        actions.Add(cell.FriendlyName, cell);
+                    }
+                    else
+                    {
+                        var cell = new NodeCell(node, Navigation);
+                        nodes.Add(cell.FriendlyName, cell);
+                    }
                 }
+
+                var sortedNodes = nodes.Keys.ToList();
+                var sortedValues = values.Keys.ToList();
+                var sortedActions = actions.Keys.ToList();
+                sortedNodes.Sort();
+                sortedValues.Sort();
+                sortedActions.Sort();
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    foreach (string node in sortedNodes)
+                    {
+                        Nodes.Add(nodes[node]);
+                    }
+                    foreach (string node in sortedValues)
+                    {
+                        Values.Add(values[node]);
+                    }
+                    foreach (string node in sortedActions)
+                    {
+                        Actions.Add(actions[node]);
+                    }
+                });
+
                 //App.Instance.DSLink.Connector.EnableQueue = false;
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    if (addNodes)
+                    if (Nodes.Count > 0)
                     {
                         Root.Add(Nodes);
                     }
-                    if (addValues)
+                    if (Values.Count > 0)
                     {
                         Root.Add(Values);
                     }
-                    if (addActions)
+                    if (Actions.Count > 0)
                     {
                         Root.Add(Actions);
                     }
@@ -122,7 +142,7 @@ namespace DSAMobile.Views
             Tapped += async (sender, e) =>
             {
                 await _navigation.PushAsync(new RequesterPageWrapper(
-                    FriendlyName,
+                    _node.Path,
                     new RequesterView(_node.Path, true)
                 ));
             };
@@ -228,7 +248,7 @@ namespace DSAMobile.Views
 
     public class RequesterPageWrapper : ContentPage
     {
-        private bool _unloaded = false;
+        private bool _unloaded;
         private readonly RequesterView _requesterView;
 
         public RequesterPageWrapper(string title, RequesterView requesterView)

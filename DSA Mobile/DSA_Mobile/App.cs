@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using DSAMobile.Battery;
 using DSAMobile.Camera;
 using DSAMobile.Communications;
@@ -27,6 +28,7 @@ namespace DSAMobile
     {
         public static App Instance;
 
+        // TODO: Make static?
         public DSLink DSLink
         {
             get;
@@ -48,14 +50,17 @@ namespace DSAMobile
 
         protected override void OnStart()
         {
+            // TODO: We should probably use this.
         }
 
         protected override void OnSleep()
         {
+            // TODO: We should probably use this.
         }
 
         protected override void OnResume()
         {
+            // TODO: We should probably use this.
         }
 
         public virtual void InitModules()
@@ -77,7 +82,7 @@ namespace DSAMobile
             enabledModules.Add(new ShareModule());
         }
 
-        public virtual void StartLink()
+        public virtual async Task StartLink()
         {
             SetDSLinkStatus("DSLink is connecting");
             try
@@ -92,14 +97,13 @@ namespace DSAMobile
                     DSLink.Config.Name = Settings.DSLinkName;
                     DSLink.Config.BrokerUrl = Settings.BrokerURL;
                 }
-                DSLink.Connect();
+                await DSLink.Connect();
             }
             catch (Exception e)
             {
                 SetDSLinkStatus(string.Format("DSLink failed to start: {0}", e.ToString()));
                 Debug.WriteLine(e.ToString());
             }
-
             SetDSLinkStatus("DSLink is connected");
         }
 

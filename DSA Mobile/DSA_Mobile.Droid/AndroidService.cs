@@ -28,12 +28,9 @@ namespace DSAMobile.Droid
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
-            new Thread(new ThreadStart(() =>
-            {
-                Log.Info(Tag, "Starting service");
-                ((AndroidApp)App.Instance).BaseStartLink();
-                Log.Info(Tag, "Started service");
-            })).Start();
+            Log.Info(Tag, "Starting service");
+            ((AndroidApp)App.Instance).BaseStartLink();
+            Log.Info(Tag, "Started service");
 
             var notificationManager = (NotificationManager)GetSystemService(NotificationService);
             notificationManager.Notify(0, _serviceNotification);
@@ -47,12 +44,9 @@ namespace DSAMobile.Droid
             base.OnDestroy();
 
             StopForeground(true);
-            new Thread(new ThreadStart(() =>
-            {
-                Log.Info(Tag, "Stopping service");
-                ((AndroidApp)App.Instance).BaseStopLink();
-                Log.Info(Tag, "Stopped service");
-            })).Start();
+            Log.Info(Tag, "Stopping service");
+            ((AndroidApp)App.Instance).BaseStopLink();
+            Log.Info(Tag, "Stopped service");
 
             var notificationManager = (NotificationManager)GetSystemService(NotificationService);
             notificationManager.Cancel(0);

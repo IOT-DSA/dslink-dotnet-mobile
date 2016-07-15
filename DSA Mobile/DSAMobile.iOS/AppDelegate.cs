@@ -23,7 +23,7 @@ namespace DSAMobile.iOS
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
 			iOSPlatform.Initialize();
 
@@ -39,7 +39,7 @@ namespace DSAMobile.iOS
             _app = new iOSApp();
 			LoadApplication(_app);
 
-            return base.FinishedLaunching(app, options);
+            return base.FinishedLaunching(uiApplication, launchOptions);
         }
 
         public override void DidEnterBackground(UIApplication uiApplication)
@@ -49,12 +49,12 @@ namespace DSAMobile.iOS
             _suspended = true;
         }
 
-        public override void WillEnterForeground(UIApplication uiApplication)
+        public override async void WillEnterForeground(UIApplication uiApplication)
         {
             base.WillEnterForeground(uiApplication);
             if (_suspended)
             {
-                _app.StartLink();
+                await _app.StartLink();
             }
             _suspended = false;
         }
