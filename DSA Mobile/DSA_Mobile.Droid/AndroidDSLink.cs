@@ -13,4 +13,3 @@ namespace DSAMobile.Droid
         }
     }
 }
-
