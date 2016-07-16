@@ -54,7 +54,7 @@ namespace DSAMobile.iOS
             base.WillEnterForeground(uiApplication);
             if (_suspended)
             {
-                await _app.StartLink();
+                _app.StartLink();
             }
             _suspended = false;
         }
