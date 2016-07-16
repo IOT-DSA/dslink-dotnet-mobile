@@ -38,14 +38,15 @@ namespace DSAMobile
         public bool Disabled = true;
         protected BaseSensors _sensors;
         protected BaseDeviceSettings _deviceSettings;
-        protected List<BaseModule> enabledModules;
+        protected List<BaseModule> _enabledModules;
+        public bool AllowServiceToggle = true;
 
         protected App()
         {
             Instance = this;
             TabHost = new TabHost();
             MainPage = TabHost;
-            enabledModules = new List<BaseModule>();
+            _enabledModules = new List<BaseModule>();
         }
 
         protected override void OnStart()
@@ -65,26 +66,27 @@ namespace DSAMobile
 
         public virtual void InitModules()
         {
-            enabledModules.Add(new BatteryModule());
-            enabledModules.Add(new DeviceInfoModule());
-            enabledModules.Add(new DeviceSettingsModule(GetDeviceSettings(), this));
-            enabledModules.Add(new SensorsModule(GetSensors()));
-            enabledModules.Add(new NotificationModule());
-            enabledModules.Add(new CameraModule());
-            enabledModules.Add(new VibrateModule());
-            enabledModules.Add(new ContactsModule());
-            enabledModules.Add(new ConnectivityModule());
-            enabledModules.Add(new CommunicationsModule());
-            enabledModules.Add(new LocationModule());
-            enabledModules.Add(new ZXingModule());
-            enabledModules.Add(new TTSModule());
-            enabledModules.Add(new FlashModule());
-            enabledModules.Add(new ShareModule());
+            _enabledModules.Add(new BatteryModule());
+            _enabledModules.Add(new DeviceInfoModule());
+            _enabledModules.Add(new DeviceSettingsModule(GetDeviceSettings(), this));
+            _enabledModules.Add(new SensorsModule(GetSensors()));
+            _enabledModules.Add(new NotificationModule());
+            _enabledModules.Add(new CameraModule());
+            _enabledModules.Add(new VibrateModule());
+            _enabledModules.Add(new ContactsModule());
+            _enabledModules.Add(new ConnectivityModule());
+            _enabledModules.Add(new CommunicationsModule());
+            _enabledModules.Add(new LocationModule());
+            _enabledModules.Add(new ZXingModule());
+            _enabledModules.Add(new TTSModule());
+            _enabledModules.Add(new FlashModule());
+            _enabledModules.Add(new ShareModule());
         }
 
-        public virtual async Task StartLink()
+        public virtual void StartLink()
         {
-            SetDSLinkStatus("DSLink is connecting");
+            AllowServiceToggle = false;
+            SetDSLinkStatus("DSLink is initializing");
             try
             {
                 if (DSLink == null)
@@ -97,23 +99,24 @@ namespace DSAMobile
                     DSLink.Config.Name = Settings.DSLinkName;
                     DSLink.Config.BrokerUrl = Settings.BrokerURL;
                 }
-                await DSLink.Connect();
+                DSLink.Connect();
             }
             catch (Exception e)
             {
                 SetDSLinkStatus(string.Format("DSLink failed to start: {0}", e.ToString()));
                 Debug.WriteLine(e.ToString());
             }
-            SetDSLinkStatus("DSLink is connected");
+            AllowServiceToggle = true;
         }
 
         public virtual void StopLink()
         {
+            AllowServiceToggle = false;
             if (DSLink != null)
             {
                 DSLink.Disconnect();
             }
-            SetDSLinkStatus("DSLink is disconnected");
+            AllowServiceToggle = true;
         }
 
         protected virtual void InitializeDSLink()
@@ -126,7 +129,7 @@ namespace DSAMobile
                                                   brokerUrl: Settings.BrokerURL,
                                                   logLevel: LogLevel.Debug,
                                                   connectionAttemptLimit: 2);
-            DSLink = PlatformDSLink(configuration, enabledModules);
+            DSLink = PlatformDSLink(configuration, _enabledModules);
         }
 
         public void SetDSLinkStatus(string text)

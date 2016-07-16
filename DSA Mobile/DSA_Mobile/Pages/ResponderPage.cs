@@ -9,7 +9,7 @@ namespace DSAMobile.Pages
     public class ResponderPage : DGPage
     {
         public readonly Label LinkStatus;
-        private readonly Button _toggleService;
+        public readonly Button ToggleService;
 
         public ResponderPage()
         {
@@ -19,18 +19,21 @@ namespace DSAMobile.Pages
                 Icon = "ion-ios-cloud-upload";
             }*/
 
-            _toggleService = new DGButton
+            ToggleService = new DGButton
             {
                 Text = "Start/Stop",
                 Command = new Command(() =>
                 {
-                    if (App.Instance.Disabled)
+                    if (App.Instance.AllowServiceToggle)
                     {
-                        App.Instance.StartLink();
-                    }
-                    else
-                    {
-                        App.Instance.StopLink();
+                        if (App.Instance.Disabled)
+                        {
+                            App.Instance.StartLink();
+                        }
+                        else
+                        {
+                            App.Instance.StopLink();
+                        }
                     }
                     App.Instance.Disabled = !App.Instance.Disabled;
                 })
@@ -46,7 +49,7 @@ namespace DSAMobile.Pages
             {
                 Children =
                 {
-                    _toggleService,
+                    ToggleService,
                     LinkStatus
                 }
             };

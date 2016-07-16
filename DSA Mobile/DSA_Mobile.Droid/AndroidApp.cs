@@ -17,7 +17,7 @@ namespace DSAMobile.Droid
     {
         public MainActivity MainActivity;
         public Action BaseStopLink;
-        public Func<Task> BaseStartLink;
+        public Action BaseStartLink;
 
         public AndroidApp()
         {
@@ -32,7 +32,7 @@ namespace DSAMobile.Droid
 
         public override DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new AndroidDSLink(config, this, MainActivity, modules);
 
-        public override async Task StartLink()
+        public override void StartLink()
         {
             MainActivity.StartService(new Intent(MainActivity, typeof(AndroidService)));
         }
