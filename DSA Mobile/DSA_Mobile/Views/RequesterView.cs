@@ -40,6 +40,9 @@ namespace DSAMobile.Views
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     Root.Clear();
+                    Nodes.Clear();
+                    Values.Clear();
+                    Actions.Clear();
                 });
 
                 //App.Instance.DSLink.Connector.EnableQueue = true;

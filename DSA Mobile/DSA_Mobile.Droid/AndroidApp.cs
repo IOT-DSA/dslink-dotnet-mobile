@@ -30,6 +30,8 @@ namespace DSAMobile.Droid
 
         public override DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new AndroidDSLink(config, this, MainActivity, modules);
 
+        public override string CommunicationFormat => "json";
+
         public override void StartLink()
         {
             MainActivity.StartService(new Intent(MainActivity, typeof(AndroidService)));

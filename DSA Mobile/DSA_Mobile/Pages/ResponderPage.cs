@@ -35,7 +35,6 @@ namespace DSAMobile.Pages
                             App.Instance.StopLink();
                         }
                     }
-                    App.Instance.Disabled = !App.Instance.Disabled;
                 })
             };
 

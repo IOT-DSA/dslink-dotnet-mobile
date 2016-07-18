@@ -27,18 +27,16 @@ namespace DSAMobile.Views
                     _value
                 }
             };
-        }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            App.Instance.DSLink.Requester.Subscribe(_path, ValueUpdate);
-        }
+            Appearing += async delegate
+            {
+                await App.Instance.DSLink.Requester.Subscribe(_path, ValueUpdate);
+            };
 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            App.Instance.DSLink.Requester.Unsubscribe(_path);
+            Disappearing += delegate
+            {
+                App.Instance.DSLink.Requester.Unsubscribe(_path);
+            };
         }
 
         public void ValueUpdate(SubscriptionUpdate update)

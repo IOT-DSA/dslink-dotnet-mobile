@@ -35,10 +35,10 @@ namespace DSAMobile
         }
         public readonly TabHost TabHost;
         public bool Disabled = true;
+        public bool AllowServiceToggle = true;
         protected BaseSensors _sensors;
         protected BaseDeviceSettings _deviceSettings;
         protected List<BaseModule> _enabledModules;
-        public bool AllowServiceToggle = true;
 
         protected App()
         {
@@ -85,7 +85,7 @@ namespace DSAMobile
         public virtual void StartLink()
         {
             AllowServiceToggle = false;
-            SetDSLinkStatus("DSLink is initializing");
+            SetDSLinkStatus("DSLink is connecting");
             try
             {
                 if (DSLink == null)
@@ -126,7 +126,7 @@ namespace DSAMobile
                                                   requester: true,
                                                   keysLocation: StoragePath() + "/dsa_mobile.keys",
                                                   brokerUrl: Settings.BrokerURL,
-                                                  logLevel: LogLevel.Debug,
+                                                  communicationFormat: CommunicationFormat,
                                                   connectionAttemptLimit: 2);
             DSLink = PlatformDSLink(configuration, _enabledModules);
         }
@@ -140,6 +140,7 @@ namespace DSAMobile
         }
 
         public virtual DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new DSLink(config, this, modules);
+        public virtual string CommunicationFormat => "msgpack";
         protected abstract string StoragePath();
         public abstract BaseSensors GetSensors();
         public abstract BaseDeviceSettings GetDeviceSettings();

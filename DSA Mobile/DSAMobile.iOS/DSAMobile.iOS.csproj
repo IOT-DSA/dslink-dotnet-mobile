@@ -254,12 +254,6 @@
     <Reference Include="Square.SocketRocket">
       <HintPath>..\..\packages\Square.SocketRocket.0.5.0.0\lib\Xamarin.iOS\Square.SocketRocket.dll</HintPath>
     </Reference>
-    <Reference Include="DSLink">
-      <HintPath>..\..\packages\DSLink.0.1.0\lib\Xamarin.iOS10\DSLink.dll</HintPath>
-    </Reference>
-    <Reference Include="DSLink.iOS">
-      <HintPath>..\..\packages\DSLink.0.1.0\lib\Xamarin.iOS10\DSLink.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Forms.Platform">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.0.107\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
@@ -271,6 +265,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="DSLink">
+      <HintPath>..\..\packages\DSLink.0.1.3\lib\Xamarin.iOS10\DSLink.dll</HintPath>
+    </Reference>
+    <Reference Include="DSLink.iOS">
+      <HintPath>..\..\packages\DSLink.0.1.3\lib\Xamarin.iOS10\DSLink.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

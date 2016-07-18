@@ -17,7 +17,7 @@ namespace DSAMobile
 
         protected override void OnConnectionOpen()
         {
-            App.Instance.SetDSLinkStatus("DSLink is connecting");
+            App.Instance.Disabled = false;
             if (_requestedModules.Count > 0)
             {
                 foreach (BaseModule module in _requestedModules)
@@ -44,11 +44,18 @@ namespace DSAMobile
 
         protected override void OnConnectionClosed()
         {
+            App.Instance.Disabled = true;
             App.Instance.SetDSLinkStatus("DSLink is disconnected");
             foreach (BaseModule module in _loadedModules)
             {
                 module.Stop();
             }
+        }
+
+        protected override void OnConnectionFailed()
+        {
+            App.Instance.Disabled = true;
+            App.Instance.SetDSLinkStatus("DSLink failed to connect");
         }
     }
 }
