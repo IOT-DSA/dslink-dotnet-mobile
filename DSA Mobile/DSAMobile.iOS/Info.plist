@@ -6,10 +6,6 @@
 	<string>DSAMobile</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.dglogik.dsamobile</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-	<key>CFBundleVersion</key>
-	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -26,6 +22,7 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
+		<string>healthkit</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
@@ -35,5 +32,9 @@
 	<string>Assets.xcassets/AppIcons.appiconset</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>DSAMobile publishes your location over DSA</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.1</string>
+	<key>CFBundleVersion</key>
+	<string>1.0.1</string>
 </dict>
 </plist>

@@ -45,8 +45,11 @@ namespace DSAMobile.iOS
         public override void DidEnterBackground(UIApplication uiApplication)
         {
             base.DidEnterBackground(uiApplication);
-            _app.StopLink();
-            _suspended = true;
+            if (!_app.Disabled)
+            {
+                _app.StopLink();
+                _suspended = true;
+            }
         }
 
         public override async void WillEnterForeground(UIApplication uiApplication)

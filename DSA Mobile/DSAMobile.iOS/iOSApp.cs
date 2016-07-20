@@ -1,6 +1,7 @@
 ﻿using System;
 using DSAMobile.DeviceSettings;
 using DSAMobile.iOS.DeviceSettings;
+using DSAMobile.iOS.Modules;
 using DSAMobile.Sensors;
 
 namespace DSAMobile.iOS
@@ -9,6 +10,13 @@ namespace DSAMobile.iOS
 	{
         public iOSApp()
         {
+        }
+
+        public override void InitModules()
+        {
+            base.InitModules();
+
+            _enabledModules.Add(new HealthKitModule());
         }
 
 		protected override string StoragePath()

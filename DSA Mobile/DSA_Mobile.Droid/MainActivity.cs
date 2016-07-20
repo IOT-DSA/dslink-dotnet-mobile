@@ -6,6 +6,7 @@ using FormsPlugin.Iconize.Droid;
 using Plugin.Iconize;
 using Plugin.Iconize.Fonts;
 using Xamarin.Forms.Platform.Android;
+using ZXing.Mobile;
 using ZXing.Net.Mobile.Forms.Android;
 using ZXingPlatform = ZXing.Net.Mobile.Forms.Android.Platform;
 
@@ -31,6 +32,7 @@ namespace DSAMobile.Droid
 
             // ZXing
             ZXingPlatform.Init();
+            MobileBarcodeScanner.Initialize(Application);
 
             // Xamarin bootstrap
             Xamarin.Forms.Forms.Init(this, bundle);

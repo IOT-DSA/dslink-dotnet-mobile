@@ -63,7 +63,7 @@ namespace DSAMobile.ZXing
                     result.BarcodeFormat.ToString(),
                     result.Timestamp
                 }
-            }, true);
+            }, close: true);
         }
     }
 }

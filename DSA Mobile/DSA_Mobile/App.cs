@@ -140,7 +140,7 @@ namespace DSAMobile
         }
 
         public virtual DSLink PlatformDSLink(Configuration config, List<BaseModule> modules) => new DSLink(config, this, modules);
-        public virtual string CommunicationFormat => "msgpack";
+        public virtual string CommunicationFormat => "json";
         protected abstract string StoragePath();
         public abstract BaseSensors GetSensors();
         public abstract BaseDeviceSettings GetDeviceSettings();

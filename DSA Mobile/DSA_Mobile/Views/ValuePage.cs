@@ -1,35 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using DSLink.Request;
+using DSLink.Respond;
 using Xamarin.Forms;
 
 namespace DSAMobile.Views
 {
     public class ValuePage : ContentPage
     {
+        private readonly TableView _tableView;
+        private readonly TextCell _valueCell;
+        private readonly TextCell _typeCell;
         private string _path;
-        private Label _value;
 
         public ValuePage(string path)
         {
             _path = path;
 
-            _value = new Label
-            {
-                Text = "Loading value..."
-            };
+            _valueCell = new TextCell();
+            _typeCell = new TextCell();
 
-            Content = new StackLayout
+            _tableView = new TableView
             {
-                HorizontalOptions = LayoutOptions.Center,
-                Children =
+                Root = new TableRoot
                 {
-                    _value
+                    new TableSection
+                    {
+                        _valueCell,
+                        _typeCell
+                    }
                 }
             };
 
+            Content = _tableView;
+
             Appearing += async delegate
             {
+                await App.Instance.DSLink.Requester.List(_path, ListUpdate);
                 await App.Instance.DSLink.Requester.Subscribe(_path, ValueUpdate);
             };
 
@@ -39,11 +47,20 @@ namespace DSAMobile.Views
             };
         }
 
+        public void ListUpdate(ListResponse response)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                _typeCell.Text = response.Node.GetConfig("type").Get();
+            });
+            response.Close();
+        }
+
         public void ValueUpdate(SubscriptionUpdate update)
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                _value.Text = update.Value.ToString();
+                _valueCell.Text = update.Value.ToString();
             });
         }
     }
