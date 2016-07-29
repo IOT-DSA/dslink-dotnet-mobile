@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using DSLink.Request;
+﻿using DSLink.Request;
 using DSLink.Respond;
+using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
 
 namespace DSAMobile.Views
@@ -47,13 +45,13 @@ namespace DSAMobile.Views
             };
         }
 
-        public void ListUpdate(ListResponse response)
+        public async void ListUpdate(ListResponse response)
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                _typeCell.Text = response.Node.GetConfig("type").Get();
+                _typeCell.Text = response.Node.GetConfig("type").String;
             });
-            response.Close();
+            await response.Close();
         }
 
         public void ValueUpdate(SubscriptionUpdate update)

@@ -21,14 +21,14 @@
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer: YEVGENY MAZO (V79DTHA6Y8)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchFastDev>false</MtouchFastDev>
     <MtouchUseSGen>true</MtouchUseSGen>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>i386</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
-    <DeviceSpecificBuild>false</DeviceSpecificBuild>
+    <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <CodesignProvision>7ade2417-2bc0-49a3-bd56-502aa2e019e0</CodesignProvision>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
@@ -44,12 +44,13 @@
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchLink>Full</MtouchLink>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <BuildIpa>true</BuildIpa>
     <IpaIncludeArtwork>true</IpaIncludeArtwork>
+    <MtouchFastDev>true</MtouchFastDev>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <Optimize>true</Optimize>
@@ -88,6 +89,8 @@
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <CodesignProvision>7ade2417-2bc0-49a3-bd56-502aa2e019e0</CodesignProvision>
+    <MtouchExtraArgs></MtouchExtraArgs>
+    <IOSDebugOverWiFi>false</IOSDebugOverWiFi>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <Optimize>true</Optimize>
@@ -191,12 +194,6 @@
     <Reference Include="Plugin.LocalNotifications.Abstractions">
       <HintPath>..\..\packages\Xam.Plugins.Notifier.2.0.2\lib\Xamarin.iOS10\Plugin.LocalNotifications.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Settings">
-      <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Settings.Abstractions">
-      <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.Vibrate.Abstractions">
       <HintPath>..\..\packages\Xam.Plugins.Vibrate.2.0.0\lib\Xamarin.iOS10\Plugin.Vibrate.Abstractions.dll</HintPath>
     </Reference>
@@ -254,12 +251,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="DSLink">
-      <HintPath>..\..\packages\DSLink.0.1.3\lib\Xamarin.iOS10\DSLink.dll</HintPath>
-    </Reference>
-    <Reference Include="DSLink.iOS">
-      <HintPath>..\..\packages\DSLink.0.1.3\lib\Xamarin.iOS10\DSLink.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="zxing.portable">
       <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.13\lib\Xamarin.iOS10\zxing.portable.dll</HintPath>
@@ -275,6 +266,21 @@
     </Reference>
     <Reference Include="ZXing.Net.Mobile.Forms.iOS">
       <HintPath>..\..\packages\ZXing.Net.Mobile.Forms.2.1.13\lib\Xamarin.iOS10\ZXing.Net.Mobile.Forms.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="DoubleRobotics.iOS">
+      <HintPath>..\..\packages\DoubleRobotics.iOS.0.1.1\lib\Xamarin.iOS10\DoubleRobotics.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings">
+      <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="DSLink">
+      <HintPath>..\..\packages\DSLink.0.2.4-alpha\lib\Xamarin.iOS10\DSLink.dll</HintPath>
+    </Reference>
+    <Reference Include="DSLink.iOS">
+      <HintPath>..\..\packages\DSLink.0.2.4-alpha\lib\Xamarin.iOS10\DSLink.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -305,8 +311,9 @@
     <Compile Include="iOSApp.cs" />
     <Compile Include="DeviceSettings\iOSDeviceSettings.cs" />
     <Compile Include="Sensors\iOSSensors.cs" />
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Modules\HealthKitModule.cs" />
+    <Compile Include="Modules\DoubleRobotModule.cs" />
+    <Compile Include="Helpers\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DSA_Mobile\DSAMobile.csproj">

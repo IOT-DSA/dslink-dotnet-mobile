@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DSLink.Nodes;
+using Newtonsoft.Json.Linq;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 
@@ -28,7 +29,7 @@ namespace DSAMobile.Connectivity
 
             _connectionTypes = _root.CreateChild("connection_types")
                                     .SetDisplayName("Types")
-                                    .SetType("array")
+                                    .SetType(ValueType.Array)
                                     .SetValue(connTypes)
                                     .BuildNode();
         }
@@ -45,12 +46,12 @@ namespace DSAMobile.Connectivity
 
         private void ConnectivityUpdated(object sender, ConnectivityChangedEventArgs eventArgs)
         {
-            _connectionTypes.Value.Set(ConnectionTypesList(CrossConnectivity.Current.ConnectionTypes));
+            _connectionTypes.Value.Set(new JArray(ConnectionTypesList(CrossConnectivity.Current.ConnectionTypes)));
         }
 
-        private static List<string> ConnectionTypesList(IEnumerable<ConnectionType> types)
+        private static JArray ConnectionTypesList(IEnumerable<ConnectionType> types)
         {
-            var ret = new List<string>();
+            var ret = new JArray();
             foreach (ConnectionType ct in types)
             {
                 ret.Add(ct.ToString());

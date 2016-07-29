@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using DSAMobile.Controls;
 using DSAMobile.Views.Cells;
 using DSLink.Nodes;
 using DSLink.Respond;
+using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
 
 namespace DSAMobile
@@ -68,25 +68,26 @@ namespace DSAMobile
             App.Instance.DSLink.Requester.List(_path, ListCallback);
         }
 
-        private void SetOutputs(List<dynamic> updates)
+        private void SetOutputs(JArray updates)
         {
-            if (updates != null && updates[0] != null)
+            if (updates != null && updates[0] != null && updates[0].Type == JTokenType.Array)
             {
-                for (int i = 0; i < updates[0].Count; i++)
+                JArray update = updates[0].Value<JArray>();
+                for (int i = 0; i < update.Count; i++)
                 {
                     var cell = _columnCells[i];
-                    var val = updates[0][i];
+                    var val = update[i];
                     if (cell != null)
                     {
                         if (cell is EntryCell)
                         {
-                            ((EntryCell)cell).Text = val;
+                            ((EntryCell)cell).Text = val.ToString();
                         }
                         else if (cell is SwitchCell)
                         {
-                            if (val is bool)
+                            if (val.Type == JTokenType.Boolean)
                             {
-                                ((SwitchCell)cell).On = val;
+                                ((SwitchCell)cell).On = val.Value<bool>();
                             }
                         }
                         else if (cell is PickerCell)
@@ -98,23 +99,23 @@ namespace DSAMobile
             }
         }
 
-        private Dictionary<string, dynamic> CollectParameters()
+        private JObject CollectParameters()
         {
-            var dict = new Dictionary<string, dynamic>();
+            var obj = new JObject();
 
             foreach (KeyValuePair<string, Cell> kp in _parameterCells)
             {
                 if (kp.Value is EntryCell)
                 {
-                    dict.Add(kp.Key, ((EntryCell)kp.Value).Text);
+                    obj[kp.Key] = ((EntryCell)kp.Value).Text;
                 }
                 else if (kp.Value is SwitchCell)
                 {
-                    dict.Add(kp.Key, ((SwitchCell)kp.Value).On);
+                    obj[kp.Key] = ((SwitchCell)kp.Value).On;
                 }
             }
 
-            return dict;
+            return obj;
         }
 
         private void ListCallback(ListResponse response)
@@ -129,13 +130,14 @@ namespace DSAMobile
                 foreach (var param in parameters)
                 {
                     Cell cell = null;
-                    var type = param.Type;
+                    var name = param["name"].Value<string>();
+                    var type = param["type"].Value<string>();
                     string[] typeParams = new string[0];
                     var bracketIndex = type.IndexOf('[');
                     if (bracketIndex != -1)
                     {
                         type = type.Substring(0, bracketIndex);
-                        typeParams = param.Type.Substring(bracketIndex + 1).TrimEnd(new char[] { ']' }).Split(',');
+                        typeParams = param["type"].Value<string>().Substring(bracketIndex + 1).TrimEnd(new char[] { ']' }).Split(',');
                     }
                     switch (type)
                     {
@@ -143,7 +145,7 @@ namespace DSAMobile
                             {
                                 cell = new EntryCell
                                 {
-                                    Label = param.Name
+                                    Label = name
                                 };
                                 break;
                             }
@@ -152,7 +154,7 @@ namespace DSAMobile
                             {
                                 cell = new EntryCell
                                 {
-                                    Label = param.Name,
+                                    Label = name,
                                     Keyboard = Keyboard.Numeric
                                 };
                                 break;
@@ -161,14 +163,14 @@ namespace DSAMobile
                             {
                                 cell = new SwitchCell
                                 {
-                                    Text = param.Name
+                                    Text = name
                                 };
                                 break;
                             }
                         case "enum":
                             cell = new PickerCell(new List<string>(typeParams))
                             {
-                                Label = param.Name
+                                Label = name
                             };
                             break;
                         case "binary":
@@ -177,7 +179,7 @@ namespace DSAMobile
                             {
                                 cell = new EntryCell
                                 {
-                                    Label = param.Name
+                                    Label = name
                                 };
                                 break;
                             }
@@ -189,7 +191,7 @@ namespace DSAMobile
                     }
                     if (cell != null)
                     {
-                        _parameterCells.Add(param.Name, cell);
+                        _parameterCells.Add(name, cell);
                         Device.BeginInvokeOnMainThread(() => _parametersSection.Add(cell));
                     }
                 }
@@ -206,10 +208,12 @@ namespace DSAMobile
             {
                 foreach (var column in columns)
                 {
+                    var name = columns["name"].Value<string>();
+                    var type = columns["type"].Value<string>();
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         Cell cell;
-                        switch (column.Type)
+                        switch (type)
                         {
                             case "string":
                             case "binary":
@@ -218,7 +222,7 @@ namespace DSAMobile
                                     cell = new EntryCell
                                     {
                                         IsEnabled = false,
-                                        Label = column.Name
+                                        Label = name
                                     };
                                     break;
                                 }
@@ -228,7 +232,7 @@ namespace DSAMobile
                                     cell = new EntryCell
                                     {
                                         IsEnabled = false,
-                                        Label = column.Name
+                                        Label = name
                                     };
                                     break;
                                 }
@@ -237,7 +241,7 @@ namespace DSAMobile
                                     cell = new SwitchCell
                                     {
                                         IsEnabled = false,
-                                        Text = column.Name
+                                        Text = name
                                     };
                                     break;
                                 }

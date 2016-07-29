@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using System.Threading;
 using DSAMobile.Utils;
+using ValueType = DSLink.Nodes.ValueType;
 
 namespace DSAMobile.Sensors
 {
@@ -52,13 +53,13 @@ namespace DSAMobile.Sensors
                                      .SetDisplayName("Accelerometer")
                                      .BuildNode();
                 _accel_x = _accelerometer.CreateChild("x")
-                                                 .SetType("number")
+                                                 .SetType(ValueType.Number)
                                                  .BuildNode();
                 _accel_y = _accelerometer.CreateChild("y")
-                                                 .SetType("number")
+                                                 .SetType(ValueType.Number)
                                                  .BuildNode();
                 _accel_z = _accelerometer.CreateChild("z")
-                                                 .SetType("number")
+                                                 .SetType(ValueType.Number)
                                                  .BuildNode();
 
                 _sensorsImpl.AccelerometerValueChanged += UpdateAccelerometer;
@@ -70,13 +71,13 @@ namespace DSAMobile.Sensors
                                  .SetDisplayName("Gyroscope")
                                  .BuildNode();
                 _gyro_x = _gyroscope.CreateChild("x")
-                                       .SetType("number")
+                                       .SetType(ValueType.Number)
                                        .BuildNode();
                 _gyro_y = _gyroscope.CreateChild("y")
-                                       .SetType("number")
+                                       .SetType(ValueType.Number)
                                        .BuildNode();
                 _gyro_z = _gyroscope.CreateChild("z")
-                                       .SetType("number")
+                                       .SetType(ValueType.Number)
                                        .BuildNode();
 
                 _sensorsImpl.GyroscopeValueChanged += UpdateGyroscope;
@@ -88,13 +89,13 @@ namespace DSAMobile.Sensors
                                .SetDisplayName("Device Motion")
                                .BuildNode();
                 _dmotion_x = _dmotion.CreateChild("x")
-                                     .SetType("number")
+                                     .SetType(ValueType.Number)
                                      .BuildNode();
                 _dmotion_y = _dmotion.CreateChild("y")
-                                     .SetType("number")
+                                     .SetType(ValueType.Number)
                                      .BuildNode();
                 _dmotion_z = _dmotion.CreateChild("z")
-                                     .SetType("number")
+                                     .SetType(ValueType.Number)
                                      .BuildNode();
 
                 _sensorsImpl.DeviceMotionValueChanged += UpdateDeviceMotion;
@@ -103,7 +104,7 @@ namespace DSAMobile.Sensors
             if (_sensorsImpl.SupportsCompass)
             {
                 /*_compass = _sensors.CreateChild("Compass")
-                              .SetType("number")
+                              .SetType(ValueType.Number)
                               .BuildNode();
                 _sensorsImpl.CompassValueChanged += (double value) =>
                 {
@@ -115,7 +116,7 @@ namespace DSAMobile.Sensors
             {
                 _lightLevel = _sensors.CreateChild("light_level")
                                   .SetDisplayName("Light Level")
-                                  .SetType("number")
+                                  .SetType(ValueType.Number)
                                   .BuildNode();
 
                 _sensorsImpl.LightLevelValueChanged += UpdateLightLevel;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DSLink.Request;
 using DSLink.Nodes.Actions;
 using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace DSAMobile.Vibrate
 {
@@ -24,11 +25,11 @@ namespace DSAMobile.Vibrate
                                    .SetDisplayName("Vibrate")
                                    .SetActionGroup(ActionGroups.Notifications)
                                    .SetInvokable(Permission.Write)
-                                   .SetAction(new Action(Permission.Write, Vibrate));
+                                   .SetAction(new ActionHandler(Permission.Write, Vibrate));
 
             if (PlatformHelper.Android)
             {
-                vibrate.AddParameter(new Parameter("Duration", "number"));
+                vibrate.AddParameter(new Parameter("duration", "number"));
             }
 
             _vibrate = vibrate.BuildNode();
@@ -42,11 +43,12 @@ namespace DSAMobile.Vibrate
         {
         }
 
-        private void Vibrate(Dictionary<string, Value> parameters, InvokeRequest request)
+        private void Vibrate(InvokeRequest request)
         {
-            if (parameters.ContainsKey("Duration"))
+            JToken token = request.Parameters["duration"];
+            if (token != null && token.Type == JTokenType.Integer)
             {
-                CrossVibrate.Current.Vibration((int) parameters["Duration"].Get());
+                CrossVibrate.Current.Vibration(token.Value<int>());
             }
             else
             {

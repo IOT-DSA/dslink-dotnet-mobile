@@ -6,7 +6,8 @@ using DSAMobile.Utils;
 using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
-using Action = DSLink.Nodes.Actions.Action;
+using Newtonsoft.Json.Linq;
+using ValueType = DSLink.Nodes.ValueType;
 
 namespace DSAMobile.DeviceSettings
 {
@@ -48,32 +49,32 @@ namespace DSAMobile.DeviceSettings
         {
             _screenStatus = superRoot.CreateChild("screen_status")
                      .SetDisplayName("Screen Status")
-                     .SetType("bool")
+                     .SetType(ValueType.Boolean)
                      .SetValue(_deviceSettings.ScreenOn())
                      .BuildNode();
 
             _screenIdleTimer = superRoot.CreateChild("screen_idle_timer")
                                         .SetDisplayName("Screen Idle Timer")
-                                        .SetType("bool")
+                                        .SetType(ValueType.Boolean)
                                         .SetWritable(Permission.Write)
                                         .SetValue(false)
                                         .BuildNode();
             _screenIdleTimer.Value.OnSet += (Value val) =>
             {
-                _deviceSettings.SetScreenIdle(val.Get());
+                _deviceSettings.SetScreenIdle(val.Boolean);
             };
 
             if (_deviceSettings.IsWiFiStateSupported)
             {
                 _wifiEnabled = superRoot.CreateChild("wifi_enabled")
                                         .SetDisplayName("WiFi Enabled")
-                                        .SetType("bool")
+                                        .SetType(ValueType.Boolean)
                                         .SetWritable(Permission.Config)
                                         .BuildNode();
 
-                _wifiEnabled.Value.OnSet += (Value val) =>
+                _wifiEnabled.Value.OnSet += (val) =>
                 {
-                    _deviceSettings.WiFiEnabled = ((Value)val).Get();
+                    _deviceSettings.WiFiEnabled = val.Boolean;
                 };
             }
 
@@ -88,7 +89,7 @@ namespace DSAMobile.DeviceSettings
                                              .AddColumn(new Column("Signal Level", "number"))
                                              .AddColumn(new Column("Frequency", "number"))
                                              .SetConfig("result", new Value("table"))
-                                             .SetAction(new Action(Permission.Config, ScanWiFiNetworks))
+                                             .SetAction(new ActionHandler(Permission.Config, ScanWiFiNetworks))
                                              .BuildNode();
             }
 
@@ -100,38 +101,38 @@ namespace DSAMobile.DeviceSettings
 
                 _wifi_ssid = _wifi.CreateChild("ssid")
                                   .SetDisplayName("SSID")
-                                   .SetType("string")
+                                   .SetType(ValueType.String)
                                    .BuildNode();
 
                 _wifi_bssid = _wifi.CreateChild("bssid")
                                    .SetDisplayName("BSSID")
-                                   .SetType("string")
+                                   .SetType(ValueType.String)
                                    .BuildNode();
 
                 _wifi_signalLevel = _wifi.CreateChild("signal_level")
                                          .SetDisplayName("Signal Level")
-                                         .SetType("number")
+                                         .SetType(ValueType.Number)
                                          .BuildNode();
 
                 _wifi_frequency = _wifi.CreateChild("frequency")
                                        .SetDisplayName("Frequency")
-                                       .SetType("number")
+                                       .SetType(ValueType.Number)
                                        .BuildNode();
 
                 _wifi_hiddenSsid = _wifi.CreateChild("hidden_ssid")
                                         .SetDisplayName("Hidden SSID")
-                                        .SetType("bool")
+                                        .SetType(ValueType.Boolean)
                                         .BuildNode();
 
                 _wifi_linkSpeed = _wifi.CreateChild("link_speed")
                                        .SetDisplayName("Link Speed")
                                        .SetAttribute("unit", new Value("Mbps"))
-                                       .SetType("number")
+                                       .SetType(ValueType.Number)
                                        .BuildNode();
 
                 _wifi_ipAddress = _wifi.CreateChild("ip_address")
                                        .SetDisplayName("IP Address")
-                                       .SetType("string")
+                                       .SetType(ValueType.String)
                                        .BuildNode();
             }
         }
@@ -196,14 +197,14 @@ namespace DSAMobile.DeviceSettings
             }
         }
 
-        private void ScanWiFiNetworks(Dictionary<string, Value> parameters, InvokeRequest request)
+        private async void ScanWiFiNetworks(InvokeRequest request)
         {
             _deviceSettings.ScanWiFiPoints((List<WiFiAccessPoint> accessPoints) =>
             {
-                var updates = new List<dynamic>();
+                Table table = new Table();
                 foreach (WiFiAccessPoint accessPoint in accessPoints)
                 {
-                    updates.Add(new List<dynamic>
+                    table.Add(new Row
                     {
                         accessPoint.Ssid,
                         accessPoint.Bssid,
@@ -211,7 +212,8 @@ namespace DSAMobile.DeviceSettings
                         accessPoint.Frequency
                     });
                 }
-                request.SendUpdates(updates, true);
+                request.UpdateTable(table);
+                request.Close();
             });
         }
     }

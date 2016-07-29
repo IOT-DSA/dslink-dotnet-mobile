@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using DSLink.Nodes;
 using DSLink.Nodes.Actions;
-using Action = DSLink.Nodes.Actions.Action;
 using Plugin.LocalNotifications;
 using DSLink.Request;
+using Newtonsoft.Json.Linq;
 
 namespace DSAMobile.Notifications
 {
@@ -25,19 +25,19 @@ namespace DSAMobile.Notifications
             _create = superRoot.CreateChild("create_notification")
                                .SetDisplayName("Create Notification")
                                .SetActionGroup(ActionGroups.Notifications)
-                               .AddParameter(new Parameter("Title", "string"))
-                               .AddParameter(new Parameter("Message", "string"))
-                               .AddColumn(new Column("Notification ID", "number"))
+                               .AddParameter(new Parameter("title", "string"))
+                               .AddParameter(new Parameter("message", "string"))
+                               .AddColumn(new Column("notificationId", "number"))
                                .SetInvokable(Permission.Write)
-                               .SetAction(new Action(Permission.Write, CreateNotification))
+                               .SetAction(new ActionHandler(Permission.Write, CreateNotification))
                                .BuildNode();
 
             _cancel = superRoot.CreateChild("cancel_notification")
                                .SetDisplayName("Cancel Notification")
                                .SetActionGroup(ActionGroups.Notifications)
-                               .AddParameter(new Parameter("Notification ID", "number"))
+                               .AddParameter(new Parameter("notificationId", "number"))
                                .SetInvokable(Permission.Write)
-                               .SetAction(new Action(Permission.Write, CancelNotification))
+                               .SetAction(new ActionHandler(Permission.Write, CancelNotification))
                                .BuildNode();
         }
 
@@ -49,15 +49,15 @@ namespace DSAMobile.Notifications
         {
         }
 
-        private void CreateNotification(Dictionary<string, Value> parameters, InvokeRequest request)
+        private void CreateNotification(InvokeRequest request)
         {
-            string title = parameters["Title"].Get();
-            string message = parameters["Message"].Get();
+            string title = request.Parameters["title"].Value<string>();
+            string message = request.Parameters["message"].Value<string>();
             int notificationID = _notificationID++;
             CrossLocalNotifications.Current.Show(title, message, notificationID);
-            request.SendUpdates(new List<dynamic>
+            request.UpdateTable(new Table
             {
-                new List<dynamic>
+                new Row
                 {
                     notificationID
                 }
@@ -65,9 +65,9 @@ namespace DSAMobile.Notifications
             request.Close();
         }
 
-        private void CancelNotification(Dictionary<string, Value> parameters, InvokeRequest request)
+        private void CancelNotification(InvokeRequest request)
         {
-            float nid = parameters["Notification ID"].Get();
+            int nid = request.Parameters["notificationId"].Value<int>();
             CrossLocalNotifications.Current.Cancel((int)nid);
             request.Close();
         }

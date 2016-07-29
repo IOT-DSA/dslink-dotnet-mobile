@@ -1,6 +1,6 @@
-﻿using System;
-using DSLink.Nodes;
+﻿using DSLink.Nodes;
 using Lamp.Plugin;
+using Newtonsoft.Json.Linq;
 
 namespace DSAMobile.Flash
 {
@@ -20,7 +20,7 @@ namespace DSAMobile.Flash
             _flashlight = superRoot.CreateChild("flashlight")
                                    .SetDisplayName("Flashlight")
                                    .SetWritable(Permission.Write)
-                                   .SetType("bool")
+                                   .SetType(ValueType.Boolean)
                                    .SetValue(false)
                                    .BuildNode();
         }
@@ -37,7 +37,7 @@ namespace DSAMobile.Flash
 
         public void FlashlightCallback(Value val)
         {
-            var boolState = val.Get();
+            var boolState = val.Boolean;
 
             if (boolState)
             {

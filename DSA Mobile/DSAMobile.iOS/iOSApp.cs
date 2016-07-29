@@ -8,15 +8,12 @@ namespace DSAMobile.iOS
 {
 	public class iOSApp : App
 	{
-        public iOSApp()
-        {
-        }
-
         public override void InitModules()
         {
             base.InitModules();
 
             _enabledModules.Add(new HealthKitModule());
+            _enabledModules.Add(new DoubleRobotModule());
         }
 
 		protected override string StoragePath()

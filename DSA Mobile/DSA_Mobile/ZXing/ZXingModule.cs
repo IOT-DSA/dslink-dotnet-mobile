@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using DSLink.Nodes;
+﻿using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
-using ZXing;
+using Newtonsoft.Json.Linq;
 using ZXing.Mobile;
-using Action = DSLink.Nodes.Actions.Action;
 
 namespace DSAMobile.ZXing
 {
@@ -33,7 +31,7 @@ namespace DSAMobile.ZXing
                                  .AddColumn(new Column("result", "dynamic"))
                                  .AddColumn(new Column("type", "string"))
                                  .AddColumn(new Column("timestamp", "number"))
-                                 .SetAction(new Action(Permission.Read, ScanCode))
+                                 .SetAction(new ActionHandler(Permission.Read, ScanCode))
                                  .BuildNode();
         }
 
@@ -45,25 +43,24 @@ namespace DSAMobile.ZXing
         {
         }
 
-        private async void ScanCode(Dictionary<string, Value> parameters, InvokeRequest request)
+        private async void ScanCode(InvokeRequest request)
         {
             var result = await _scanner.Scan();
 
-            if (result == null)
+            if (result != null)
             {
-                request.Close();
-                return;
+                await request.UpdateTable(new Table
+                {
+                    new Row
+                    {
+                        result.Text,
+                        result.BarcodeFormat.ToString(),
+                        result.Timestamp
+                    }
+                });
             }
 
-            request.SendUpdates(new List<dynamic>
-            {
-                new List<dynamic>
-                {
-                    result.Text,
-                    result.BarcodeFormat.ToString(),
-                    result.Timestamp
-                }
-            }, close: true);
+            await request.Close();
         }
     }
 }

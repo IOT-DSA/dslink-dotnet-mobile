@@ -33,8 +33,12 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>DSAMobile publishes your location over DSA</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.1</string>
+	<string>1.0.2</string>
+	<key>UISupportedExternalAccessoryProtocols</key>
+	<array>
+		<string>com.doublerobotics.pancho</string>
+	</array>
 </dict>
 </plist>

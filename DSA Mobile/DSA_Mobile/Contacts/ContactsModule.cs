@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
+using Newtonsoft.Json.Linq;
 using Plugin.Contacts;
 using Plugin.Contacts.Abstractions;
-using Action = DSLink.Nodes.Actions.Action;
 
 namespace DSAMobile.Contacts
 {
@@ -31,7 +30,7 @@ namespace DSAMobile.Contacts
                                     .AddColumn(new Column("Phone Numbers", "array"))
                                     .AddColumn(new Column("Emails", "array"))
                                     .SetConfig("result", new Value("table"))
-                                    .SetAction(new Action(Permission.Write, GetContacts))
+                                    .SetAction(new ActionHandler(Permission.Write, GetContacts))
                                     .BuildNode();
         }
 
@@ -43,16 +42,16 @@ namespace DSAMobile.Contacts
         {
         }
 
-        private void GetContacts(Dictionary<string, Value> parameters, InvokeRequest request)
+        private void GetContacts(InvokeRequest request)
         {
             CrossContacts.Current.PreferContactAggregation = false;
             var contacts = CrossContacts.Current.Contacts.ToList();
-            var updates = new List<dynamic>();
+            var table = new Table();
 
             foreach (Contact contact in contacts)
             {
-                var contactPhones = new List<string>();
-                var contactEmails = new List<string>();
+                var contactPhones = new JArray();
+                var contactEmails = new JArray();
 
                 foreach (Phone phone in contact.Phones)
                 {
@@ -64,7 +63,7 @@ namespace DSAMobile.Contacts
                     contactEmails.Add(email.Address);
                 }
 
-                updates.Add(new List<dynamic>
+                table.Add(new Row
                 {
                     contact.DisplayName,
                     contactPhones,
@@ -72,7 +71,7 @@ namespace DSAMobile.Contacts
                 });
             }
 
-            request.SendUpdates(updates);
+            request.UpdateTable(table);
             request.Close();
         }
     }

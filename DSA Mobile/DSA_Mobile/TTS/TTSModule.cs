@@ -2,6 +2,7 @@
 using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
+using Newtonsoft.Json.Linq;
 using Plugin.TextToSpeech;
 
 namespace DSAMobile.TTS
@@ -24,10 +25,10 @@ namespace DSAMobile.TTS
             _speak = superRoot.CreateChild("speak")
                               .SetDisplayName("Speak")
                               .SetActionGroup(ActionGroups.Audio)
-                              .AddParameter(new Parameter("Text", "string"))
-                              .AddParameter(new Parameter("Queue", "bool", false))
+                              .AddParameter(new Parameter("text", "string"))
+                              .AddParameter(new Parameter("queue", "bool", false))
                               .SetInvokable(Permission.Read)
-                              .SetAction(new Action(Permission.Read, Speak))
+                              .SetAction(new ActionHandler(Permission.Read, Speak))
                               .BuildNode();
         }
 
@@ -40,10 +41,10 @@ namespace DSAMobile.TTS
             _speak.RemoveFromParent();
         }
 
-        public void Speak(Dictionary<string, Value> parameters, InvokeRequest request)
+        public void Speak(InvokeRequest request)
         {
-            var text = parameters["Text"].Get();
-            var queue = parameters["Queue"].Get();
+            var text = request.Parameters["text"].Value<string>();
+            var queue = request.Parameters["queue"].Value<bool>();
 
             CrossTextToSpeech.Current.Speak(text, queue);
         }

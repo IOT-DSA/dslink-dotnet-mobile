@@ -34,15 +34,15 @@ namespace DSAMobile.Droid
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::DSAMobile.Droid.Resource.Attribute.actionBarSize;
 			global::Plugin.TextToSpeech.Resource.String.ApplicationName = global::DSAMobile.Droid.Resource.String.ApplicationName;
 			global::Plugin.TextToSpeech.Resource.String.Hello = global::DSAMobile.Droid.Resource.String.Hello;
-			global::DSLink.Android.Resource.String.ApplicationName = global::DSAMobile.Droid.Resource.String.ApplicationName;
-			global::DSLink.Android.Resource.String.Hello = global::DSAMobile.Droid.Resource.String.Hello;
-			global::DSLink.Android.Resource.String.library_name = global::DSAMobile.Droid.Resource.String.library_name;
 			global::ZXing.Mobile.Resource.Id.contentFrame = global::DSAMobile.Droid.Resource.Id.contentFrame;
 			global::ZXing.Mobile.Resource.Layout.zxingscanneractivitylayout = global::DSAMobile.Droid.Resource.Layout.zxingscanneractivitylayout;
 			global::ZXing.Mobile.Resource.Layout.zxingscannerfragmentlayout = global::DSAMobile.Droid.Resource.Layout.zxingscannerfragmentlayout;
 			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscanneractivitylayout = global::DSAMobile.Droid.Resource.Layout.zxingscanneractivitylayout;
 			global::ZXing.Net.Mobile.Forms.Android.Resource.Layout.zxingscannerfragmentlayout = global::DSAMobile.Droid.Resource.Layout.zxingscannerfragmentlayout;
 			global::ZXing.Net.Mobile.Forms.Android.Resource.String.library_name = global::DSAMobile.Droid.Resource.String.library_name;
+			global::DSLink.Android.Resource.String.ApplicationName = global::DSAMobile.Droid.Resource.String.ApplicationName;
+			global::DSLink.Android.Resource.String.Hello = global::DSAMobile.Droid.Resource.String.Hello;
+			global::DSLink.Android.Resource.String.library_name = global::DSAMobile.Droid.Resource.String.library_name;
 		}
 		
 		public partial class Animation

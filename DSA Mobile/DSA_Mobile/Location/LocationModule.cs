@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using DSLink.Nodes;
+﻿using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
 using Plugin.ExternalMaps;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
-using Action = DSLink.Nodes.Actions.Action;
 using Permission = DSLink.Nodes.Permission;
-using OSPermission = Plugin.Permissions.Abstractions.Permission;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
+using Newtonsoft.Json.Linq;
 
 namespace DSAMobile.Location
 {
@@ -34,19 +30,19 @@ namespace DSAMobile.Location
                                              .AddParameter(new Parameter("Name", "string"))
                                              .AddParameter(new Parameter("Latitude", "number"))
                                              .AddParameter(new Parameter("Longitude", "number"))
-                                             .SetAction(new Action(Permission.Write, NavigateToCoord))
+                                             .SetAction(new ActionHandler(Permission.Write, NavigateToCoord))
                                              .BuildNode();
 
             if (CrossGeolocator.Current.IsGeolocationAvailable)
             {
                 _locLatitude = superRoot.CreateChild("latitude")
                                         .SetDisplayName("Latitude")
-                                        .SetType("double")
+                                        .SetType(ValueType.Number)
                                         .BuildNode();
 
                 _locLongitude = superRoot.CreateChild("longitude")
                                          .SetDisplayName("Longitude")
-                                         .SetType("double")
+                                         .SetType(ValueType.Number)
                                          .BuildNode();
             }
         }
@@ -69,11 +65,11 @@ namespace DSAMobile.Location
             }
         }
 
-        public void NavigateToCoord(Dictionary<string, Value> parameters, InvokeRequest request)
+        public void NavigateToCoord(InvokeRequest request)
         {
-            string name = parameters["Name"].Get();
-            double longitude = parameters["Longitude"].Get();
-            double latitude = parameters["Latitude"].Get();
+            string name = request.Parameters["Name"].Value<string>();
+            double longitude = request.Parameters["Longitude"].Value<double>();
+            double latitude = request.Parameters["Latitude"].Value<double>();
 
             CrossExternalMaps.Current.NavigateTo(name, latitude, longitude);
             request.Close();

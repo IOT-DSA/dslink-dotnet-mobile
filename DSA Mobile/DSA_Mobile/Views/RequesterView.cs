@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using DSLink.Nodes;
 using DSLink.Request;
 using Xamarin.Forms;
@@ -176,7 +176,7 @@ namespace DSAMobile.Views
 
     public class ValueCell : CustomNodeCell
     {
-        private Label _valueLabel;
+        private readonly Label _valueLabel;
 
         public ValueCell(Node node, INavigation navigation, List<string> subscribedPaths) : base(node, navigation)
         {
@@ -208,14 +208,17 @@ namespace DSAMobile.Views
             };
 
             subscribedPaths.Add(_node.Path);
-            App.Instance.DSLink.Requester.Subscribe(_node.Path, ValueUpdate);
+            Task.Run(async () =>
+            {
+                await App.Instance.DSLink.Requester.Subscribe(_node.Path, ValueUpdate);
+            });
         }
 
         private void ValueUpdate(SubscriptionUpdate update)
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                _valueLabel.Text = update.Value;
+                _valueLabel.Text = update.Value.ToString();
             });
         }
     }

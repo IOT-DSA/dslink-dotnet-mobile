@@ -21,19 +21,19 @@ namespace DSAMobile.Battery
         {
             _percentRemaining = superRoot.CreateChild("battery_percent")
                                          .SetDisplayName("Battery Percent")
-                                         .SetType("number")
+                                         .SetType(ValueType.Number)
                                          .SetValue(CrossBattery.Current.RemainingChargePercent)
                                          .BuildNode();
 
             _status = superRoot.CreateChild("battery_status")
                                .SetDisplayName("Battery Status")
-                               .SetType("enum[Charging,Discharging,Full,NotCharging,Unknown]")
+                               .SetType(ValueType.MakeEnum("Charging", "Discharging", "Full", "NotCharging", "Unknown"))
                                .SetValue(CrossBattery.Current.Status.ToString())
                                .BuildNode();
 
             _source = superRoot.CreateChild("power_source")
                                .SetDisplayName("Power Source")
-                               .SetType("enum[Battery,Ac,Usb,Wireless,Other]")
+                               .SetType(ValueType.MakeEnum("Battery", "Ac", "Usb", "Wireless", "Other"))
                                .SetValue(CrossBattery.Current.PowerSource.ToString())
                                .BuildNode();
 

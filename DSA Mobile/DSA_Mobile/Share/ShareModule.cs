@@ -2,6 +2,7 @@
 using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
+using Newtonsoft.Json.Linq;
 using Plugin.Share;
 using Plugin.Share.Abstractions;
 
@@ -25,21 +26,21 @@ namespace DSAMobile.Share
         {
             NodeFactory factory; 
 
-            factory = superRoot.CreateChild("open_in_browser")
+            factory = superRoot.CreateChild("openInBrowser")
                                .SetDisplayName("Open in Browser")
                                .SetActionGroup(ActionGroups.Share)
                                .SetInvokable(Permission.Write)
-                               .AddParameter(new Parameter("URL", "string"))
-                               .SetAction(new Action(Permission.Write, OpenInBrowser));
+                               .AddParameter(new Parameter("url", "string"))
+                               .SetAction(new ActionHandler(Permission.Write, OpenInBrowser));
 
             if (PlatformHelper.Android)
             {
-                factory.AddParameter(new Parameter("Show Title", "bool"));
+                factory.AddParameter(new Parameter("showTitle", "bool"));
             }
 
             if (PlatformHelper.iOS)
             {
-                factory.AddParameter(new Parameter("Reader Mode", "bool"));
+                factory.AddParameter(new Parameter("readerMode", "bool"));
             }
 
             _openInBrowser = factory.BuildNode();
@@ -48,29 +49,29 @@ namespace DSAMobile.Share
                               .SetDisplayName("Share")
                               .SetActionGroup(ActionGroups.Share)
                               .SetInvokable(Permission.Write)
-                              .AddParameter(new Parameter("Title", "string", "Share"))
-                              .AddParameter(new Parameter("Text", "string"))
-                              .SetAction(new Action(Permission.Write, Share))
+                              .AddParameter(new Parameter("title", "string", "Share"))
+                              .AddParameter(new Parameter("text", "string"))
+                              .SetAction(new ActionHandler(Permission.Write, Share))
                               .BuildNode();
 
-            _shareLink = superRoot.CreateChild("share_link")
+            _shareLink = superRoot.CreateChild("shareLink")
                                   .SetDisplayName("Share Link")
                                   .SetActionGroup(ActionGroups.Share)
                                   .SetInvokable(Permission.Write)
-                                  .AddParameter(new Parameter("URL", "string"))
-                                  .AddParameter(new Parameter("Message", "string"))
-                                  .AddParameter(new Parameter("Title", "string"))
-                                  .SetAction(new Action(Permission.Write, ShareLink))
+                                  .AddParameter(new Parameter("url", "string"))
+                                  .AddParameter(new Parameter("msg", "string"))
+                                  .AddParameter(new Parameter("title", "string"))
+                                  .SetAction(new ActionHandler(Permission.Write, ShareLink))
                                   .BuildNode();
 
             if (CrossShare.Current.SupportsClipboard)
             {
-                _setClipboard = superRoot.CreateChild("set_clipboard")
+                _setClipboard = superRoot.CreateChild("setClipboard")
                                          .SetDisplayName("Set Clipboard")
                                          .SetActionGroup(ActionGroups.Share)
                                          .SetInvokable(Permission.Write)
-                                         .AddParameter(new Parameter("Text", "string"))
-                                         .SetAction(new Action(Permission.Write, SetClipboardContents))
+                                         .AddParameter(new Parameter("text", "string"))
+                                         .SetAction(new ActionHandler(Permission.Write, SetClipboardContents))
                                          .BuildNode();
             }
         }
@@ -83,55 +84,58 @@ namespace DSAMobile.Share
         {
         }
 
-        private void OpenInBrowser(Dictionary<string, Value> parameters, InvokeRequest request)
+        private async void OpenInBrowser(InvokeRequest request)
         {
             // We should just close the request now.
-            request.Close();
+            await request.Close();
 
-            var url = parameters["URL"].Get();
+            var url = request.Parameters["url"].Value<string>();
             var options = new BrowserOptions();
 
-            if (PlatformHelper.Android && parameters.ContainsKey("Show Title"))
+            var showTitle = request.Parameters["showTitle"];
+            var readerMode = request.Parameters["readerMode"];
+
+            if (PlatformHelper.Android && showTitle != null && showTitle.Type == JTokenType.Boolean)
             {
-                options.ChromeShowTitle = parameters["Show Title"].Get();
+                options.ChromeShowTitle = showTitle.Value<bool>();
             }
 
-            if (PlatformHelper.iOS && parameters.ContainsKey("Reader Mode"))
+            if (PlatformHelper.iOS && readerMode != null && readerMode.Type == JTokenType.String)
             {
-                options.UseSafairReaderMode = parameters["Reader Mode"].Get();
+                options.UseSafairReaderMode = readerMode.Value<bool>();
             }
 
-            CrossShare.Current.OpenBrowser(url, options);
+            await CrossShare.Current.OpenBrowser(url, options);
         }
 
-        private void Share(Dictionary<string, Value> parameters, InvokeRequest request)
+        private async void Share(InvokeRequest request)
         {
-            request.Close();
+            await request.Close();
 
-            var title = parameters["Title"].Get();
-            var text = parameters["Text"].Get();
+            var title = request.Parameters["title"].Value<string>();
+            var text = request.Parameters["text"].Value<string>();
 
-            CrossShare.Current.Share(text, title);
+            await CrossShare.Current.Share(text, title);
         }
 
-        private void ShareLink(Dictionary<string, Value> parameters, InvokeRequest request)
+        private async void ShareLink(InvokeRequest request)
         {
-            request.Close();
+            await request.Close();
 
-            var url = parameters["URL"].Get();
-            var message = parameters["Message"].Get();
-            var title = parameters["Title"].Get();
+            var url = request.Parameters["url"].Value<string>();
+            var message = request.Parameters["msg"].Value<string>();
+            var title = request.Parameters["title"].Value<string>();
 
-            CrossShare.Current.ShareLink(url, message, title);
+            await CrossShare.Current.ShareLink(url, message, title);
         }
 
-        private void SetClipboardContents(Dictionary<string, Value> parameters, InvokeRequest request)
+        private async void SetClipboardContents(InvokeRequest request)
         {
-            request.Close();
+            await request.Close();
 
-            var text = parameters["Text"].Get();
+            var text = request.Parameters["text"].Value<string>();
 
-            CrossShare.Current.SetClipboardText(text);
+            await CrossShare.Current.SetClipboardText(text);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using DSLink.Nodes;
 using Plugin.DeviceInfo;
+using ValueType = DSLink.Nodes.ValueType;
 
 namespace DSAMobile.DeviceInfo
 {
@@ -21,19 +22,19 @@ namespace DSAMobile.DeviceInfo
         {
             _os = superRoot.CreateChild("os")
                            .SetDisplayName("OS")
-                           .SetType("string")
+                           .SetType(ValueType.String)
                            .SetValue(CrossDeviceInfo.Current.Platform.ToString())
                            .BuildNode();
 
             _osVersion = superRoot.CreateChild("os_ver")
                                   .SetDisplayName("OS Version")
-                                  .SetType("string")
+                                  .SetType(ValueType.String)
                                   .SetValue(CrossDeviceInfo.Current.Version)
                                   .BuildNode();
 
             _model = superRoot.CreateChild("device_model")
                               .SetDisplayName("Device Model")
-                              .SetType("string")
+                              .SetType(ValueType.String)
                               .SetValue(CrossDeviceInfo.Current.Model)
                               .BuildNode();
         }

@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using Plugin.Media;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
-using Action = DSLink.Nodes.Actions.Action;
 using Permission = DSLink.Nodes.Permission;
 using OSPermission = Plugin.Permissions.Abstractions.Permission;
 using DSLink.Request;
 using Plugin.Media.Abstractions;
+using Newtonsoft.Json.Linq;
 
 namespace DSAMobile.Camera
 {
@@ -58,7 +56,7 @@ namespace DSAMobile.Camera
                                         .SetActionGroup(ActionGroups.Camera)
                                         .SetInvokable(Permission.Write)
                                         .AddColumn(new Column("Data", "binary"))
-                                        .SetAction(new Action(Permission.Write, TakePicture))
+                                        .SetAction(new ActionHandler(Permission.Write, TakePicture))
                                         .BuildNode();
             }
 
@@ -69,7 +67,7 @@ namespace DSAMobile.Camera
                                         .SetActionGroup(ActionGroups.Camera)
                                         .SetInvokable(Permission.Write)
                                         .AddColumn(new Column("Data", "binary"))
-                                        .SetAction(new Action(Permission.Write, PickPicture))
+                                        .SetAction(new ActionHandler(Permission.Write, PickPicture))
                                         .BuildNode();
             }
         }
@@ -82,7 +80,7 @@ namespace DSAMobile.Camera
         {
         }
 
-        private async void TakePicture(Dictionary<string, Value> parameters, InvokeRequest request)
+        private async void TakePicture(InvokeRequest request)
         {
             var result = await CrossMedia.Current.TakePhotoAsync(
                 new StoreCameraMediaOptions
@@ -92,45 +90,36 @@ namespace DSAMobile.Camera
                 }
             );
 
-            if (result == null)
+            if (result != null)
             {
-                request.Close();
-                return;
-            }
-
-            request.SendUpdates(
-                new List<dynamic>
+                await request.UpdateTable(new Table
                 {
-                    new List<dynamic>
+                    new Row
                     {
                         result.GetStream().ReadAllBytes()
                     }
-                }
-            );
-            request.Close();
+                });
+            }
+
+            await request.Close();
         }
 
-        private async void PickPicture(Dictionary<string, Value> parameters, InvokeRequest request)
+        private async void PickPicture(InvokeRequest request)
         {
             var result = await CrossMedia.Current.PickPhotoAsync();
 
             if (result == null)
             {
-                request.Close();
-                return;
-            }
-
-            request.SendUpdates(
-                new List<dynamic>
+                await request.UpdateTable(new Table
                 {
-                    new List<dynamic>
+                    new JArray
                     {
                         result.GetStream().ReadAllBytes()
                     }
-                }
-            );
-            request.Close();
+                });
+            }
+
+            await request.Close();
         }
     }
 }
-
