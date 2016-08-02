@@ -276,11 +276,17 @@
     <Reference Include="Plugin.Settings.Abstractions">
       <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="HockeySDK">
+      <HintPath>..\..\packages\HockeySDK.Xamarin.4.1.0-beta3\lib\Xamarin.iOS10\HockeySDK.dll</HintPath>
+    </Reference>
+    <Reference Include="HockeySDK.iOSBindings">
+      <HintPath>..\..\packages\HockeySDK.Xamarin.4.1.0-beta3\lib\Xamarin.iOS10\HockeySDK.iOSBindings.dll</HintPath>
+    </Reference>
     <Reference Include="DSLink">
-      <HintPath>..\..\packages\DSLink.0.2.6-alpha\lib\Xamarin.iOS10\DSLink.dll</HintPath>
+      <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\Xamarin.iOS10\DSLink.dll</HintPath>
     </Reference>
     <Reference Include="DSLink.iOS">
-      <HintPath>..\..\packages\DSLink.0.2.6-alpha\lib\Xamarin.iOS10\DSLink.iOS.dll</HintPath>
+      <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\Xamarin.iOS10\DSLink.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

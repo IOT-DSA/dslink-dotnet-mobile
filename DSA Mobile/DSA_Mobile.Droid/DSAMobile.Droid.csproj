@@ -260,10 +260,10 @@
       <HintPath>..\..\packages\Portable.BouncyCastle-Signed.1.7.0.2\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10\crypto.dll</HintPath>
     </Reference>
     <Reference Include="DSLink">
-      <HintPath>..\..\packages\DSLink.0.2.6-alpha\lib\MonoAndroid10\DSLink.dll</HintPath>
+      <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\MonoAndroid10\DSLink.dll</HintPath>
     </Reference>
     <Reference Include="DSLink.Android">
-      <HintPath>..\..\packages\DSLink.0.2.6-alpha\lib\MonoAndroid10\DSLink.Android.dll</HintPath>
+      <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\MonoAndroid10\DSLink.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

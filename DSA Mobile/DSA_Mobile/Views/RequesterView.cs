@@ -207,10 +207,10 @@ namespace DSAMobile.Views
                 }
             };
 
-            subscribedPaths.Add(_node.Path);
             Task.Run(async () =>
             {
                 await App.Instance.DSLink.Requester.Subscribe(_node.Path, ValueUpdate);
+                subscribedPaths.Add(_node.Path);
             });
         }
 

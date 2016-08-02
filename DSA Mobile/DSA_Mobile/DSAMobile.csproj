@@ -215,7 +215,7 @@
       <HintPath>..\..\packages\Websockets.Pcl.1.1.9\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10\WebSockets.PCL.dll</HintPath>
     </Reference>
     <Reference Include="DSLink">
-      <HintPath>..\..\packages\DSLink.0.2.6-alpha\lib\portable-net45+win+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarintvos10+xamarinwatchos10+xamarinios10\DSLink.dll</HintPath>
+      <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\portable-net45+win+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarintvos10+xamarinwatchos10+xamarinios10\DSLink.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

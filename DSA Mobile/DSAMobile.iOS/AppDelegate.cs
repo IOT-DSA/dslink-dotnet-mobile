@@ -1,5 +1,6 @@
 ﻿using DSLink.iOS;
 using Foundation;
+using HockeyApp.iOS;
 using Plugin.Iconize;
 using Plugin.Iconize.Fonts;
 using UIKit;
@@ -38,6 +39,18 @@ namespace DSAMobile.iOS
             Xamarin.Forms.Forms.Init();
             _app = new iOSApp();
 			LoadApplication(_app);
+
+            var manager = BITHockeyManager.SharedHockeyManager;
+            manager.Configure("315c78e1363a425f8a44823e3dfca712");
+            manager.StartManager();
+            manager.Authenticator.AuthenticateInstallation();
+#if DEBUG
+            manager.DisableCrashManager = true;
+            manager.DisableInstallTracking = true;
+            manager.DisableFeedbackManager = true;
+            manager.DisableMetricsManager = true;
+            manager.DisableUpdateManager = true;
+#endif
 
             return base.FinishedLaunching(uiApplication, launchOptions);
         }
