@@ -4,9 +4,10 @@ using System;
 using System.Threading.Tasks;
 using System.Threading;
 using DSAMobile.Utils;
+using DSAMobile.Sensors;
 using ValueType = DSLink.Nodes.ValueType;
 
-namespace DSAMobile.Sensors
+namespace DSAMobile.Modules
 {
     public class SensorsModule : BaseModule
 	{

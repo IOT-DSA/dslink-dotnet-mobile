@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using DSLink.Nodes;
+﻿using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
 using Newtonsoft.Json.Linq;
 using Plugin.TextToSpeech;
 
-namespace DSAMobile.TTS
+namespace DSAMobile.Modules
 {
     public class TTSModule : BaseModule
     {

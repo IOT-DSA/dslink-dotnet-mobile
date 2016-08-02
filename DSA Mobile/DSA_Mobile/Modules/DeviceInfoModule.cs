@@ -3,7 +3,7 @@ using DSLink.Nodes;
 using Plugin.DeviceInfo;
 using ValueType = DSLink.Nodes.ValueType;
 
-namespace DSAMobile.DeviceInfo
+namespace DSAMobile.Modules
 {
     public class DeviceInfoModule : BaseModule
     {

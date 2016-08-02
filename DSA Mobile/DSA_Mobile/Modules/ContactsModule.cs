@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
@@ -7,7 +6,7 @@ using Newtonsoft.Json.Linq;
 using Plugin.Contacts;
 using Plugin.Contacts.Abstractions;
 
-namespace DSAMobile.Contacts
+namespace DSAMobile.Modules
 {
     public class ContactsModule : BaseModule
     {

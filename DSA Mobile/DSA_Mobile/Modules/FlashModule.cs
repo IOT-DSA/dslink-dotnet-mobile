@@ -1,8 +1,7 @@
 ﻿using DSLink.Nodes;
 using Lamp.Plugin;
-using Newtonsoft.Json.Linq;
 
-namespace DSAMobile.Flash
+namespace DSAMobile.Modules
 {
     public class FlashModule : BaseModule
     {

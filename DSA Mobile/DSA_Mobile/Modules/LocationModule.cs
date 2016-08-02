@@ -7,7 +7,7 @@ using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Newtonsoft.Json.Linq;
 
-namespace DSAMobile.Location
+namespace DSAMobile.Modules
 {
     public class LocationModule : BaseModule
     {

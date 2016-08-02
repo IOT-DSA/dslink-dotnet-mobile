@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using DSLink.Nodes;
 using Newtonsoft.Json.Linq;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 
-namespace DSAMobile.Connectivity
+namespace DSAMobile.Modules
 {
     public class ConnectivityModule : BaseModule
     {

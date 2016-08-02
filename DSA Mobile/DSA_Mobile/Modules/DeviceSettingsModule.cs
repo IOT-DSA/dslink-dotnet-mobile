@@ -6,10 +6,9 @@ using DSAMobile.Utils;
 using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
-using Newtonsoft.Json.Linq;
 using ValueType = DSLink.Nodes.ValueType;
 
-namespace DSAMobile.DeviceSettings
+namespace DSAMobile.Modules
 {
     public class DeviceSettingsModule : BaseModule
     {

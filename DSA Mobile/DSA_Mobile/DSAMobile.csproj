@@ -42,31 +42,15 @@
     <Compile Include="Sensors\MotionVector.cs" />
     <Compile Include="Sensors\SensorType.cs" />
     <Compile Include="BaseModule.cs" />
-    <Compile Include="DeviceSettings\BaseDeviceSettings.cs" />
     <Compile Include="Pages\SettingsPage.cs" />
     <Compile Include="Pages\ResponderPage.cs" />
-    <Compile Include="Battery\BatteryModule.cs" />
-    <Compile Include="DeviceInfo\DeviceInfoModule.cs" />
-    <Compile Include="DeviceSettings\DeviceSettingsModule.cs" />
-    <Compile Include="Notifications\NotificationModule.cs" />
-    <Compile Include="Sensors\SensorsModule.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Pages\TabHost.cs" />
     <Compile Include="Pages\RequesterPage.cs" />
     <Compile Include="Views\DGPage.cs" />
     <Compile Include="PlatformHelper.cs" />
-    <Compile Include="Camera\CameraModule.cs" />
     <Compile Include="Utilities.cs" />
-    <Compile Include="Vibrate\VibrateModule.cs" />
-    <Compile Include="Contacts\ContactsModule.cs" />
-    <Compile Include="Connectivity\ConnectivityModule.cs" />
-    <Compile Include="Communications\CommunicationsModule.cs" />
-    <Compile Include="Location\LocationModule.cs" />
-    <Compile Include="ZXing\ZXingModule.cs" />
     <Compile Include="ActionGroups.cs" />
-    <Compile Include="TTS\TTSModule.cs" />
-    <Compile Include="Flash\FlashModule.cs" />
-    <Compile Include="Share\ShareModule.cs" />
     <Compile Include="Controls.cs" />
     <Compile Include="Views\TablePage.cs" />
     <Compile Include="Views\RequesterView.cs" />
@@ -75,6 +59,22 @@
     <Compile Include="Views\ActionView.cs" />
     <Compile Include="Views\Cells\PickerCell.cs" />
     <Compile Include="Mono.Options-PCL.cs" />
+    <Compile Include="Modules\LocationModule.cs" />
+    <Compile Include="Modules\NotificationModule.cs" />
+    <Compile Include="Modules\ZXingModule.cs" />
+    <Compile Include="Modules\FlashModule.cs" />
+    <Compile Include="Modules\BaseDeviceSettings.cs" />
+    <Compile Include="Modules\DeviceSettingsModule.cs" />
+    <Compile Include="Modules\VibrateModule.cs" />
+    <Compile Include="Modules\DeviceInfoModule.cs" />
+    <Compile Include="Modules\ContactsModule.cs" />
+    <Compile Include="Modules\ConnectivityModule.cs" />
+    <Compile Include="Modules\CommunicationsModule.cs" />
+    <Compile Include="Modules\CameraModule.cs" />
+    <Compile Include="Modules\BatteryModule.cs" />
+    <Compile Include="Modules\SensorsModule.cs" />
+    <Compile Include="Modules\ShareModule.cs" />
+    <Compile Include="Modules\TTSModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Plugin.Battery, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -243,6 +243,7 @@
     <Folder Include="Resources\" />
     <Folder Include="Resources\Icons\" />
     <Folder Include="Views\Cells\" />
+    <Folder Include="Modules\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

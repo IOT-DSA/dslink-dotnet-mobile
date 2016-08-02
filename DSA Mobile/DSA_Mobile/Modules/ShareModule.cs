@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using DSLink.Nodes;
+﻿using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
 using Newtonsoft.Json.Linq;
 using Plugin.Share;
 using Plugin.Share.Abstractions;
 
-namespace DSAMobile.Share
+namespace DSAMobile.Modules
 {
     public class ShareModule : BaseModule
     {

@@ -10,7 +10,7 @@ using DSLink.Request;
 using Plugin.Media.Abstractions;
 using Newtonsoft.Json.Linq;
 
-namespace DSAMobile.Camera
+namespace DSAMobile.Modules
 {
     public class CameraModule : BaseModule
     {

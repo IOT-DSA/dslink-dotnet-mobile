@@ -1,10 +1,9 @@
 ﻿using DSLink.Nodes;
 using DSLink.Nodes.Actions;
 using DSLink.Request;
-using Newtonsoft.Json.Linq;
 using ZXing.Mobile;
 
-namespace DSAMobile.ZXing
+namespace DSAMobile.Modules
 {
     public class ZXingModule : BaseModule
     {
