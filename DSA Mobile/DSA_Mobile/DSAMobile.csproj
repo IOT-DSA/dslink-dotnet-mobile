@@ -223,22 +223,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sensors\" />
-    <Folder Include="DeviceSettings\" />
-    <Folder Include="Camera\" />
     <Folder Include="Pages\" />
-    <Folder Include="Battery\" />
-    <Folder Include="DeviceInfo\" />
-    <Folder Include="Notifications\" />
     <Folder Include="Views\" />
-    <Folder Include="Vibrate\" />
-    <Folder Include="Contacts\" />
-    <Folder Include="Connectivity\" />
-    <Folder Include="Communications\" />
-    <Folder Include="Location\" />
-    <Folder Include="ZXing\" />
-    <Folder Include="TTS\" />
-    <Folder Include="Flash\" />
-    <Folder Include="Share\" />
     <Folder Include="Utils\" />
     <Folder Include="Resources\" />
     <Folder Include="Resources\Icons\" />
