@@ -1,5 +1,5 @@
 ﻿using System;
-using DSAMobile.DeviceSettings;
+using DSAMobile.Modules;
 using DSAMobile.iOS.DeviceSettings;
 using DSAMobile.iOS.Modules;
 using DSAMobile.Sensors;

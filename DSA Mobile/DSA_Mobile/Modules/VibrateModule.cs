@@ -4,7 +4,7 @@ using DSLink.Request;
 using DSLink.Nodes.Actions;
 using Newtonsoft.Json.Linq;
 
-namespace DSAMobile.Vibrate
+namespace DSAMobile.Modules
 {
     public class VibrateModule : BaseModule
     {

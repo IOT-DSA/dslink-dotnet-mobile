@@ -1,4 +1,4 @@
-﻿using DSAMobile.DeviceSettings;
+﻿using DSAMobile.Modules;
 using Android.Content;
 using Android.OS;
 using System.Collections.Generic;

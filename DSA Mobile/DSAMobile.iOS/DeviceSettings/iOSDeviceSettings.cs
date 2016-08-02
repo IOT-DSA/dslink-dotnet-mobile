@@ -1,4 +1,4 @@
-﻿using DSAMobile.DeviceSettings;
+﻿using DSAMobile.Modules;
 using UIKit;
 
 namespace DSAMobile.iOS.DeviceSettings

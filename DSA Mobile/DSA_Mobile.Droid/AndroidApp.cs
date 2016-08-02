@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using Android.Content;
 using Android.Hardware;
-using DSAMobile.DeviceSettings;
 using DSAMobile.Droid.DeviceSettings;
 using DSAMobile.Droid.Sensors;
 using DSAMobile.Sensors;
+using DSAMobile.Modules;
 using DSLink;
 using Environment = Android.OS.Environment;
 
