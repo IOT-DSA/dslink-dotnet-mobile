@@ -10,4 +10,3 @@ namespace DSAMobile
         public static bool WindowsPhone => Device.OS == TargetPlatform.WinPhone;
     }
 }
-

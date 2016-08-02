@@ -23,22 +23,22 @@ namespace DSAMobile.Pages
                 Text = "Save",
                 Command = new Command(() =>
                 {
-                    Settings.BrokerURL = _brokerUrlCell.Text;
-                    Settings.DSLinkName = _dslinkNameCell.Text;
+                    Settings.Broker = _brokerUrlCell.Text;
+                    Settings.Name = _dslinkNameCell.Text;
                 })
             };
 
             _brokerUrlCell = new EntryCell
             {
                 Label = "Broker URL",
-                Text = Settings.BrokerURL,
+                Text = Settings.Broker,
                 Keyboard = Keyboard.Url
             };
 
             _dslinkNameCell = new EntryCell
             {
                 Label = "DSLink Name",
-                Text = Settings.DSLinkName
+                Text = Settings.Name
             };
 
             Content = new StackLayout

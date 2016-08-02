@@ -253,11 +253,17 @@
     <Reference Include="ZXing.Net.Mobile.Forms.Android">
       <HintPath>..\..\packages\ZXing.Net.Mobile.Forms.2.1.13\lib\MonoAndroid403\ZXing.Net.Mobile.Forms.Android.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="crypto">
+      <HintPath>..\..\packages\Portable.BouncyCastle-Signed.1.7.0.2\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10\crypto.dll</HintPath>
+    </Reference>
     <Reference Include="DSLink">
-      <HintPath>..\..\packages\DSLink.0.2.4-alpha\lib\MonoAndroid10\DSLink.dll</HintPath>
+      <HintPath>..\..\packages\DSLink.0.2.6-alpha\lib\MonoAndroid10\DSLink.dll</HintPath>
     </Reference>
     <Reference Include="DSLink.Android">
-      <HintPath>..\..\packages\DSLink.0.2.4-alpha\lib\MonoAndroid10\DSLink.Android.dll</HintPath>
+      <HintPath>..\..\packages\DSLink.0.2.6-alpha\lib\MonoAndroid10\DSLink.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +276,7 @@
     <Compile Include="DeviceSettings\AndroidDeviceSettings.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="AndroidService.cs" />
+    <Compile Include="Mono.Options-PCL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

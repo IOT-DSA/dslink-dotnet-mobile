@@ -277,10 +277,10 @@
       <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="DSLink">
-      <HintPath>..\..\packages\DSLink.0.2.4-alpha\lib\Xamarin.iOS10\DSLink.dll</HintPath>
+      <HintPath>..\..\packages\DSLink.0.2.6-alpha\lib\Xamarin.iOS10\DSLink.dll</HintPath>
     </Reference>
     <Reference Include="DSLink.iOS">
-      <HintPath>..\..\packages\DSLink.0.2.4-alpha\lib\Xamarin.iOS10\DSLink.iOS.dll</HintPath>
+      <HintPath>..\..\packages\DSLink.0.2.6-alpha\lib\Xamarin.iOS10\DSLink.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +314,7 @@
     <Compile Include="Modules\HealthKitModule.cs" />
     <Compile Include="Modules\DoubleRobotModule.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Mono.Options-PCL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DSA_Mobile\DSAMobile.csproj">

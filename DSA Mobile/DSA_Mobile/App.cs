@@ -95,8 +95,8 @@ namespace DSAMobile
                 }
                 else
                 {
-                    DSLink.Config.Name = Settings.DSLinkName;
-                    DSLink.Config.BrokerUrl = Settings.BrokerURL;
+                    DSLink.Config.Name = Settings.Name;
+                    DSLink.Config.BrokerUrl = Settings.Broker;
                 }
                 DSLink.Connect();
             }
@@ -121,11 +121,11 @@ namespace DSAMobile
         protected virtual void InitializeDSLink()
         {
             var configuration = new Configuration(new List<string>(),
-                                                  Settings.DSLinkName,
+                                                  Settings.Name,
                                                   responder: true,
                                                   requester: true,
                                                   keysLocation: StoragePath() + "/dsa_mobile.keys",
-                                                  brokerUrl: Settings.BrokerURL,
+                                                  brokerUrl: Settings.Broker,
                                                   communicationFormat: CommunicationFormat,
                                                   logLevel: LogLevel.Debug,
                                                   connectionAttemptLimit: 2);
