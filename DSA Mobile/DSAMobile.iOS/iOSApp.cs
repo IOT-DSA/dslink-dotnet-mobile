@@ -12,7 +12,7 @@ namespace DSAMobile.iOS
         {
             base.InitModules();
 
-            _enabledModules.Add(new HealthKitModule());
+            //_enabledModules.Add(new HealthKitModule());
             _enabledModules.Add(new DoubleRobotModule());
         }
 

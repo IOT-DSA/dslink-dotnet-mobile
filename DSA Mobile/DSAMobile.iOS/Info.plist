@@ -40,5 +40,7 @@
 	<array>
 		<string>com.doublerobotics.pancho</string>
 	</array>
+	<key>NSContactsUsageDescription</key>
+	<string>DSAMobile publishes your contacts over DSA</string>
 </dict>
 </plist>
