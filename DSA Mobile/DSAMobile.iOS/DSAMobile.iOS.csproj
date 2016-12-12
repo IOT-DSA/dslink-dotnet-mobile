@@ -116,15 +116,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
-    <Reference Include="Xamarin.Forms.Platform.iOS">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.0.107\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.0.107\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.0.107\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.Iconize">
       <HintPath>..\..\packages\Xam.Plugin.Iconize.1.0.10\lib\Xamarin.iOS10\Plugin.Iconize.dll</HintPath>
     </Reference>
@@ -146,18 +137,6 @@
     <Reference Include="MsgPack">
       <HintPath>..\..\packages\MsgPack.Cli.0.6.8\lib\Xamarin.iOS10\MsgPack.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Battery">
-      <HintPath>..\..\packages\Xam.Plugin.Battery.2.0.0\lib\Xamarin.iOS10\Plugin.Battery.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Battery.Abstractions">
-      <HintPath>..\..\packages\Xam.Plugin.Battery.2.0.0\lib\Xamarin.iOS10\Plugin.Battery.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Contacts">
-      <HintPath>..\..\packages\Xam.Plugin.Contacts.2.0.2-beta1\lib\Xamarin.iOS10\Plugin.Contacts.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Contacts.Abstractions">
-      <HintPath>..\..\packages\Xam.Plugin.Contacts.2.0.2-beta1\lib\Xamarin.iOS10\Plugin.Contacts.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.DeviceInfo">
       <HintPath>..\..\packages\Xam.Plugin.DeviceInfo.2.0.2\lib\Xamarin.iOS10\Plugin.DeviceInfo.dll</HintPath>
     </Reference>
@@ -175,12 +154,6 @@
     </Reference>
     <Reference Include="Plugin.Geolocator.Abstractions">
       <HintPath>..\..\packages\Xam.Plugin.Geolocator.3.0.4\lib\Xamarin.iOS10\Plugin.Geolocator.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Media">
-      <HintPath>..\..\packages\Xam.Plugin.Media.2.3.0\lib\Xamarin.iOS10\Plugin.Media.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Media.Abstractions">
-      <HintPath>..\..\packages\Xam.Plugin.Media.2.3.0\lib\Xamarin.iOS10\Plugin.Media.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Messaging.Abstractions">
       <HintPath>..\..\packages\Xam.Plugins.Messaging.3.2.1\lib\Xamarin.iOS10\Plugin.Messaging.Abstractions.dll</HintPath>
@@ -206,12 +179,6 @@
     <Reference Include="PCLStorage.Abstractions">
       <HintPath>..\..\packages\PCLStorage.1.0.2\lib\portable-Xamarin.iOS+Xamarin.Mac\PCLStorage.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Permissions">
-      <HintPath>..\..\packages\Plugin.Permissions.1.1.7\lib\Xamarin.iOS10\Plugin.Permissions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Permissions.Abstractions">
-      <HintPath>..\..\packages\Plugin.Permissions.1.1.7\lib\Xamarin.iOS10\Plugin.Permissions.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.TextToSpeech.Abstractions">
       <HintPath>..\..\packages\Xam.Plugins.TextToSpeech.2.0.0\lib\Xamarin.iOS10\Plugin.TextToSpeech.Abstractions.dll</HintPath>
     </Reference>
@@ -224,12 +191,6 @@
     <Reference Include="Lamp.Plugin.Abstractions">
       <HintPath>..\..\packages\kphillpotts.Lamp.Plugin.1.0.0.1\lib\Xamarin.iOS10\Lamp.Plugin.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Share">
-      <HintPath>..\..\packages\Plugin.Share.4.0.2\lib\Xamarin.iOS10\Plugin.Share.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Share.Abstractions">
-      <HintPath>..\..\packages\Plugin.Share.4.0.2\lib\Xamarin.iOS10\Plugin.Share.Abstractions.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.Connectivity">
       <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\Xamarin.iOS10\Plugin.Connectivity.dll</HintPath>
     </Reference>
@@ -238,9 +199,6 @@
     </Reference>
     <Reference Include="Square.SocketRocket">
       <HintPath>..\..\packages\Square.SocketRocket.0.5.0.0\lib\Xamarin.iOS\Square.SocketRocket.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.0.107\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Websockets.Ios">
       <HintPath>..\..\packages\Websockets.Pcl.1.1.9\lib\xamarinios10\Websockets.Ios.dll</HintPath>
@@ -252,41 +210,83 @@
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="zxing.portable">
-      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.13\lib\Xamarin.iOS10\zxing.portable.dll</HintPath>
-    </Reference>
-    <Reference Include="ZXing.Net.Mobile.Core">
-      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.13\lib\Xamarin.iOS10\ZXing.Net.Mobile.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="ZXingNetMobile">
-      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.13\lib\Xamarin.iOS10\ZXingNetMobile.dll</HintPath>
-    </Reference>
-    <Reference Include="ZXing.Net.Mobile.Forms">
-      <HintPath>..\..\packages\ZXing.Net.Mobile.Forms.2.1.13\lib\Xamarin.iOS10\ZXing.Net.Mobile.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="ZXing.Net.Mobile.Forms.iOS">
-      <HintPath>..\..\packages\ZXing.Net.Mobile.Forms.2.1.13\lib\Xamarin.iOS10\ZXing.Net.Mobile.Forms.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="DoubleRobotics.iOS">
       <HintPath>..\..\packages\DoubleRobotics.iOS.0.1.1\lib\Xamarin.iOS10\DoubleRobotics.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Settings">
-      <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Settings.Abstractions">
-      <HintPath>..\..\packages\Xam.Plugins.Settings.2.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="HockeySDK">
-      <HintPath>..\..\packages\HockeySDK.Xamarin.4.1.0-beta3\lib\Xamarin.iOS10\HockeySDK.dll</HintPath>
-    </Reference>
-    <Reference Include="HockeySDK.iOSBindings">
-      <HintPath>..\..\packages\HockeySDK.Xamarin.4.1.0-beta3\lib\Xamarin.iOS10\HockeySDK.iOSBindings.dll</HintPath>
     </Reference>
     <Reference Include="DSLink">
       <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\Xamarin.iOS10\DSLink.dll</HintPath>
     </Reference>
     <Reference Include="DSLink.iOS">
       <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\Xamarin.iOS10\DSLink.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="HockeySDK">
+      <HintPath>..\..\packages\HockeySDK.Xamarin.4.1.0\lib\Xamarin.iOS10\HockeySDK.dll</HintPath>
+    </Reference>
+    <Reference Include="HockeySDK.iOSBindings">
+      <HintPath>..\..\packages\HockeySDK.Xamarin.4.1.0\lib\Xamarin.iOS10\HockeySDK.iOSBindings.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Permissions.Abstractions">
+      <HintPath>..\..\packages\Plugin.Permissions.1.2.1\lib\Xamarin.iOS10\Plugin.Permissions.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Permissions">
+      <HintPath>..\..\packages\Plugin.Permissions.1.2.1\lib\Xamarin.iOS10\Plugin.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share.Abstractions">
+      <HintPath>..\..\packages\Plugin.Share.4.0.3\lib\Xamarin.iOS10\Plugin.Share.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share">
+      <HintPath>..\..\packages\Plugin.Share.4.0.3\lib\Xamarin.iOS10\Plugin.Share.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Battery.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Battery.2.1.1\lib\Xamarin.iOS10\Plugin.Battery.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Battery">
+      <HintPath>..\..\packages\Xam.Plugin.Battery.2.1.1\lib\Xamarin.iOS10\Plugin.Battery.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Contacts.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Contacts.2.2.0.29-beta\lib\Xamarin.iOS10\Plugin.Contacts.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Contacts">
+      <HintPath>..\..\packages\Xam.Plugin.Contacts.2.2.0.29-beta\lib\Xamarin.iOS10\Plugin.Contacts.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugin.Media.2.6.1\lib\Xamarin.iOS10\Plugin.Media.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media">
+      <HintPath>..\..\packages\Xam.Plugin.Media.2.6.1\lib\Xamarin.iOS10\Plugin.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings.Abstractions">
+      <HintPath>..\..\packages\Xam.Plugins.Settings.2.5.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings">
+      <HintPath>..\..\packages\Xam.Plugins.Settings.2.5.1.0\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.175\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.175\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.iOS">
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.175\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\..\packages\Xamarin.Forms.2.3.3.175\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="ZXing.Net.Mobile.Core">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.47\lib\Xamarin.iOS10\ZXing.Net.Mobile.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.portable">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.47\lib\Xamarin.iOS10\zxing.portable.dll</HintPath>
+    </Reference>
+    <Reference Include="ZXingNetMobile">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.47\lib\Xamarin.iOS10\ZXingNetMobile.dll</HintPath>
+    </Reference>
+    <Reference Include="ZXing.Net.Mobile.Forms">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.Forms.2.1.47\lib\Xamarin.iOS10\ZXing.Net.Mobile.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="ZXing.Net.Mobile.Forms.iOS">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.Forms.2.1.47\lib\Xamarin.iOS10\ZXing.Net.Mobile.Forms.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -319,8 +319,8 @@
     <Compile Include="Sensors\iOSSensors.cs" />
     <Compile Include="Modules\HealthKitModule.cs" />
     <Compile Include="Modules\DoubleRobotModule.cs" />
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Mono.Options-PCL.cs" />
+    <Compile Include="Helpers\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DSA_Mobile\DSAMobile.csproj">
@@ -333,5 +333,5 @@
     <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.0.107\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>
