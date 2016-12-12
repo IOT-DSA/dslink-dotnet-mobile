@@ -13,10 +13,6 @@ namespace DSAMobile.Pages
         public SettingsPage()
         {
             Title = "Settings";
-            /*if (PlatformHelper.iOS)
-            {
-                Icon = "ion-toggle-filled";
-            }*/
 
             _saveButton = new DGButton
             {

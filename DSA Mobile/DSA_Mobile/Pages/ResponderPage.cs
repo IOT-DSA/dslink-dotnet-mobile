@@ -1,55 +1,46 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using DSAMobile.Controls;
-using DSAMobile.Views;
+﻿using DSAMobile.Views;
 using Xamarin.Forms;
 
 namespace DSAMobile.Pages
 {
     public class ResponderPage : DGPage
     {
-        public readonly Label LinkStatus;
-        public readonly Button ToggleService;
+        private readonly SwitchCell _toggleServiceSwitch;
 
         public ResponderPage()
         {
             Title = "Responder";
-            /*if (PlatformHelper.iOS)
-            {
-                Icon = "ion-ios-cloud-upload";
-            }*/
 
-            ToggleService = new DGButton
+            _toggleServiceSwitch = new SwitchCell
             {
-                Text = "Start/Stop",
-                Command = new Command(() =>
-                {
-                    if (App.Instance.AllowServiceToggle)
-                    {
-                        if (App.Instance.Disabled)
-                        {
-                            App.Instance.StartLink();
-                        }
-                        else
-                        {
-                            App.Instance.StopLink();
-                        }
-                    }
-                })
+                Text = "Service"
             };
-
-            LinkStatus = new Label
+            _toggleServiceSwitch.OnChanged += (sender, e) =>
             {
-                Text = "DSLink is disconnected",
-                HorizontalTextAlignment = TextAlignment.Center
+                if (e.Value && App.Instance.Disabled)
+                {
+                    App.Instance.StartLink();
+                }
+                else if (!e.Value && !App.Instance.Disabled)
+                {
+                    App.Instance.StopLink();
+                }
             };
 
             Content = new StackLayout
             {
                 Children =
                 {
-                    ToggleService,
-                    LinkStatus
+                    new TableView
+                    {
+                        Root = new TableRoot
+                        {
+                            new TableSection()
+                            {
+                                _toggleServiceSwitch
+                            }
+                        }
+                    }
                 }
             };
         }

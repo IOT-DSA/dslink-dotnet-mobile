@@ -123,7 +123,8 @@ namespace DSAMobile
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                TabHost.ResponderPage.LinkStatus.Text = text;
+                // TODO
+                //TabHost.ResponderPage.LinkStatus.Text = text;
             });
         }
 
