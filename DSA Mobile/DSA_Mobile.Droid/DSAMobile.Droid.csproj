@@ -142,12 +142,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="DSLink.Android">
-      <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\MonoAndroid10\DSLink.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="DSLink">
-      <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\MonoAndroid10\DSLink.dll</HintPath>
-    </Reference>
     <Reference Include="Plugin.Connectivity.Abstractions">
       <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\MonoAndroid10\Plugin.Connectivity.Abstractions.dll</HintPath>
     </Reference>
@@ -259,6 +253,12 @@
     <Reference Include="Plugin.Contacts">
       <HintPath>..\..\packages\Xam.Plugin.Contacts.2.2.0.29-beta\lib\MonoAndroid10\Plugin.Contacts.dll</HintPath>
     </Reference>
+    <Reference Include="DSLink.Android">
+      <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\MonoAndroid10\DSLink.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="DSLink">
+      <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\MonoAndroid10\DSLink.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidApp.cs" />
@@ -271,7 +271,6 @@
     <Compile Include="MainApplication.cs" />
     <Compile Include="AndroidService.cs" />
     <Compile Include="Mono.Options-PCL.cs" />
-    <Compile Include="Helpers\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

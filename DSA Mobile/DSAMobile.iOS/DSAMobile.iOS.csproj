@@ -197,9 +197,6 @@
     <Reference Include="Plugin.Connectivity.Abstractions">
       <HintPath>..\..\packages\Xam.Plugin.Connectivity.2.2.12\lib\Xamarin.iOS10\Plugin.Connectivity.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Square.SocketRocket">
-      <HintPath>..\..\packages\Square.SocketRocket.0.5.0.0\lib\Xamarin.iOS\Square.SocketRocket.dll</HintPath>
-    </Reference>
     <Reference Include="Websockets.Ios">
       <HintPath>..\..\packages\Websockets.Pcl.1.1.9\lib\xamarinios10\Websockets.Ios.dll</HintPath>
     </Reference>
@@ -212,12 +209,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="DoubleRobotics.iOS">
       <HintPath>..\..\packages\DoubleRobotics.iOS.0.1.1\lib\Xamarin.iOS10\DoubleRobotics.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="DSLink">
-      <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\Xamarin.iOS10\DSLink.dll</HintPath>
-    </Reference>
-    <Reference Include="DSLink.iOS">
-      <HintPath>..\..\packages\DSLink.0.2.8-alpha\lib\Xamarin.iOS10\DSLink.iOS.dll</HintPath>
     </Reference>
     <Reference Include="HockeySDK">
       <HintPath>..\..\packages\HockeySDK.Xamarin.4.1.0\lib\Xamarin.iOS10\HockeySDK.dll</HintPath>
@@ -288,6 +279,18 @@
     <Reference Include="ZXing.Net.Mobile.Forms.iOS">
       <HintPath>..\..\packages\ZXing.Net.Mobile.Forms.2.1.47\lib\Xamarin.iOS10\ZXing.Net.Mobile.Forms.iOS.dll</HintPath>
     </Reference>
+    <Reference Include="Square.SocketRocket">
+      <HintPath>..\..\packages\Square.SocketRocket.0.5.0.1\lib\Xamarin.iOS\Square.SocketRocket.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>..\..\packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="DSLink">
+      <HintPath>..\..\packages\DSLink.0.3.8-alpha\lib\Xamarin.iOS\DSLink.dll</HintPath>
+    </Reference>
+    <Reference Include="DSLink.iOS">
+      <HintPath>..\..\packages\DSLink.0.3.8-alpha\lib\Xamarin.iOS\DSLink.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json" />
@@ -320,7 +323,6 @@
     <Compile Include="Modules\HealthKitModule.cs" />
     <Compile Include="Modules\DoubleRobotModule.cs" />
     <Compile Include="Mono.Options-PCL.cs" />
-    <Compile Include="Helpers\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DSA_Mobile\DSAMobile.csproj">
